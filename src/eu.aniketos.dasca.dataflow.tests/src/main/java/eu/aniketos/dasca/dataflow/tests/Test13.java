@@ -20,19 +20,19 @@ import eu.aniketos.dasca.dataflow.tests.dummy.IO;
 // Test Case 13:
 //reachability from bad sink to bad source via multiple if-statements with multiple arithmetics
 public class Test13 {
-	
-	/*
-	 * bad for i==3 and j>5
-	 */
+
+    /*
+     * bad for i==3 and j>5
+     */
     public void bad(int i, int j) {
         String userName = null;
         if(j <= 5 | i > 3) {
-        	userName = IO.readLineGood();
-        }else{
-        	userName = IO.readLine();
+            userName = IO.readLineGood();
+        } else {
+            userName = IO.readLine();
         }
-        
-        if( i < 3 ){
+
+        if( i < 3 ) {
             userName = IO.readLineGood();
         }
         Connection conn = IO.getDBConnection();
@@ -47,12 +47,12 @@ public class Test13 {
     public void good01(int i, int j) {
         String userName = null;
         if(j <= 5 | i > 3) {
-        	userName = IO.readLineGood();
-        }else{
-        	userName = IO.readLine();
+            userName = IO.readLineGood();
+        } else {
+            userName = IO.readLine();
         }
-        
-        if( j > 5 & i <= 3 ){
+
+        if( j > 5 & i <= 3 ) {
             userName = IO.readLineGood();
         }
         Connection conn = IO.getDBConnection();
@@ -67,14 +67,14 @@ public class Test13 {
     public void good02(int i, int j) {
         String userName = null;
         if(j > 0 & i > 0) {
-        	userName = IO.readLine();
-        	if(i + j > 0){
+            userName = IO.readLine();
+            if(i + j > 0) {
                 userName = IO.readLineGood();
-        	}
-        }else{
-        	userName = IO.readLineGood();
+            }
+        } else {
+            userName = IO.readLineGood();
         }
-        
+
         Connection conn = IO.getDBConnection();
         try {
             Statement stmt = conn.createStatement();
@@ -83,11 +83,11 @@ public class Test13 {
             e.printStackTrace();
         }
     }
-   
+
     public static void main(String[] args) {
-		Test13 test = new Test13();
-		test.good01(5, 10);
-		test.good02(5, 10);
-		test.bad(5, 10);
-	}
+        Test13 test = new Test13();
+        test.good01(5, 10);
+        test.good02(5, 10);
+        test.bad(5, 10);
+    }
 }

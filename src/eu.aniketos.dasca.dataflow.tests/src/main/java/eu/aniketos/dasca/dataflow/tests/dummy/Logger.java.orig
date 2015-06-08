@@ -12,11 +12,11 @@ package eu.aniketos.dasca.dataflow.tests.dummy;
 
 public class Logger {
 
-    public static Logger getLogger(String name) {
-        return null;
-    }
-
-    public void warning(String msg) {
-
-    }
+	public static Logger getLogger(String name){
+		return null;
+	}
+	
+	public void warning(String msg){
+		
+	}
 }

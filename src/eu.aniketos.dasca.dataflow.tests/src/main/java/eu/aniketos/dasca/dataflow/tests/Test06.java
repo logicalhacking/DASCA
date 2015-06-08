@@ -20,7 +20,7 @@ import eu.aniketos.dasca.dataflow.tests.dummy.IO;
 // Test Case 06:
 //reachability from bad sink to bad source via indirect data flow
 public class Test06 {
-	
+
 
     public void bad() {
         String userName;
@@ -39,7 +39,7 @@ public class Test06 {
             e.printStackTrace();
         }
     }
-    
+
     public void good01() {
         String userName;
         String fix   = "fix";
@@ -57,7 +57,7 @@ public class Test06 {
             e.printStackTrace();
         }
     }
-    
+
     public void good02() {
         String userName;
         String fix   = "fix";
@@ -74,11 +74,11 @@ public class Test06 {
             e.printStackTrace();
         }
     }
-   
+
     public static void main(String[] args) {
-		Test06 test = new Test06();
-		test.good01();
-		test.good02();
-		test.bad();
-	}
+        Test06 test = new Test06();
+        test.good01();
+        test.good02();
+        test.bad();
+    }
 }

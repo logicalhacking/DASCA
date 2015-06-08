@@ -20,7 +20,7 @@ import eu.aniketos.dasca.dataflow.tests.dummy.IO;
 // Test Case 05:
 //reachability from bad sink to bad source via arithmetic expressions
 public class Test05 {
-	
+
 
     public void bad() {
         String userName;
@@ -55,10 +55,10 @@ public class Test05 {
             e.printStackTrace();
         }
     }
-   
+
     public static void main(String[] args) {
-		Test05 test = new Test05();
-		test.good01();
-		test.bad();
-	}
+        Test05 test = new Test05();
+        test.good01();
+        test.bad();
+    }
 }

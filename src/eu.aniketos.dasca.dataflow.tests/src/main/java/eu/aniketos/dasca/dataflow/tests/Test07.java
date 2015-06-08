@@ -20,16 +20,16 @@ import eu.aniketos.dasca.dataflow.tests.dummy.IO;
 // Test Case 07:
 //reachability from bad sink to bad source via multiple if-statements
 public class Test07 {
-	
+
 
     public void bad() {
         String userName = null;
         boolean local_true = true;
         if(local_true) {
-        	userName = IO.readLine();
+            userName = IO.readLine();
         }
-        
-        if(!local_true){
+
+        if(!local_true) {
             userName = IO.readLineGood();
         }
         Connection conn = IO.getDBConnection();
@@ -40,15 +40,15 @@ public class Test07 {
             e.printStackTrace();
         }
     }
-    
+
     public void good01() {
         String userName = null;
         boolean local_true = true;
         if(!local_true) {
-        	userName = IO.readLine();
+            userName = IO.readLine();
         }
-        
-        if(local_true){
+
+        if(local_true) {
             userName = IO.readLineGood();
         }
         Connection conn = IO.getDBConnection();
@@ -59,10 +59,10 @@ public class Test07 {
             e.printStackTrace();
         }
     }
-   
+
     public static void main(String[] args) {
-		Test07 test = new Test07();
-		test.good01();
-		test.bad();
-	}
+        Test07 test = new Test07();
+        test.good01();
+        test.bad();
+    }
 }

@@ -20,19 +20,19 @@ import eu.aniketos.dasca.dataflow.tests.dummy.IO;
 // Test Case 12:
 //reachability from bad sink to bad source via multiple if-statements and boolean expressions combined with arithmetics
 public class Test12 {
-	
-	/*
-	 * bad for i==3 and !x
-	 */
+
+    /*
+     * bad for i==3 and !x
+     */
     public void bad(boolean x, int i) {
         String userName = null;
         if(x | i > 3) {
-        	userName = IO.readLineGood();
-        }else{
-        	userName = IO.readLine();
+            userName = IO.readLineGood();
+        } else {
+            userName = IO.readLine();
         }
-        
-        if( i < 3 ){
+
+        if( i < 3 ) {
             userName = IO.readLineGood();
         }
         Connection conn = IO.getDBConnection();
@@ -47,12 +47,12 @@ public class Test12 {
     public void good01(boolean x, int i) {
         String userName = null;
         if(x | i > 3) {
-        	userName = IO.readLineGood();
-        }else{
-        	userName = IO.readLine();
+            userName = IO.readLineGood();
+        } else {
+            userName = IO.readLine();
         }
-        
-        if(!x & i <= 3 ){
+
+        if(!x & i <= 3 ) {
             userName = IO.readLineGood();
         }
         Connection conn = IO.getDBConnection();
@@ -63,10 +63,10 @@ public class Test12 {
             e.printStackTrace();
         }
     }
-   
+
     public static void main(String[] args) {
-		Test12 test = new Test12();
-		test.good01(true, 5);
-		test.bad(true, 5);
-	}
+        Test12 test = new Test12();
+        test.good01(true, 5);
+        test.bad(true, 5);
+    }
 }

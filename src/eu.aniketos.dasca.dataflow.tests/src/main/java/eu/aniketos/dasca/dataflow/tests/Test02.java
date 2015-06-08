@@ -20,8 +20,8 @@ import eu.aniketos.dasca.dataflow.tests.dummy.IO;
 // Test Case 02:
 // reachability from bad sink to bad source via global boolean constant
 public class Test02 {
-	
-	private final boolean final_false = false;
+
+    private final boolean final_false = false;
 
     public void bad() {
         String userName;
@@ -59,7 +59,7 @@ public class Test02 {
         String userName =  IO.readLine();
 
         if(final_false) {
-        	Connection conn = IO.getDBConnection();
+            Connection conn = IO.getDBConnection();
             try {
                 Statement stmt = conn.createStatement();
                 stmt.execute("SELECT * FROM user WHERE name='" + userName + "';");
@@ -68,11 +68,11 @@ public class Test02 {
             }
         }
     }
-   
+
     public static void main(String[] args) {
-		Test02 test = new Test02();
-		test.good01();
-		test.good02();
-		test.bad();
-	}
+        Test02 test = new Test02();
+        test.good01();
+        test.good02();
+        test.bad();
+    }
 }

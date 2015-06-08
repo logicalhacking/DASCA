@@ -20,19 +20,19 @@ import eu.aniketos.dasca.dataflow.tests.dummy.IO;
 // Test Case 18:
 //reachability from multiple differing bad sinks to one bad source with one vulnerability
 public class Test18 {
-	
-	/*
-	 * 1 findings
-	 */
-	public void bad() {
+
+    /*
+     * 1 findings
+     */
+    public void bad() {
         String userName;
-        
+
         if(true) {
-        	userName = IO.readLine();
-        } else{
-        	userName = IO.readLine2();
+            userName = IO.readLine();
+        } else {
+            userName = IO.readLine2();
         }
-        
+
         Connection conn = IO.getDBConnection();
         try {
             Statement stmt = conn.createStatement();
@@ -43,7 +43,7 @@ public class Test18 {
     }
 
     public static void main(String[] args) {
-		Test18 test = new Test18();
-		test.bad();
-	}
+        Test18 test = new Test18();
+        test.bad();
+    }
 }

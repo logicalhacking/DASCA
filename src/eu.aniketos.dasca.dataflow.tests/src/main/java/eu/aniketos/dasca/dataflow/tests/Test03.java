@@ -20,8 +20,8 @@ import eu.aniketos.dasca.dataflow.tests.dummy.IO;
 // Test Case 03:
 //reachability from bad sink to bad source via global boolean variable
 public class Test03 {
-	
-	private boolean public_true = true;
+
+    private boolean public_true = true;
 
     public void bad() {
         String userName;
@@ -54,10 +54,10 @@ public class Test03 {
             e.printStackTrace();
         }
     }
-   
+
     public static void main(String[] args) {
-		Test03 test = new Test03();
-		test.good01();
-		test.bad();
-	}
+        Test03 test = new Test03();
+        test.good01();
+        test.bad();
+    }
 }

@@ -37,7 +37,7 @@ public class Test01 {
         }
     }
 
-	public void good01() {
+    public void good01() {
         String userName;
         if(true) {
             userName = "fix";
@@ -52,10 +52,10 @@ public class Test01 {
             e.printStackTrace();
         }
     }
-    
+
     public static void main(String[] args) {
-		Test01 test = new Test01();
-		test.good01();
-		test.bad();
-	}
+        Test01 test = new Test01();
+        test.good01();
+        test.bad();
+    }
 }

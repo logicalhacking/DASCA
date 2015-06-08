@@ -20,7 +20,7 @@ import eu.aniketos.dasca.dataflow.tests.dummy.IO;
 // Test Case 09:
 //reachability from bad sink to bad source via mutually exclusive source and sink
 public class Test09 {
-	
+
 
     public void bad() {
         String userName = null;
@@ -30,16 +30,16 @@ public class Test09 {
         }
 
         if(local_true) {
-	        Connection conn = IO.getDBConnection();
-	        try {
-	            Statement stmt = conn.createStatement();
-	            stmt.execute("SELECT * FROM user WHERE name='" + userName + "';");
-	        } catch(SQLException e) {
-	            e.printStackTrace();
-	        }
+            Connection conn = IO.getDBConnection();
+            try {
+                Statement stmt = conn.createStatement();
+                stmt.execute("SELECT * FROM user WHERE name='" + userName + "';");
+            } catch(SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
-    
+
     public void good01() {
         String userName = null;
         boolean local_true = true;
@@ -48,16 +48,16 @@ public class Test09 {
         }
 
         if(!local_true) {
-	        Connection conn = IO.getDBConnection();
-	        try {
-	            Statement stmt = conn.createStatement();
-	            stmt.execute("SELECT * FROM user WHERE name='" + userName + "';");
-	        } catch(SQLException e) {
-	            e.printStackTrace();
-	        }
+            Connection conn = IO.getDBConnection();
+            try {
+                Statement stmt = conn.createStatement();
+                stmt.execute("SELECT * FROM user WHERE name='" + userName + "';");
+            } catch(SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
-    
+
     public void good02() {
         String userName = null;
         int i = 1;
@@ -66,16 +66,16 @@ public class Test09 {
         }
 
         if(i < 3 ) {
-	        Connection conn = IO.getDBConnection();
-	        try {
-	            Statement stmt = conn.createStatement();
-	            stmt.execute("SELECT * FROM user WHERE name='" + userName + "';");
-	        } catch(SQLException e) {
-	            e.printStackTrace();
-	        }
+            Connection conn = IO.getDBConnection();
+            try {
+                Statement stmt = conn.createStatement();
+                stmt.execute("SELECT * FROM user WHERE name='" + userName + "';");
+            } catch(SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
-    
+
     public void good03(int i) {
         String userName = null;
         if(i > 3) {
@@ -83,21 +83,21 @@ public class Test09 {
         }
 
         if(i < 3 ) {
-	        Connection conn = IO.getDBConnection();
-	        try {
-	            Statement stmt = conn.createStatement();
-	            stmt.execute("SELECT * FROM user WHERE name='" + userName + "';");
-	        } catch(SQLException e) {
-	            e.printStackTrace();
-	        }
+            Connection conn = IO.getDBConnection();
+            try {
+                Statement stmt = conn.createStatement();
+                stmt.execute("SELECT * FROM user WHERE name='" + userName + "';");
+            } catch(SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
-   
+
     public static void main(String[] args) {
-		Test09 test = new Test09();
-		test.good01();
-		test.good02();
-		test.good03(5);
-		test.bad();
-	}
+        Test09 test = new Test09();
+        test.good01();
+        test.good02();
+        test.good03(5);
+        test.bad();
+    }
 }
