@@ -11,4 +11,13 @@
   <version>0.1.0</version>
   <packaging>eclipse-plugin</packaging>
   <name>DASCA - Dataflow Analysis</name>
+  <dependencies>
+    <dependency>
+      <groupId>cvc3</groupId>
+      <artifactId>cvc3</artifactId>
+      <version>1.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/libcvc3-5.0.0.jar</systemPath>
+    </dependency>
+  </dependencies>
 </project>
