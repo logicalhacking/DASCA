@@ -7,14 +7,24 @@
   <packaging>pom</packaging>
   <name>DASCA - Parent project</name>
   <properties>
-    <tycho.version>0.22.0</tycho.version>
+    <tycho.version>0.21.0</tycho.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <luna-repo.url>http://download.eclipse.org/releases/luna</luna-repo.url>
   </properties>
   <modules>
+    <module>../../externals/WALA</module>
     <module>../eu.aniketos.dasca.dataflow</module>
     <module>../eu.aniketos.dasca.dataflow.tests</module>
-  </modules>
+    </modules>
+  <profiles>
+    <profile>
+      <id>eclipse</id>
+      <modules>
+        <module>../eu.aniketos.dasca.dataflow</module> 
+        <module>../eu.aniketos.dasca.dataflow.tests</module>
+      </modules>
+    </profile>
+  </profiles>
   <repositories>
     <repository>
       <id>luna</id>
