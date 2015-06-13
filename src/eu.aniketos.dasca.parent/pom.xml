@@ -11,10 +11,8 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <luna-repo.url>http://download.eclipse.org/releases/luna</luna-repo.url>
   </properties>
-  <modules>
-    <module>../../externals/WALA</module>
-    <module>../eu.aniketos.dasca.dataflow</module>
-    <module>../eu.aniketos.dasca.dataflow.tests</module>
+    <modules>
+      <module>../../externals/WALA/</module>
     </modules>
   <profiles>
     <profile>
