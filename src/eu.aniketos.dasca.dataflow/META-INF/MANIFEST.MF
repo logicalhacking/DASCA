@@ -13,9 +13,16 @@ Require-Bundle: org.eclipse.ui,
  com.ibm.wala.ide,
  com.ibm.wala.core,
  com.ibm.wala.shrike,
- com.ibm.wala.ide.jdt
+ com.ibm.wala.ide.jdt,
+ org.apache.log4j,
+ org.junit
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.eclipse.ui.wizards.datatransfer
 Bundle-ClassPath: .,
- lib/libcvc3-5.0.0.jar
+ libcvc3-5.0.0.jar,
+ walaUtil.jar,
+ junit.jar,
+ jdi.jar,
+ jdimodel.jar,
+ pdebuild.jar
