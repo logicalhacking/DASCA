@@ -11,15 +11,23 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <luna-repo.url>http://download.eclipse.org/releases/luna</luna-repo.url>
   </properties>
-    <modules>
-      <module>../../externals/WALA/</module>
-    </modules>
   <profiles>
     <profile>
-      <id>eclipse</id>
+      <id>dasca</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <modules>
-        <module>../eu.aniketos.dasca.dataflow</module> 
+        <module>../eu.aniketos.dasca.dataflow</module>
         <module>../eu.aniketos.dasca.dataflow.tests</module>
+        <!-- <module>../eu.aniketos.dasca.js</module> -->
+        <!-- <module>../eu.aniketos.dasca.crosslanguage</module> -->
+      </modules>
+    </profile>
+    <profile>
+      <id>wala</id>
+      <modules>
+        <module>../../externals/WALA/</module>
       </modules>
     </profile>
   </profiles>
@@ -44,21 +52,35 @@
         <version>${tycho.version}</version>
         <configuration>
           <resolver>p2</resolver>
+<!--          <environments>
+            <environment>
+              <os>linux</os>
+              <ws>gtk</ws>
+              <arch>x86_64</arch>
+            </environment>
+            <environment>
+              <os>linux32</os>
+              <ws>gtk</ws>
+              <arch>x86</arch>
+            </environment>
+            <environment>
+              <os>win32</os>
+              <ws>win32</ws>
+              <arch>x86</arch>
+            </environment>
+            <environment>
+              <os>win32</os>
+              <ws>win32</ws>
+              <arch>x86_64</arch>
+            </environment>
+            <environment>
+              <os>macosx</os>
+              <ws>cocoa</ws>
+              <arch>x86_64</arch>
+            </environment>
+          </environments> -->
         </configuration>
       </plugin>
     </plugins>
   </build>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>[4.8,)</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>[1.2,)</version>
-    </dependency>
-  </dependencies>
 </project>
