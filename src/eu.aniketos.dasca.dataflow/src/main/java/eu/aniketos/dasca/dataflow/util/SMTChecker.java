@@ -15,7 +15,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.ibm.wala.cast.ir.ssa.AstConstants;
+
+import com.ibm.wala.cast.ir.ssa.CAstBinaryOp;
+// import com.ibm.wala.cast.ir.ssa.AstConstants;
 import com.ibm.wala.cast.java.ssa.AstJavaInvokeInstruction;
 import com.ibm.wala.shrikeBT.BinaryOpInstruction;
 import com.ibm.wala.shrikeBT.IBinaryOpInstruction.IOperator;
@@ -123,7 +125,7 @@ public class SMTChecker {
         }
 
         IOperator op = binOpInstruction.getOperator();
-
+        
         if(op == BinaryOpInstruction.Operator.OR) {
             return vc.orExpr(exprLhs, exprRhs);
         } else if(op == BinaryOpInstruction.Operator.AND) {
@@ -136,6 +138,7 @@ public class SMTChecker {
             return vc.divideExpr(exprLhs, exprRhs);
         } else if(op == BinaryOpInstruction.Operator.MUL) {
             return vc.multExpr(exprLhs, exprRhs);
+/* Old Shrike-based coding:        
         } else if(op == AstConstants.BinaryOp.LT) {
             return vc.ltExpr(exprLhs, exprRhs);
         } else if(op == AstConstants.BinaryOp.LE) {
@@ -145,6 +148,17 @@ public class SMTChecker {
         } else if(op == AstConstants.BinaryOp.GE) {
             return vc.geExpr(exprLhs, exprRhs);
         } else if(op == AstConstants.BinaryOp.GT) {
+            return vc.gtExpr(exprLhs, exprRhs);
+*/            
+        } else if(op == CAstBinaryOp.LT) {
+            return vc.ltExpr(exprLhs, exprRhs);
+        } else if(op == CAstBinaryOp.LE) {
+            return vc.leExpr(exprLhs, exprRhs);
+        } else if(op == CAstBinaryOp.EQ) {
+            return vc.eqExpr(exprLhs, exprRhs);
+        } else if(op == CAstBinaryOp.GE) {
+            return vc.geExpr(exprLhs, exprRhs);
+        } else if(op == CAstBinaryOp.GT) {
             return vc.gtExpr(exprLhs, exprRhs);
         } else {
             return vc.notExpr(vc.eqExpr(exprLhs, exprRhs));
@@ -241,6 +255,7 @@ public class SMTChecker {
                     return vc.divideExpr(exprLhs, exprRhs);
                 } else if(op == BinaryOpInstruction.Operator.MUL) {
                     return vc.multExpr(exprLhs, exprRhs);
+ /* Old Shrike-based coding:        
                 } else if(op == AstConstants.BinaryOp.LT) {
                     return vc.ltExpr(exprLhs, exprRhs);
                 } else if(op == AstConstants.BinaryOp.LE) {
@@ -254,6 +269,20 @@ public class SMTChecker {
                 } else if(op == AstConstants.BinaryOp.NE) {
                     return vc.notExpr(vc.eqExpr(exprLhs, exprRhs));
                 }
+*/
+                } else if(op == CAstBinaryOp.LT) {
+                    return vc.ltExpr(exprLhs, exprRhs);
+                } else if(op == CAstBinaryOp.LE) {
+                    return vc.leExpr(exprLhs, exprRhs);
+                } else if(op == CAstBinaryOp.EQ) {
+                    return vc.eqExpr(exprLhs, exprRhs);
+                } else if(op == CAstBinaryOp.GE) {
+                    return vc.geExpr(exprLhs, exprRhs);
+                } else if(op == CAstBinaryOp.GT) {
+                    return vc.gtExpr(exprLhs, exprRhs);
+                } else if(op == CAstBinaryOp.NE) {
+                    return vc.notExpr(vc.eqExpr(exprLhs, exprRhs));
+                }                    
             } else if(defInst instanceof SSAUnaryOpInstruction) { // WALA uses unary operation ONLY for negation
                 SSAUnaryOpInstruction unaryInst = (SSAUnaryOpInstruction) defInst;
 
