@@ -11,5 +11,37 @@
   <version>0.1.0</version>
   <packaging>jar</packaging>
   <name>DASCA - JavaScript Analysis</name>
+  <dependencies>
+    <dependency>
+      <groupId>com.ibm.wala</groupId>
+      <version>1.3.8-SNAPSHOT</version>
+      <artifactId>com.ibm.wala.core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.wala</groupId>
+      <version>1.3.8-SNAPSHOT</version>
+      <artifactId>com.ibm.wala.cast</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.wala</groupId>
+      <version>1.3.8-SNAPSHOT</version>
+      <artifactId>com.ibm.wala.cast.js</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.wala</groupId>
+      <version>1.3.8-SNAPSHOT</version>
+      <artifactId>com.ibm.wala.cast.js.rhino</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.wala</groupId>
+      <version>1.3.8-SNAPSHOT</version>
+      <artifactId>com.ibm.wala.util</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.wala</groupId>
+      <version>1.3.8-SNAPSHOT</version>
+      <artifactId>com.ibm.wala.shrike</artifactId>
+    </dependency>
+  </dependencies>
 </project>
 ~                       
