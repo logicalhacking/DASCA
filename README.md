@@ -33,12 +33,5 @@ Main contact: [Achim D. Brucker](http://www.brucker.ch/)
 
 ### Contributors
 * Thomas Deuster
-* Michael Herberg
 * Michael Herzberg
 * Tim Herres
-
-
-
-
-
-
