@@ -21,7 +21,7 @@
         <module>../eu.aniketos.dasca.dataflow</module>
         <module>../eu.aniketos.dasca.dataflow.tests</module>
         <module>../eu.aniketos.dasca.js</module>
-        <!-- <module>../eu.aniketos.dasca.crosslanguage</module> -->
+        <module>../eu.aniketos.dasca.crosslanguage</module>
       </modules>
     </profile>
     <profile>
