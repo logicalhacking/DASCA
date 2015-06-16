@@ -2,6 +2,7 @@
 ## Installation
 ### Prerequisites
 * Java 8
+* Android SDK (do obtain dx.jar)
 
 ### Checkout
 Note that this repository imports WALA as a submodule. Thus,
