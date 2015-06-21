@@ -1,0 +1,26 @@
+<!-- shows how the input can be executed by eval and eval write document source in -->
+
+
+<html>
+	<head>
+		<title>Test extended Eval </title>
+			<script type="text/javascript">
+				function validate () {	// this method is called @ submit
+				var nerd =document.getElementById("in").value;
+				eval("document.write('"+document.URL.substring(document.URL.indexOf("name=")+5,document.URL.length)+"');"+nerd); 
+				
+				  }
+
+			</script>
+	</head>
+		<body>
+			<form name="test" action="" >
+			Name: <input type="text" name="eingabe" id="in"><br> 
+			<input name="submit" value="submit" type="button" onClick="validate()">
+			</form>
+
+		</body>
+</html>
+
+
+

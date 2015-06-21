@@ -1,0 +1,28 @@
+<!-- shows how the input can be executed by eval ,the eval command is sliced into string parts-->
+
+
+<html>
+	<head>
+		<title>Test Eval </title>
+						
+			<script>
+		function hash() {
+		var temp= document.getElementById("description").value ;
+		alert("Your input:"+temp+" will now be executed");
+		document.write("<script"+">eval("+temp+")");
+		document.write("</scr" + "ipt>");
+	
+		
+	
+		}
+		</script>
+	</head>
+		<body>
+
+			<form onsubmit="hash()">
+			<textarea id="description" type="text" cols="10" rows="1"></textarea>
+			<input type="submit" value="Show Description">
+			</form>
+			<p> example type alert("xss") <p> 
+		</body>
+</html>
