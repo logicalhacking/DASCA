@@ -2,6 +2,7 @@
 ## Installation
 ### Prerequisites
 * Java 8
+* CVC3 including the Java bindings for CVC3
 * Android SDK (do obtain dx.jar)
 
 ### Checkout
