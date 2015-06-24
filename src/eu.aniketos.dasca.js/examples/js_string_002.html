@@ -1,0 +1,25 @@
+<!-- normally the command document.write(info) would be found, but is the write part described 
+by letters from a String maybe not-->
+
+<html><head><title>Test XSS </title>
+</head><body>
+<form name="test" action="">
+Name: <input type="text" name="eingabe" onBlur="validate(this.value)"><br> 
+leave the input empty than klick somwhere
+</form>
+<script type="text/javascript">
+document.test.eingabe.focus(); // first set focus on input
+function validate (input) {	// this method is called @ leave focus on input
+  if (input == "") {
+
+  var info = window.location.href;
+  var infos= "awraiatae"
+  var temp= infos.charAt(1)+infos.charAt(2)+infos.charAt(4)+infos.charAt(6)+infos.charAt(8)
+
+  
+    document[temp](info);// = document.write(info) will not be found by ff
+  //document.write(info); // should be found
+  }
+}
+</script>
+</body></html>

@@ -1,0 +1,20 @@
+
+<html><head><title>Test XSS </title>
+</head><body>
+<form name="test" action="">
+Name: <input type="text" name="eingabe" onBlur="validate(this.value)"><br> 
+leave the input empty than klick somwhere
+</form>
+<script type="text/javascript">
+document.test.eingabe.focus(); // first set focus on input
+function validate (input) {	// this method is called @ leave focus on input
+  if (input == "") {
+
+  var info = window.location.href;
+ 
+  alert(document[String.fromCharCode(87,82,73,84,69)]+info);  
+  document.write(info); // should be found
+  }
+}
+</script>
+</body></html>

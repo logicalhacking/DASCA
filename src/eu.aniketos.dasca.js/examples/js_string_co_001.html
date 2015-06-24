@@ -1,0 +1,24 @@
+<!-- shows how document write url can be shared into different strings -->
+
+
+<html>
+	<head>
+<title>Test Eval </title>
+<script type="text/javascript">
+function validate () {	// this method is called @ submit
+var t = document.URL;
+var f = "write";
+var k = document[f];
+k(t);
+
+  }
+
+</script>
+	</head>
+<body>
+<form name="test" action="" >
+Name: <input type="text" name="eingabe" id="in"><br> 
+<input name="submit" value="submit" type="button" onClick="validate()">
+</form>
+
+</body></html>
