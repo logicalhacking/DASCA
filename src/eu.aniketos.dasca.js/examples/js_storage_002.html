@@ -1,0 +1,33 @@
+<html>
+<head>
+<title> storage </title>
+<script type="text/javascript">
+function storeText(inputID) {
+
+
+var userInput = localStorage.userInfo;  // is storage empty?
+
+
+if(userInput!=null) userInput+=" ";
+else userInput="";
+
+
+userInput += document.getElementById(inputID).value; //add Data , concat storage+input
+
+
+localStorage.userInfo = userInput; // put the user input into the storage 
+
+
+document.getElementById("result").innerHTML = localStorage.userInfo + " - entered to date";   // show it on side 
+}
+</script>
+</head>
+<body>
+<p> Pls enter input! <p>
+<input id="userText" type="text"/>
+<input type="button" value="store" onclick="storeText('userText')"/>
+<div id="result">
+Result here
+</div>
+</body>
+</html>

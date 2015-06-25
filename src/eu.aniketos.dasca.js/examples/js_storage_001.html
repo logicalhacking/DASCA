@@ -1,0 +1,26 @@
+
+<html>
+	<head>
+		<title>Test Storage</title>	
+		<script language="JavaScript">
+			
+			function saveSecret() {
+				var secret = document.getElementById('SecretData').value;
+				localStorage.setItem('userdata',secret);
+	
+				var yoursec = document.getElementById('YourSec');
+				yoursec.innerHTML = 'Your Secret is : ' + localStorage.userdata;
+				alert("dein pw" +  localStorage.userdata);
+			}
+		
+		</script>
+	</head>
+
+	<body>
+	<form name="f1" id="form1" action="">
+		<p><b>Enter Data <input type="password" id="SecretData" />
+		<input type="submit" value="Show" action="saveSecret()">
+		</form>
+		<p id="YourSec"></p>
+	</body>
+</html>
