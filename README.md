@@ -7,7 +7,11 @@
 
 ### Checkout
 Note that this repository imports WALA as a submodule. Thus,
-you either need to recursively clone this repository or execute
+you either need to recursively clone this repository, e.g., 
+```
+git clone --recursive https://github.com/DASPA/DASCA.git
+```
+or execute
 ```
 git submodule update --init --recursive
 ```
