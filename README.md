@@ -11,11 +11,15 @@ you either need to recursively clone this repository, e.g.,
 ```
 git clone --recursive https://github.com/DASPA/DASCA.git
 ```
-or execute
+or execute ``git submodule update --init --recursive`` after 
+cloning the repository.
+
+Next, you need to copy ``dx.jar`` from the Android SDK into
+the WALA project ``com.ibm.wala.dalvik.test'', e.g.:
 ```
-git submodule update --init --recursive
+mkdir -p DASCA/externals/WALA/com.ibm.wala.dalvik.test/lib
+cp $ANDROID_HOME/build-tools/20.0.0/lib/dx.jar DASCA/externals/WALA/com.ibm.wala.dalvik.test/lib
 ```
-after cloning the repository.
 
 ### How to Compile
 First resolve the dependencies using maven and initialise the 
