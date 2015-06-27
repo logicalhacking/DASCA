@@ -21,7 +21,7 @@ after cloning the repository.
 First resolve the dependencies using maven and initialise the 
 Eclipse project structure:
 ```
-cd src/eu.aniketos.dasca.parent/
+cd DASCA/src/eu.aniketos.dasca.parent/
 mvn -P wala clean install -DskipTests=true -q
 mvn -P dasca clean eclipse:clean 
 mvn -P dasca eclipse:eclipse
