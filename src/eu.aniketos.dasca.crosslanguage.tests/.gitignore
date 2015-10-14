@@ -1,0 +1,7 @@
+.cache-main
+.classpath
+.project
+target
+testapks
+src/main/resources/android19.jar
+/dependency-reduced-pom.xml
