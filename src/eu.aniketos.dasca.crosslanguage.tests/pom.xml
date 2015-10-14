@@ -90,6 +90,11 @@
       <artifactId>com.ibm.wala.dalvik</artifactId>
       <version>${wala.version}</version>
     </dependency>
+    <dependency>
+    	<groupId>eu.aniketos.dasca</groupId>
+    	<artifactId>eu.aniketos.dasca.crosslanguage</artifactId>
+    	<version>0.0.1-SNAPSHOT</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
