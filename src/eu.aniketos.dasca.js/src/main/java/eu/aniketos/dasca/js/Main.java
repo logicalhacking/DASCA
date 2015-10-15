@@ -482,7 +482,7 @@ public class Main {
         for (Statement s : slice) {
             String temp4 = "";
             List<String> para = new ArrayList<String>();
-            gui gui = new gui();
+            GUI gui = new GUI();
             // if controlbox createFuncBody is enabled
 
             if (function) {
