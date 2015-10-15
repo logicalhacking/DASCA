@@ -2,40 +2,46 @@
 ## Installation
 ### Prerequisites
 * Java 8
-* CVC3 including the Java bindings for CVC3
 * Android SDK (do obtain dx.jar)
+* Eclipse Mars, including
+  * Scala IDE
+  * m2e plugin 
+* CVC3 including the Java bindings for CVC3
+* apktool 
+
 
 ### Checkout
 Note that this repository imports WALA as a submodule. Thus,
-you either need to recursively clone this repository, e.g., 
+you either need to recursively clone this repository, e.g.,
 ```
 git clone --recursive https://github.com/DASPA/DASCA.git
 ```
 or execute ``git submodule update --init --recursive`` after 
 cloning the repository.
 
-Next, you need to copy ``dx.jar`` from the Android SDK into
-the WALA project ``com.ibm.wala.dalvik.test'', e.g.:
+
+### Resolving external dependencies
+* Ensure that the environment variable ``ANDROID_HOME'' is set correctly and that
+  the Android SDK has API 19 installed, i.e.,
+  ``${ANDROID_HOME}/platforms/android-19/android.jar'' should be a valid path.
+* Install ``apktool_2.0.0.jar'' into your local maven repository:
 ```
-mkdir -p DASCA/externals/WALA/com.ibm.wala.dalvik.test/lib
-cp $ANDROID_HOME/build-tools/20.0.0/lib/dx.jar DASCA/externals/WALA/com.ibm.wala.dalvik.test/lib
-```
+wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.0.0.jar
+mvn install:install-file -Dfile=apktool_2.0.0.jar -DgroupId=apktool \
+    -DartifactId=apktool -Dpackaging=jar -Dversion=2.0.0
+'''
 
 ### How to Compile
-First resolve the dependencies using maven and initialise the 
-Eclipse project structure:
+First resolve the dependencies using maven:
 ```
 cd DASCA/src/eu.aniketos.dasca.parent/
 mvn -P wala clean install -DskipTests=true -q
-mvn -P dasca clean eclipse:clean 
-mvn -P dasca eclipse:eclipse
 ```
 After this, all projects can be imported into a fresh Eclipse
-workspace using `File -> Import -> Existing Projects into Workspace`.
-Please import them in the following order:
-1. Import all WALA projects (``externals/WALA/``) into Eclipse. 
-2. Import all DASCA projects (``src/``) into Eclipse.
-While several Wala projects may contain compilation errors, all DASCA 
+workspace using `File -> Import -> Maven -> Existing Maven Projects`:
+1. Select the DASCA ``src'' folder as source for the import
+2. Import all offered projects (WALA and DASCA)
+While some Wala projects may contain compilation errors, all DASCA 
 projects (i.e., `eu.aniketos.dasca.*`) should compile without errors.
 
 ## Team 
