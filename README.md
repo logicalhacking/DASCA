@@ -29,7 +29,7 @@ cloning the repository.
 wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.0.0.jar
 mvn install:install-file -Dfile=apktool_2.0.0.jar -DgroupId=apktool \
     -DartifactId=apktool -Dpackaging=jar -Dversion=2.0.0
-'''
+```
 
 ### How to Compile
 First resolve the dependencies using maven:
