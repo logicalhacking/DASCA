@@ -2,7 +2,7 @@
 ## Installation
 ### Prerequisites
 * Java 8
-* Android SDK (do obtain dx.jar)
+* Android SDK (to obtain dx.jar)
 * Eclipse Mars, including
   * Scala IDE
   * Scala Maven Plugin (http://scala-ide.org/docs/tutorials/m2eclipse/)
