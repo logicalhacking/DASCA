@@ -15,7 +15,7 @@
 Note that this repository imports WALA as a submodule. Thus,
 you either need to recursively clone this repository, e.g.,
 ```
-git clone --recursive https://github.com/DASPA/DASCA.git
+git clone --recursive https://git.logicalhacking.com/DASCA/DASCA.git
 ```
 or execute ``git submodule update --init --recursive`` after 
 cloning the repository.
