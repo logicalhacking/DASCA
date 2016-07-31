@@ -2,6 +2,7 @@
 ## Installation
 ### Prerequisites
 * Java 8
+* Java 6 (core libraries for the WALA analysis)
 * Android SDK (to obtain dx.jar)
 * Eclipse Mars, including
   * Scala IDE
