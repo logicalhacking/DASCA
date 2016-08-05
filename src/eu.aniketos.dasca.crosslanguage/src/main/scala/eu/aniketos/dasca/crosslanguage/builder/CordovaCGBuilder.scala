@@ -156,7 +156,12 @@ class CordovaCGBuilder(val apk: File, val apkUnzipDir: File) {
   private def createJavaCallGraph = {
     val tmpAndroidJar = File.createTempFile("android", "jar")
     tmpAndroidJar.deleteOnExit()
-    TemporaryFile.urlToFile(tmpAndroidJar, getClass.getClassLoader.getResource("android19.jar"))
+    if (null != getClass.getClassLoader.getResource("android19.jar")){
+      TemporaryFile.urlToFile(tmpAndroidJar, getClass.getClassLoader.getResource("android19.jar"))
+    }else{
+       logger.error("Please install android19.jar.");
+       throw new FileNotFoundException("Please install android19.jar.");
+    }
     val scope = AndroidAnalysisScope.setUpAndroidAnalysisScope(apk.toURI(), getClass.getClassLoader.getResource("javaexclusions.txt").getFile, CordovaCGBuilder.getClass.getClassLoader())
     scope.addToScope(ClassLoaderReference.Primordial, new JarFileModule(new JarFile(tmpAndroidJar)))
     val cha = ClassHierarchy.make(scope)
