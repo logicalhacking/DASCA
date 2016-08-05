@@ -36,7 +36,7 @@ mvn install:install-file -Dfile=apktool_2.0.0.jar -DgroupId=apktool \
 ### How to Compile
 First resolve the dependencies using maven:
 ```
-cd DASCA/src/eu.aniketos.dasca.parent/
+cd src/eu.aniketos.dasca.parent/
 mvn -P wala clean install -DskipTests=true -q
 ```
 After this, all projects can be imported into a fresh Eclipse
