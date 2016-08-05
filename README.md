@@ -4,7 +4,7 @@
 * Java 8
 * Java 6 (core libraries for the WALA analysis)
 * Android SDK (to obtain dx.jar)
-* Eclipse Mars, including
+* Eclipse Neon, including
   * Scala IDE
   * Scala Maven Plugin (http://scala-ide.org/docs/tutorials/m2eclipse/)
   * m2e plugin 
