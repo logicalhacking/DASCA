@@ -18,9 +18,6 @@ import com.ibm.wala.dalvik.classLoader.DexIMethod
 import com.ibm.wala.ipa.callgraph.CallGraph
 import org.apache.commons.io.FileUtils
 
-/**
- * @author D062824
- */
 object DalvikLineNumberCalculator {
   val MethodRegex = """\s*\.method (.+)""".r
   val LineRegex = """\s*\.line ([0-9]+)\s*""".r
