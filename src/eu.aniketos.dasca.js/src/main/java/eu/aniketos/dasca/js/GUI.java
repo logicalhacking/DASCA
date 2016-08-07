@@ -800,7 +800,7 @@ public class GUI {
 
                         if ((sdg.getNode(i).toString().contains(temp) == true)
                                 && (sdg.getNode(i).toString().contains("prolo") == false)
-                                && (sdg.getNode(i).getKind() == Kind.NORMAL)) {
+                                && (((Statement)sdg.getNode(i)).getKind() == Kind.NORMAL)) {
                             lm.addElement(sdg.getNode(i).toString()
                                           + "This is Node|" + i);
                             // writeInstructions(sdg.getNode(i));
@@ -857,7 +857,7 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
                 Statement sto;
                 selec = Integer.parseInt(hallo);
-                sto = sdg.getNode(selec);
+                sto = (Statement) sdg.getNode(selec);
                 mainConsole.append(dateFormat.format(new Date())
                                    + ":Selected Statement in sdg " + selec + "\n");
                 symtab = sto.getNode().getIR().getSymbolTable();
@@ -886,7 +886,7 @@ public class GUI {
             public void actionPerformed(ActionEvent e) {
 
                 int temp = slice.indexOf("|");
-                Statement stat = sdg.getNode(Integer.parseInt(slice
+                Statement stat = (Statement) sdg.getNode(Integer.parseInt(slice
                                              .substring(temp + 1)));
                 stat.getNode().getIR().toString();
                 mainConsole.append(dateFormat.format(new Date())
@@ -1535,7 +1535,7 @@ public class GUI {
     public void searchReturn(final JTextPane textSliceEdt)
     throws FileNotFoundException, ScriptException {
         String out = "";
-        Statement statm = sdg.getNode(Integer.parseInt(hallo));
+        Statement statm = (Statement) sdg.getNode(Integer.parseInt(hallo));
         CGNode node = statm.getNode();
 
         SSACFG cfg = node.getIR().getControlFlowGraph();
@@ -1701,7 +1701,7 @@ public class GUI {
 
         labelSeed.setText(slice);
 
-        st = sdg.getNode(Integer.parseInt(hallo));
+        st = (Statement) sdg.getNode(Integer.parseInt(hallo));
 
         mainConsole.append(dateFormat.format(new Date())
                            + ":Action= Slice from Node " + Integer.parseInt(hallo) + "\n");
@@ -1772,7 +1772,7 @@ public class GUI {
             // possible stat.getArt= ssaReturnStatement
             if ((sdg.getNode(i).toString().contains("return") == true)
                     && (sdg.getNode(i).toString().contains("prolo") == false)
-                    && (sdg.getNode(i).getKind() == Kind.NORMAL)
+                    && (((Statement)sdg.getNode(i)).getKind() == Kind.NORMAL)
                     && (sdg.getNode(i).toString().contains("ctor") == false)) {
                 mainConsole.append(dateFormat.format(date)
                                    + ":Found return Statement" + "\n");

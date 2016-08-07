@@ -21,6 +21,7 @@ import java.util.Set;
 // import org.junit.Assert;
 import com.ibm.wala.cast.ir.ssa.AstIRFactory;
 import com.ibm.wala.cast.ir.translator.TranslatorToCAst.Error;
+import com.ibm.wala.cast.js.html.DefaultSourceExtractor;
 import com.ibm.wala.cast.js.html.WebPageLoaderFactory;
 import com.ibm.wala.cast.js.html.WebUtil;
 import com.ibm.wala.cast.js.ipa.callgraph.JSAnalysisOptions;
@@ -49,6 +50,7 @@ import com.ibm.wala.util.CancelException;
 import com.ibm.wala.util.WalaException;
 import com.ibm.wala.util.collections.HashSetFactory;
 import com.ibm.wala.util.io.FileProvider;
+import com.ibm.wala.util.functions.Function;
 
 /**
  * TODO this class is a mess. rewrite.
@@ -215,7 +217,7 @@ public class ImprovedJSCallGraphBuilderUtil
         scripts.add(getPrologueFile("preamble.js"));
 
         try {
-            scripts.addAll(WebUtil.extractScriptFromHTML(url, true).fst);// TODO
+            scripts.addAll(WebUtil.extractScriptFromHTML(url, DefaultSourceExtractor.factory).fst);// TODO
         } catch (Error e) {
             SourceModule dummy = new SourceURLModule(url);
             scripts.add(dummy);

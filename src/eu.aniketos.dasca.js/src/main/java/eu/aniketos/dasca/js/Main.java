@@ -185,9 +185,8 @@ public class Main {
         for (int i = 0; i < sdg.getMaxNumber(); i++) {
             if ((sdg.getNode(i).toString().contains(part) == true)
                     && (sdg.getNode(i).toString().contains("prolo") == false)
-                    && (sdg.getNode(i).getKind() == Kind.NORMAL)) {
-
-                writeInstructions(sdg.getNode(i));
+                    && (((Statement)sdg.getNode(i)).getKind() == Kind.NORMAL)) {
+                writeInstructions((Statement)sdg.getNode(i));
 
                 System.out.println("Number:" + i + "|" + sdg.getNode(i) + "");
 
