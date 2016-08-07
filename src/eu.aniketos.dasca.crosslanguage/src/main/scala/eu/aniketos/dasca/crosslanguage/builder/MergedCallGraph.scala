@@ -49,6 +49,7 @@ import scala.collection.mutable.Queue
 import scala.collection.mutable.ListBuffer
 import com.ibm.wala.cast.ir.ssa.AstIRFactory
 import scala.collection.mutable.LinkedHashSet
+import com.ibm.wala.classLoader.IMethod
 
 class MergedCallGraph(val javaCG: CallGraph, val jsCG: CallGraph, val configXml: Elem) extends Iterable[CGNode] {
   val logger = Logger(LoggerFactory.getLogger(getClass.toString))
@@ -260,8 +261,8 @@ class MergedCallGraph(val javaCG: CallGraph, val jsCG: CallGraph, val configXml:
         case _ =>
       }
       to.getIR match {
-        case ir: AstIRFactory#AstIR => {
-          val (_, _, _, _, relPath) = Util.getJavaScriptSourceInfo(ir, ir.getInstructions.find(_ != null).get)
+        case ir: AstIRFactory[IMethod]#AstIR => {
+          val (_, _, _, _, relPath:String) = Util.getJavaScriptSourceInfo(ir, ir.getInstructions.find(_ != null).get)
           val lc = relPath.toLowerCase()
           val filename = lc.substring(lc.lastIndexOf('/'))
           if (filename.contains("jquery") || filename.contains("energize") || filename.contains("jqm") || filename.contains("prologue.js") ||
@@ -275,8 +276,8 @@ class MergedCallGraph(val javaCG: CallGraph, val jsCG: CallGraph, val configXml:
       }
     } else {
       from.getIR match {
-        case ir: AstIRFactory#AstIR => {
-          val (_, _, _, _, relPath) = Util.getJavaScriptSourceInfo(ir, ir.getInstructions.find(_ != null).get)
+        case ir: AstIRFactory[IMethod]#AstIR => {
+          val (_, _, _, _, relPath:String) = Util.getJavaScriptSourceInfo(ir, ir.getInstructions.find(_ != null).get)
           val lc = relPath.toLowerCase()
           val filename = lc.substring(lc.lastIndexOf('/'))
           if (filename.contains("cordova")) {

@@ -29,6 +29,7 @@ import eu.aniketos.dasca.crosslanguage.builder.ReplacePluginDefinesAndRequires
 import eu.aniketos.dasca.crosslanguage.builder.FilterJSFrameworks
 import eu.aniketos.dasca.crosslanguage.builder.PreciseJS
 import eu.aniketos.dasca.crosslanguage.builder.RunBuildersInParallel
+import com.ibm.wala.classLoader.IMethod
 
 object Util {
   val cachedDalvikLines = Map[(CGNode, SSAInstruction), Int]()
@@ -50,7 +51,7 @@ object Util {
   }
 
   val JavaScriptPathRegex = """.+/assets/(.+)""".r
-  def getJavaScriptSourceInfo(ir: AstIRFactory#AstIR, inst: SSAInstruction) = {
+  def getJavaScriptSourceInfo(ir: AstIRFactory[IMethod]#AstIR, inst: SSAInstruction) = {
     val sourcePos = ir.getMethod.getSourcePosition(inst.iindex) match {
       case iPos: IncludedPosition => iPos.getIncludePosition
       case sp => sp
@@ -72,8 +73,8 @@ object Util {
       s"$className:$line, Method: $method, Path: $path"
     } else {
       node.getIR match {
-        case ir: AstIRFactory#AstIR => {
-          val (line, col, start, end, relPath) = getJavaScriptSourceInfo(ir, inst)
+        case ir:AstIRFactory[IMethod]#AstIR => {
+          val (line, col, start, end, relPath:String) = getJavaScriptSourceInfo(ir, inst)
           val fileName = relPath.substring(relPath.lastIndexOf('/') + 1)
           s"$fileName:$line:$col ($start -> $end), Path: $relPath"
         }

@@ -14,7 +14,7 @@ import java.io.File
 import scala.collection.mutable.TreeSet
 import org.apache.commons.io.FileUtils
 import com.ibm.wala.cast.tree.CAstSourcePositionMap.Position
-import com.ibm.wala.cast.js.translator.RangePosition
+import com.ibm.wala.cast.tree.impl.RangePosition
 
 class FileMapRecorder(file: File) {
 

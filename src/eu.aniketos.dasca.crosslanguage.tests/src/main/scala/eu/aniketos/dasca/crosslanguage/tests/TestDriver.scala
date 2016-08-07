@@ -25,6 +25,7 @@ import com.ibm.wala.cast.ir.ssa.AstIRFactory
 import eu.aniketos.dasca.crosslanguage.util.SourceLocation
 import eu.aniketos.dasca.crosslanguage.builder.FilterJSFrameworks
 import scala.collection.mutable.LinkedHashSet
+import com.ibm.wala.classLoader.IMethod
 
 object TestDriver {
   def main(args: Array[String]): Unit = {
@@ -74,6 +75,7 @@ object TestDriver {
     }
   }
 
+  
   def convertToSourceLocationPairs(crossTargets: Map[(CGNode, CallSiteReference), LinkedHashSet[CGNode]]): Set[(SourceLocation, SourceLocation)] = {
     for (
       origin <- crossTargets.keys;
@@ -81,12 +83,12 @@ object TestDriver {
     ) yield {
       if (Util.isJavaNode(origin._1)) {
         target.getIR match {
-          case ir: AstIRFactory#AstIR => (JavaSourceLocation(origin._1, origin._2), JavaScriptSourceLocation(ir))
+          case ir: AstIRFactory[IMethod]#AstIR => (JavaSourceLocation(origin._1, origin._2), JavaScriptSourceLocation(ir))
           case _ => (JavaSourceLocation(origin._1, origin._2), new JavaScriptSourceLocation(-1, -1, "unknown"))
         }
       } else {
         origin._1.getIR match {
-          case ir: AstIRFactory#AstIR => (JavaScriptSourceLocation(ir, origin._2), JavaSourceLocation(target))
+          case ir: AstIRFactory[IMethod]#AstIR => (JavaScriptSourceLocation(ir, origin._2), JavaSourceLocation(target))
           case _ => (new JavaScriptSourceLocation(-1, -1, "unknown"), JavaSourceLocation(target))
         }
       }
