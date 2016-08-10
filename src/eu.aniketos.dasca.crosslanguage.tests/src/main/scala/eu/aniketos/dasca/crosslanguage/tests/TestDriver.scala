@@ -1,5 +1,6 @@
 /*
  * (C) Copyright 2010-2015 SAP SE.
+ *               2016      The University of Sheffield.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -26,6 +27,7 @@ import eu.aniketos.dasca.crosslanguage.util.SourceLocation
 import eu.aniketos.dasca.crosslanguage.builder.FilterJSFrameworks
 import scala.collection.mutable.LinkedHashSet
 import com.ibm.wala.classLoader.IMethod
+import eu.aniketos.dasca.crosslanguage.tests.apps.Featherweight_100_35_Info
 
 object TestDriver {
   def main(args: Array[String]): Unit = {
@@ -44,7 +46,8 @@ object TestDriver {
     val options = if (args(0).charAt(0) == '-') Util.argsToOptions(args(0)) else List()
 
     val infos = List(
-      FeatherweightInfo
+      FeatherweightInfo,
+      Featherweight_100_35_Info
       )
 
     for (info <- infos if (new File(apkDir, info.getApkName)).isFile()) {
