@@ -27,7 +27,7 @@ import eu.aniketos.dasca.crosslanguage.util.SourceLocation
 import eu.aniketos.dasca.crosslanguage.builder.FilterJSFrameworks
 import scala.collection.mutable.LinkedHashSet
 import com.ibm.wala.classLoader.IMethod
-import eu.aniketos.dasca.crosslanguage.tests.apps.Featherweight_100_35_Info
+import eu.aniketos.dasca.crosslanguage.tests.apps.Featherweight_100_350_Info
 
 object TestDriver {
   def main(args: Array[String]): Unit = {
@@ -47,7 +47,7 @@ object TestDriver {
 
     val infos = List(
       FeatherweightInfo,
-      Featherweight_100_35_Info
+      Featherweight_100_350_Info
       )
 
     for (info <- infos if (new File(apkDir, info.getApkName)).isFile()) {

@@ -20,7 +20,7 @@ import eu.aniketos.dasca.crosslanguage.util.JavaScriptSourceLocation
 import eu.aniketos.dasca.crosslanguage.util.JavaSourceLocation
 import eu.aniketos.dasca.crosslanguage.util.SourceLocation
 
-object Featherweight_100_35_Info extends AppInfo {
+object Featherweight_100_350_Info extends AppInfo {
   def getApkName: String = "de.zertapps.dvhma.featherweight_1.0.0_3.5.0_debug.apk"
 
   def getExpectedConnections: List[(SourceLocation, SourceLocation)] = {
