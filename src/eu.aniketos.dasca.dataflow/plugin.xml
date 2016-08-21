@@ -5,22 +5,22 @@
          point="org.eclipse.ui.actionSets">
       <actionSet
             id="eu.aniketos.dasca.dataflow.actionSet"
-            label="WALA Action Set"
+            label="DASCA Action Set"
             visible="true">
          <menu
-               label="WALA &amp;Menu"
-               id="walaMenu">
+               label="DASCA"
+               id="eu.aniketos.dasca.menu">
             <separator
-                  name="walaGroup">
+                  name="eu.aniketos.dasca.group">
             </separator>
          </menu>
          <action
                label="Analyze Source Code"
                class="eu.aniketos.dasca.dataflow.actions.AnalyzeSourceCode"
                tooltip="Analyze Source Code"
-               menubarPath="walaMenu/walaGroup"
-               toolbarPath="walaGroup"
-               id="eu.aniketos.dasca.dataflow.actions.BuildCallGraph">
+               menubarPath="eu.aniketos.dasca.menu/eu.aniketos.dasca.group"
+               toolbarPath="eu.aniketos.dasca.group"
+               id="eu.aniketos.dasca.dataflow.actions.AnalyzeSourceCode">
          </action>
       </actionSet>
    </extension>
