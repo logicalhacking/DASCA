@@ -5,7 +5,7 @@
 analysis_depth = 2
 
 # name of java project
-analysis_project = eu.aniketos.dasca.dataflow.testdata
+analysis_project = eu.aniketos.dasca.dataflow.test.data
 
 # name of java class
 analysis_entry_class = Test13
