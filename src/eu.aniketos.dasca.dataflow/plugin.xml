@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            id="eu.aniketos.dasca.dataflow.actionSet"
+            label="WALA Action Set"
+            visible="true">
+         <menu
+               label="WALA &amp;Menu"
+               id="walaMenu">
+            <separator
+                  name="walaGroup">
+            </separator>
+         </menu>
+         <action
+               label="Analyze Source Code"
+               class="eu.aniketos.dasca.dataflow.actions.AnalyzeSourceCode"
+               tooltip="Analyze Source Code"
+               menubarPath="walaMenu/walaGroup"
+               toolbarPath="walaGroup"
+               id="eu.aniketos.dasca.dataflow.actions.BuildCallGraph">
+         </action>
+      </actionSet>
+   </extension>
+
+</plugin>
