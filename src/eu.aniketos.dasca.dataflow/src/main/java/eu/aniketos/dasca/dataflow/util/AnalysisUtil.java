@@ -229,12 +229,17 @@ public class AnalysisUtil {
                 File f = new File("config/main.config");
                 in = new FileInputStream(f);
             }
+            System.err.println("Reading configuration file: "+in);
             stream = new BufferedInputStream(in);
             properties.load(stream);
             stream.close();
         } catch (FileNotFoundException e) {
             System.err.println("no config file found");
             return "";
+        } catch (NullPointerException e) {
+            System.out.println(" STD no config file found (null pointer)");
+            System.err.println(" ERR no config file found (null pointer)");
+        	return "";
         } catch (IOException e) {
             e.printStackTrace();
             return "";

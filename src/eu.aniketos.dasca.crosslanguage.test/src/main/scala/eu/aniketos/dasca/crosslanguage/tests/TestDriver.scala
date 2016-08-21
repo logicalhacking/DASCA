@@ -9,13 +9,13 @@
  *
  */
 
-package eu.aniketos.dasca.crosslanguage.tests
+package eu.aniketos.dasca.crosslanguage.test
 
 import com.ibm.wala.classLoader.CallSiteReference
 import com.ibm.wala.ipa.callgraph.CGNode
 import eu.aniketos.dasca.crosslanguage.util.Util
 import eu.aniketos.dasca.crosslanguage.builder.CordovaCGBuilder
-import eu.aniketos.dasca.crosslanguage.tests.apps.FeatherweightInfo
+import eu.aniketos.dasca.crosslanguage.test.apps.FeatherweightInfo
 import eu.aniketos.dasca.crosslanguage.builder.FilterJavaCallSites
 import eu.aniketos.dasca.crosslanguage.builder.MockCordovaExec
 import eu.aniketos.dasca.crosslanguage.builder.ReplacePluginDefinesAndRequires
@@ -27,8 +27,8 @@ import eu.aniketos.dasca.crosslanguage.util.SourceLocation
 import eu.aniketos.dasca.crosslanguage.builder.FilterJSFrameworks
 import scala.collection.mutable.LinkedHashSet
 import com.ibm.wala.classLoader.IMethod
-import eu.aniketos.dasca.crosslanguage.tests.apps.Featherweight_100_350_Info
-import eu.aniketos.dasca.crosslanguage.tests.apps.Featherweight_100_630_Info
+import eu.aniketos.dasca.crosslanguage.test.apps.Featherweight_100_350_Info
+import eu.aniketos.dasca.crosslanguage.test.apps.Featherweight_100_630_Info
 
 object TestDriver {
   def main(args: Array[String]): Unit = {

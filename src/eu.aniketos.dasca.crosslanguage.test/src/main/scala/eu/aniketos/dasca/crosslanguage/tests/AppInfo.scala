@@ -8,7 +8,7 @@
  *
  */
 
-package eu.aniketos.dasca.crosslanguage.tests
+package eu.aniketos.dasca.crosslanguage.test
 
 import java.io.File
 import eu.aniketos.dasca.crosslanguage.util.SourceLocation

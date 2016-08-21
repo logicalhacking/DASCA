@@ -23,7 +23,7 @@
         <module>../eu.aniketos.dasca.dataflow.test.data</module>
         <module>../eu.aniketos.dasca.js</module>
         <module>../eu.aniketos.dasca.crosslanguage</module>
-        <module>../eu.aniketos.dasca.crosslanguage.tests</module>
+        <module>../eu.aniketos.dasca.crosslanguage.test</module>
       </modules>
     </profile>
     <profile>

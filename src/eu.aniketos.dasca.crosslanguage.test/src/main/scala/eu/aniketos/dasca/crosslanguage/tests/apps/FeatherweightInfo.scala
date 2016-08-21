@@ -8,13 +8,13 @@
  *
  */
 
-package eu.aniketos.dasca.crosslanguage.tests.apps
+package eu.aniketos.dasca.crosslanguage.test.apps
 
 import java.io.File
 
 import scala.collection.mutable.ListBuffer
 
-import eu.aniketos.dasca.crosslanguage.tests.AppInfo
+import eu.aniketos.dasca.crosslanguage.test.AppInfo
 import eu.aniketos.dasca.crosslanguage.util.JavaScriptSourceLocation
 import eu.aniketos.dasca.crosslanguage.util.JavaSourceLocation
 import eu.aniketos.dasca.crosslanguage.util.SourceLocation
