@@ -20,7 +20,7 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.eclipse.ui.wizards.datatransfer
 Bundle-ClassPath: .,
- libcvc3-5.0.0.jar,
+ lib/libcvc3-5.0.0.jar,
  walaUtil.jar,
  junit.jar,
  jdi.jar,
