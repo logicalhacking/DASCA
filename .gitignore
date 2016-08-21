@@ -3,3 +3,4 @@ src/*/.settings
 src/*/.project
 src/*/target
 src/*/bin
+eu.aniketos.dasca.dataflow/config/main.config
