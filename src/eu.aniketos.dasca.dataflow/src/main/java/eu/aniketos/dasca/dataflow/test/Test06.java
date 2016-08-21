@@ -8,7 +8,7 @@
  *
  */
 
-package eu.aniketos.dasca.dataflow.tests;
+package eu.aniketos.dasca.dataflow.test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,13 +16,12 @@ import org.junit.Test;
 
 import eu.aniketos.dasca.dataflow.util.SuperGraphUtil;
 
-public class Test11 {
+public class Test06 {
 
-    String entryClass = "Test11";
+    String entryClass = "Test06";
 
     @Test
     public void testBad() {
-        AllTests.init();
         int result = SuperGraphUtil.analyzeAndSaveSuperGraph(AllTests.superGraph, entryClass, "bad");
         assertEquals(1, result);
         return;
@@ -30,7 +29,6 @@ public class Test11 {
 
     @Test
     public void testGood01() {
-        AllTests.init();
         int result = SuperGraphUtil.analyzeAndSaveSuperGraph(AllTests.superGraph, entryClass, "good01");
         assertEquals(0, result);
         return;
@@ -38,32 +36,7 @@ public class Test11 {
 
     @Test
     public void testGood02() {
-        AllTests.init();
         int result = SuperGraphUtil.analyzeAndSaveSuperGraph(AllTests.superGraph, entryClass, "good02");
-        assertEquals(0, result);
-        return;
-    }
-
-    @Test
-    public void testGood03() {
-        AllTests.init();
-        int result = SuperGraphUtil.analyzeAndSaveSuperGraph(AllTests.superGraph, entryClass, "good03");
-        assertEquals(0, result);
-        return;
-    }
-
-    @Test
-    public void testGood04() {
-        AllTests.init();
-        int result = SuperGraphUtil.analyzeAndSaveSuperGraph(AllTests.superGraph, entryClass, "good04");
-        assertEquals(0, result);
-        return;
-    }
-
-    @Test
-    public void testGood05() {
-        AllTests.init();
-        int result = SuperGraphUtil.analyzeAndSaveSuperGraph(AllTests.superGraph, entryClass, "good05");
         assertEquals(0, result);
         return;
     }

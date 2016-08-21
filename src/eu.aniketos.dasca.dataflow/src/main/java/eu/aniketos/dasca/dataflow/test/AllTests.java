@@ -1,4 +1,4 @@
-package eu.aniketos.dasca.dataflow.tests;
+package eu.aniketos.dasca.dataflow.test;
 
 import java.io.IOException;
 

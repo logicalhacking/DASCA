@@ -8,7 +8,7 @@
  *
  */
 
-package eu.aniketos.dasca.dataflow.tests;
+package eu.aniketos.dasca.dataflow.test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,15 +16,15 @@ import org.junit.Test;
 
 import eu.aniketos.dasca.dataflow.util.SuperGraphUtil;
 
-public class Test17 {
+public class Test18 {
 
-    String entryClass = "Test17";
+    String entryClass = "Test18";
 
     @Test
     public void testBad() {
         AllTests.init();
         int result = SuperGraphUtil.analyzeAndSaveSuperGraph(AllTests.superGraph, entryClass, "bad");
-        assertEquals(2, result);
+        assertEquals(1, result);
         return;
     }
 
