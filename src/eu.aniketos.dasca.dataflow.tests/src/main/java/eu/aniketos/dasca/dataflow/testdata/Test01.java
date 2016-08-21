@@ -8,24 +8,38 @@
  *
  */
 
-package eu.aniketos.dasca.dataflow.tests;
+package eu.aniketos.dasca.dataflow.testdata;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import eu.aniketos.dasca.dataflow.tests.dummy.IO;
+import eu.aniketos.dasca.dataflow.testdata.dummy.IO;
 
 
-// Test Case 03:
-//reachability from bad sink to bad source via global boolean variable
-public class Test03 {
-
-    private boolean public_true = true;
+// Test Case 01:
+// different types of (apparently) constant values
+public class Test01 {
 
     public void bad() {
         String userName;
-        if(public_true) {
+        if(true) {
+            userName = IO.readLine();
+        } else {
+            userName = "fix";
+        }
+        Connection conn = IO.getDBConnection();
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("SELECT * FROM user WHERE name='" + userName + "';");
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void good01() {
+        String userName;
+        if(true) {
             userName = "fix";
         } else {
             userName = IO.readLine();
@@ -39,24 +53,8 @@ public class Test03 {
         }
     }
 
-    public void good01() {
-        String userName = IO.readLine();
-        if(public_true) {
-            userName = "fix";
-        } else {
-            userName = "fix";
-        }
-        Connection conn = IO.getDBConnection();
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.execute("SELECT * FROM user WHERE name='" + userName + "';");
-        } catch(SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void main(String[] args) {
-        Test03 test = new Test03();
+        Test01 test = new Test01();
         test.good01();
         test.bad();
     }

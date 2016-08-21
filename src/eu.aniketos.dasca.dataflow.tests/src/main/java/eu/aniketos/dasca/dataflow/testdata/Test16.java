@@ -8,27 +8,31 @@
  *
  */
 
-package eu.aniketos.dasca.dataflow.tests;
+package eu.aniketos.dasca.dataflow.testdata;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import eu.aniketos.dasca.dataflow.tests.dummy.IO;
+import eu.aniketos.dasca.dataflow.testdata.dummy.IO;
 
 
-// Test Case 19:
-//reachability from multiple differing bad sinks to one bad source with multiple vulnerabilities
-public class Test19 {
+// Test Case 16:
+//reachability from multiple identical bad sinks to one bad source with one vulnerability
+public class Test16 {
 
     /*
-     * 2 findings
+     * 1 findings
      */
     public void bad(int i) {
         String userName = IO.readLine();
 
-        if(i < 10) {
-            userName = IO.readLine2();
+        if(i < 0) {
+            userName = IO.readLine();
+        }
+
+        if(i < 0) {
+            userName = IO.sanitize(userName);
         }
 
         Connection conn = IO.getDBConnection();
@@ -41,7 +45,7 @@ public class Test19 {
     }
 
     public static void main(String[] args) {
-        Test19 test = new Test19();
+        Test16 test = new Test16();
         test.bad(5);
     }
 }

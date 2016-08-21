@@ -8,32 +8,27 @@
  *
  */
 
-package eu.aniketos.dasca.dataflow.tests;
+package eu.aniketos.dasca.dataflow.testdata;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import eu.aniketos.dasca.dataflow.tests.dummy.IO;
+import eu.aniketos.dasca.dataflow.testdata.dummy.IO;
 
 
-// Test Case 12:
-//reachability from bad sink to bad source via multiple if-statements and boolean expressions combined with arithmetics
-public class Test12 {
+// Test Case 05:
+//reachability from bad sink to bad source via arithmetic expressions
+public class Test05 {
 
-    /*
-     * bad for i==3 and !x
-     */
-    public void bad(boolean x, int i) {
-        String userName = null;
-        if(x | i > 3) {
-            userName = IO.readLineGood();
+
+    public void bad() {
+        String userName;
+        int i = 5;
+        if(i > 10) {
+            userName = "fix";
         } else {
             userName = IO.readLine();
-        }
-
-        if( i < 3 ) {
-            userName = IO.readLineGood();
         }
         Connection conn = IO.getDBConnection();
         try {
@@ -44,16 +39,13 @@ public class Test12 {
         }
     }
 
-    public void good01(boolean x, int i) {
-        String userName = null;
-        if(x | i > 3) {
-            userName = IO.readLineGood();
+    public void good01() {
+        String userName = IO.readLine();
+        int i = 5;
+        if(i > 10) {
+            userName = "fix";
         } else {
-            userName = IO.readLine();
-        }
-
-        if(!x & i <= 3 ) {
-            userName = IO.readLineGood();
+            userName = "fix";
         }
         Connection conn = IO.getDBConnection();
         try {
@@ -65,8 +57,8 @@ public class Test12 {
     }
 
     public static void main(String[] args) {
-        Test12 test = new Test12();
-        test.good01(true, 5);
-        test.bad(true, 5);
+        Test05 test = new Test05();
+        test.good01();
+        test.bad();
     }
 }

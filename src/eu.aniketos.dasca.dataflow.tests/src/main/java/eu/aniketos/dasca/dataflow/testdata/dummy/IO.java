@@ -8,7 +8,7 @@
  *
  */
 
-package eu.aniketos.dasca.dataflow.tests.dummy;
+package eu.aniketos.dasca.dataflow.testdata.dummy;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

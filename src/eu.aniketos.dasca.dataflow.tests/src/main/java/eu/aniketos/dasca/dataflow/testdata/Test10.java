@@ -8,28 +8,31 @@
  *
  */
 
-package eu.aniketos.dasca.dataflow.tests;
+package eu.aniketos.dasca.dataflow.testdata;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import eu.aniketos.dasca.dataflow.tests.dummy.IO;
+import eu.aniketos.dasca.dataflow.testdata.dummy.IO;
 
 
-// Test Case 09:
-//reachability from bad sink to bad source via mutually exclusive source and sink
-public class Test09 {
+// Test Case 10:
+//reachability from bad sink to bad source via mutually exclusive source and sink (changing variables)
+public class Test10 {
 
-
-    public void bad() {
+    /*
+     * bad for i==3
+     */
+    public void bad(int i) {
         String userName = null;
-        boolean local_true = true;
-        if(local_true) {
+        if(i > 2) {
             userName = IO.readLine();
         }
 
-        if(local_true) {
+        i = i - 2;
+
+        if(i < 2) {
             Connection conn = IO.getDBConnection();
             try {
                 Statement stmt = conn.createStatement();
@@ -40,14 +43,15 @@ public class Test09 {
         }
     }
 
-    public void good01() {
+    public void good01(int i) {
         String userName = null;
-        boolean local_true = true;
-        if(local_true) {
+        if(i > 2) {
             userName = IO.readLine();
         }
 
-        if(!local_true) {
+        i = i - 2;
+
+        if(i < 0) {
             Connection conn = IO.getDBConnection();
             try {
                 Statement stmt = conn.createStatement();
@@ -58,14 +62,15 @@ public class Test09 {
         }
     }
 
-    public void good02() {
+    public void good02(int i) {
         String userName = null;
-        int i = 1;
-        if(i > 5) {
+        if(i > 2) {
             userName = IO.readLine();
         }
 
-        if(i < 3 ) {
+        i = i * -1;
+
+        if(i > 2) {
             Connection conn = IO.getDBConnection();
             try {
                 Statement stmt = conn.createStatement();
@@ -76,13 +81,15 @@ public class Test09 {
         }
     }
 
-    public void good03(int i) {
+    public void good03(boolean bool) {
         String userName = null;
-        if(i > 3) {
+        if(bool) {
             userName = IO.readLine();
         }
 
-        if(i < 3 ) {
+        bool = !bool;
+
+        if(bool) {
             Connection conn = IO.getDBConnection();
             try {
                 Statement stmt = conn.createStatement();
@@ -94,10 +101,10 @@ public class Test09 {
     }
 
     public static void main(String[] args) {
-        Test09 test = new Test09();
-        test.good01();
-        test.good02();
-        test.good03(5);
-        test.bad();
+        Test10 test = new Test10();
+        test.good01(10);
+        test.good02(10);
+        test.good03(true);
+        test.bad(10);
     }
 }

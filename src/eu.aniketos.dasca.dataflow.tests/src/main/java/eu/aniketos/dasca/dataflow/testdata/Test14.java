@@ -8,29 +8,33 @@
  *
  */
 
-package eu.aniketos.dasca.dataflow.tests;
+package eu.aniketos.dasca.dataflow.testdata;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import eu.aniketos.dasca.dataflow.tests.dummy.IO;
+import eu.aniketos.dasca.dataflow.testdata.dummy.IO;
 
 
-// Test Case 06:
-//reachability from bad sink to bad source via indirect data flow
-public class Test06 {
+// Test Case 14:
+//reachability from bad sink to bad source via if-statement and loops
+public class Test14 {
 
-
-    public void bad() {
-        String userName;
-        String fix   = "fix";
-        String input = IO.readLine();
-        if(false) {
-            userName = fix;
-        } else {
-            userName = input;
+    /*
+     * bad for i==0
+     */
+    public void bad(int i) {
+        String userName = IO.readLine();
+        if(i < 0) {
+            userName = IO.readLineGood();
         }
+
+        for (int j = 0; j < i; j++) {
+            userName = IO.readLineGood();
+
+        }
+
         Connection conn = IO.getDBConnection();
         try {
             Statement stmt = conn.createStatement();
@@ -41,14 +45,13 @@ public class Test06 {
     }
 
     public void good01() {
-        String userName;
-        String fix   = "fix";
-        String input = IO.readLine();
-        if(true) {
-            userName = fix;
-        } else {
-            userName = IO.readLine(); // TODO: = input;
+        String userName = IO.readLineGood();
+
+        for (int j = 0; j < 0; j++) {
+            userName = IO.readLine();
+
         }
+
         Connection conn = IO.getDBConnection();
         try {
             Statement stmt = conn.createStatement();
@@ -58,14 +61,17 @@ public class Test06 {
         }
     }
 
-    public void good02() {
-        String userName;
-        String fix   = "fix";
-        if(true) {
-            userName = fix + "";
-        } else {
-            userName = fix + IO.readLine();
+    public void good02(int i) {
+        String userName = IO.readLine();
+        if(i <= 0) {
+            userName = IO.readLineGood();
         }
+
+        for (int j = 0; j < i; j++) {
+            userName = IO.readLineGood();
+
+        }
+
         Connection conn = IO.getDBConnection();
         try {
             Statement stmt = conn.createStatement();
@@ -76,9 +82,9 @@ public class Test06 {
     }
 
     public static void main(String[] args) {
-        Test06 test = new Test06();
+        Test14 test = new Test14();
         test.good01();
-        test.good02();
-        test.bad();
+        test.good02(5);
+        test.bad(5);
     }
 }

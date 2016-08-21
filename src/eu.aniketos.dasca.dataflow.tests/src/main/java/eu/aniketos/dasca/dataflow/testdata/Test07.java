@@ -8,25 +8,29 @@
  *
  */
 
-package eu.aniketos.dasca.dataflow.tests;
+package eu.aniketos.dasca.dataflow.testdata;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import eu.aniketos.dasca.dataflow.tests.dummy.IO;
+import eu.aniketos.dasca.dataflow.testdata.dummy.IO;
 
 
-// Test Case 01:
-// different types of (apparently) constant values
-public class Test01 {
+// Test Case 07:
+//reachability from bad sink to bad source via multiple if-statements
+public class Test07 {
+
 
     public void bad() {
-        String userName;
-        if(true) {
+        String userName = null;
+        boolean local_true = true;
+        if(local_true) {
             userName = IO.readLine();
-        } else {
-            userName = "fix";
+        }
+
+        if(!local_true) {
+            userName = IO.readLineGood();
         }
         Connection conn = IO.getDBConnection();
         try {
@@ -38,11 +42,14 @@ public class Test01 {
     }
 
     public void good01() {
-        String userName;
-        if(true) {
-            userName = "fix";
-        } else {
+        String userName = null;
+        boolean local_true = true;
+        if(!local_true) {
             userName = IO.readLine();
+        }
+
+        if(local_true) {
+            userName = IO.readLineGood();
         }
         Connection conn = IO.getDBConnection();
         try {
@@ -54,7 +61,7 @@ public class Test01 {
     }
 
     public static void main(String[] args) {
-        Test01 test = new Test01();
+        Test07 test = new Test07();
         test.good01();
         test.bad();
     }

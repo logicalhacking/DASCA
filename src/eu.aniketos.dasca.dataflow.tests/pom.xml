@@ -7,7 +7,7 @@
     <version>0.1</version>
     <relativePath>../eu.aniketos.dasca.parent/pom.xml</relativePath>
   </parent>
-  <artifactId>eu.aniketos.dasca.dataflow.tests</artifactId>
+  <artifactId>eu.aniketos.dasca.dataflow.testdata</artifactId>
   <version>0.1</version>
   <packaging>jar</packaging>
   <name>DASCA - Dataflow Test Cases</name>

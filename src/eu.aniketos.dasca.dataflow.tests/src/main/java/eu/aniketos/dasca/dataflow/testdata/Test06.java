@@ -8,27 +8,28 @@
  *
  */
 
-package eu.aniketos.dasca.dataflow.tests;
+package eu.aniketos.dasca.dataflow.testdata;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import eu.aniketos.dasca.dataflow.tests.dummy.IO;
+import eu.aniketos.dasca.dataflow.testdata.dummy.IO;
 
 
-// Test Case 05:
-//reachability from bad sink to bad source via arithmetic expressions
-public class Test05 {
+// Test Case 06:
+//reachability from bad sink to bad source via indirect data flow
+public class Test06 {
 
 
     public void bad() {
         String userName;
-        int i = 5;
-        if(i > 10) {
-            userName = "fix";
+        String fix   = "fix";
+        String input = IO.readLine();
+        if(false) {
+            userName = fix;
         } else {
-            userName = IO.readLine();
+            userName = input;
         }
         Connection conn = IO.getDBConnection();
         try {
@@ -40,12 +41,30 @@ public class Test05 {
     }
 
     public void good01() {
-        String userName = IO.readLine();
-        int i = 5;
-        if(i > 10) {
-            userName = "fix";
+        String userName;
+        String fix   = "fix";
+        String input = IO.readLine();
+        if(true) {
+            userName = fix;
         } else {
-            userName = "fix";
+            userName = IO.readLine(); // TODO: = input;
+        }
+        Connection conn = IO.getDBConnection();
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.execute("SELECT * FROM user WHERE name='" + userName + "';");
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void good02() {
+        String userName;
+        String fix   = "fix";
+        if(true) {
+            userName = fix + "";
+        } else {
+            userName = fix + IO.readLine();
         }
         Connection conn = IO.getDBConnection();
         try {
@@ -57,8 +76,9 @@ public class Test05 {
     }
 
     public static void main(String[] args) {
-        Test05 test = new Test05();
+        Test06 test = new Test06();
         test.good01();
+        test.good02();
         test.bad();
     }
 }

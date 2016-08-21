@@ -8,25 +8,25 @@
  *
  */
 
-package eu.aniketos.dasca.dataflow.tests;
+package eu.aniketos.dasca.dataflow.testdata;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import eu.aniketos.dasca.dataflow.tests.dummy.IO;
+import eu.aniketos.dasca.dataflow.testdata.dummy.IO;
 
 
-// Test Case 13:
-//reachability from bad sink to bad source via multiple if-statements with multiple arithmetics
-public class Test13 {
+// Test Case 12:
+//reachability from bad sink to bad source via multiple if-statements and boolean expressions combined with arithmetics
+public class Test12 {
 
     /*
-     * bad for i==3 and j>5
+     * bad for i==3 and !x
      */
-    public void bad(int i, int j) {
+    public void bad(boolean x, int i) {
         String userName = null;
-        if(j <= 5 | i > 3) {
+        if(x | i > 3) {
             userName = IO.readLineGood();
         } else {
             userName = IO.readLine();
@@ -44,37 +44,17 @@ public class Test13 {
         }
     }
 
-    public void good01(int i, int j) {
+    public void good01(boolean x, int i) {
         String userName = null;
-        if(j <= 5 | i > 3) {
+        if(x | i > 3) {
             userName = IO.readLineGood();
         } else {
             userName = IO.readLine();
         }
 
-        if( j > 5 & i <= 3 ) {
+        if(!x & i <= 3 ) {
             userName = IO.readLineGood();
         }
-        Connection conn = IO.getDBConnection();
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.execute("SELECT * FROM user WHERE name='" + userName + "';");
-        } catch(SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void good02(int i, int j) {
-        String userName = null;
-        if(j > 0 & i > 0) {
-            userName = IO.readLine();
-            if(i + j > 0) {
-                userName = IO.readLineGood();
-            }
-        } else {
-            userName = IO.readLineGood();
-        }
-
         Connection conn = IO.getDBConnection();
         try {
             Statement stmt = conn.createStatement();
@@ -85,9 +65,8 @@ public class Test13 {
     }
 
     public static void main(String[] args) {
-        Test13 test = new Test13();
-        test.good01(5, 10);
-        test.good02(5, 10);
-        test.bad(5, 10);
+        Test12 test = new Test12();
+        test.good01(true, 5);
+        test.bad(true, 5);
     }
 }

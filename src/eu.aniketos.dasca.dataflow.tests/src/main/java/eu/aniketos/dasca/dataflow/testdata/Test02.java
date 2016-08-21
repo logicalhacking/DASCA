@@ -8,24 +8,24 @@
  *
  */
 
-package eu.aniketos.dasca.dataflow.tests;
+package eu.aniketos.dasca.dataflow.testdata;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import eu.aniketos.dasca.dataflow.tests.dummy.IO;
+import eu.aniketos.dasca.dataflow.testdata.dummy.IO;
 
 
-// Test Case 04:
-//reachability from bad sink to bad source via local boolean variable
-public class Test04 {
+// Test Case 02:
+// reachability from bad sink to bad source via global boolean constant
+public class Test02 {
 
+    private final boolean final_false = false;
 
     public void bad() {
         String userName;
-        boolean local_false = false;
-        if(local_false) {
+        if(final_false) {
             userName = "fix";
         } else {
             userName = IO.readLine();
@@ -40,10 +40,9 @@ public class Test04 {
     }
 
     public void good01() {
-        String userName = IO.readLine();
-        boolean local_true = true;
-        if(local_true) {
-            userName = "fix";
+        String userName;
+        if(final_false) {
+            userName =  IO.readLine();
         } else {
             userName = "fix";
         }
@@ -56,9 +55,24 @@ public class Test04 {
         }
     }
 
+    public void good02() {
+        String userName =  IO.readLine();
+
+        if(final_false) {
+            Connection conn = IO.getDBConnection();
+            try {
+                Statement stmt = conn.createStatement();
+                stmt.execute("SELECT * FROM user WHERE name='" + userName + "';");
+            } catch(SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        Test04 test = new Test04();
+        Test02 test = new Test02();
         test.good01();
+        test.good02();
         test.bad();
     }
 }
