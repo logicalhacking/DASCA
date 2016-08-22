@@ -10,7 +10,7 @@
   <artifactId>eu.aniketos.dasca.dataflow.test.data</artifactId>
   <version>0.1</version>
   <packaging>jar</packaging>
-  <name>DASCA - Dataflow Test Cases</name>
+  <name>DASCA - Dataflow Test Data</name>
   <build>
     <plugins>
       <plugin>
