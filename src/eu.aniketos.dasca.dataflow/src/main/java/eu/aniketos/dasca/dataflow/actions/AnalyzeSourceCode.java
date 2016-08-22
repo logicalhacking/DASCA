@@ -110,13 +110,13 @@ public class AnalyzeSourceCode implements IWorkbenchWindowActionDelegate {
                 }
 
             } catch (IOException e) {
-                e.printStackTrace();
+                log.error("IOException In AnalyzeSourceCode.run: ",e);
             } catch (CoreException e) {
-                e.printStackTrace();
+                log.error("CoreException In AnalyzeSourceCode.run: ",e);
             } catch (IllegalArgumentException e) {
-                e.printStackTrace();
+                log.error("IllegalArgumentException In AnalyzeSourceCode.run: ",e);
             } catch (CancelException e) {
-                e.printStackTrace();
+                log.error("CancelException In AnalyzeSourceCode.run: ",e);
             }
         } else {
             log.error("Warning: You did not select a project or something failed while getting the project");
