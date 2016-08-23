@@ -89,7 +89,9 @@ public class AnalyzeSourceCode implements IWorkbenchWindowActionDelegate {
         }
 
         if (javaProject != null) {
-
+        	log.debug("Info: Select Java Project: "+ javaProject.getElementName());
+        
+        	
             try {
                 JDTJavaSourceAnalysisEngine engine = PlugInUtil.createEngine(javaProject);
 

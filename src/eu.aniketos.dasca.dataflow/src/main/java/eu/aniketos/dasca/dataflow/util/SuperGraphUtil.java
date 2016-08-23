@@ -119,7 +119,7 @@ public class SuperGraphUtil {
             throw new IllegalArgumentException("sg was null for entry Class \""+entryClass+"\" and entry method \""+entryMethod+"\"");
         }
 
-        log.info("--- start analyzing " + entryMethod + " ---");
+        log.info("--- start analyzing " + entryClass + "." + entryMethod + " ---");
         ValidityChecker vc = ValidityChecker.create();
         vc.push();
 
@@ -164,13 +164,15 @@ public class SuperGraphUtil {
             i++;
         }
         if(mainEntryId == 0 && mainExitId == 0) {
-            log.error("empty entry method, ensure invocation in main method");
+            log.error("   "+entryClass + "." + entryMethod + 
+            		  ": empty entry method, ensure invocation in main method");
             return 0;
         }
         HashSet<Integer> relevantIDs = new HashSet<Integer>();
         BasicBlockInContext<IExplodedBasicBlock> bbic = sgNodes.get(mainEntryId);
         acceptedMethods.add(bbic.getMethod().getReference());
-        log.debug("start recursive graph building");
+        log.error("   "+entryClass + "." + entryMethod + 
+                  "start recursive graph building");
         relevantPathSearch(relevantIDs, sg, sgNodes, sgNodesReversed, acceptedMethods, mainEntryId, mainExitId);
 
         // remove irrelevant nodes (not on at least one path between entry and exit node)
@@ -184,7 +186,8 @@ public class SuperGraphUtil {
         }
 
         // build separate adjacency list
-        log.debug("build seperate adjacency list");
+        log.debug("   "+entryClass + "." + entryMethod + 
+                  "build seperate adjacency list");
         HashMap<Integer, ArrayList<Integer>> adjList = new HashMap<Integer, ArrayList<Integer>>();
         HashMap<Integer, ArrayList<Integer>> adjListReverse = new HashMap<Integer, ArrayList<Integer>>();
 
@@ -200,8 +203,8 @@ public class SuperGraphUtil {
         if(removeEmptyNodes) {
             removeEmptyNodes(emptyNodes, adjList, adjListReverse, sgNodes, sgNodesReversed);
         }
-
-        log.debug("add conditions to graph nodes");
+        log.debug("   "+entryClass + "." + entryMethod + 
+                  "add conditions to graph nodes");
         ArrayList<Integer> visited = new ArrayList<Integer>();
         ArrayList<Integer> currentConditions = new ArrayList<Integer>();
         HashMap<Integer, Integer> currentConditionsEndId = new HashMap<Integer, Integer>();
@@ -453,7 +456,7 @@ public class SuperGraphUtil {
         Expr completeExpr = vc.andExpr(allExpr);
         SatResult satResult = vc.checkUnsat(completeExpr);
         boolean satisfiable = satResult.equals(SatResult.SATISFIABLE);
-        log.info("checking expression [" + (satisfiable?"SAT":"UNSAT") + "]: " + completeExpr);
+        log.info("     checking expression [" + (satisfiable?"SAT":"UNSAT") + "]: " + completeExpr);
         return satisfiable;
     }
 
@@ -462,6 +465,7 @@ public class SuperGraphUtil {
                                        HashMap<Integer, HashSet<ArrayList<Integer>>> paths) {
 
         ArrayList<Integer> children = adjList.get(currentId);
+        assert children != null : "No entry found in adjList for "+currentId;
         HashSet<ArrayList<Integer>> currentPaths = new HashSet<ArrayList<Integer>>();
 
         for(int child : children) {
