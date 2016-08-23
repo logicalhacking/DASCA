@@ -15,6 +15,7 @@ import java.io.IOException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.viewers.ISelection;
@@ -76,8 +77,11 @@ public class PlugInUtil {
      */
     public static JDTJavaSourceAnalysisEngine /* JavaSourceAnalysisEngine */
     createEngine(IJavaProject project) throws IOException, CoreException, IllegalArgumentException, CancelException {
-        assert project == null : "You must provide a valid IJavaProject";
-        project.open(null);
+        assert project != null : "You must provide a valid IJavaProject";
+       /* if (project != null) {
+        	throw new RuntimeException ("Info about project: " + project);
+        } */
+		project.open(null);
 
         JDTJavaSourceAnalysisEngine engine;
         // engine = new JDTJavaSourceAnalysisEngine(project.getElementName());
@@ -87,25 +91,25 @@ public class PlugInUtil {
             @Override
             protected Iterable<Entrypoint> makeDefaultEntrypoints(AnalysisScope scope, IClassHierarchy cha) {
                 String [] classes= {
-                    "Leu/aniketos/dasca/dataflow/test/Test01"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test02"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test03"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test04"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test05"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test06"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test07"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test08"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test09"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test10"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test11"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test12"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test13"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test14"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test15"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test16"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test17"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test18"
-                    ,"Leu/aniketos/dasca/dataflow/test/Test19"
+                     "Leu/aniketos/dasca/dataflow/test/data/Test01"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test02"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test03"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test04"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test05"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test06"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test07"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test08"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test09"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test10"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test11"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test12"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test13"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test14"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test15"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test16"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test17"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test18"
+                    ,"Leu/aniketos/dasca/dataflow/test/data/Test19"
                 };
 
 
@@ -116,6 +120,6 @@ public class PlugInUtil {
         engine.setExclusionsFile(REGRESSION_EXCLUSIONS);
 
         return engine;
-    }
+    } 
 
 }
