@@ -29,39 +29,33 @@ import com.ibm.wala.util.CancelException;
 	Test13.class, Test14.class, Test15.class, Test16.class,
 	Test17.class, Test18.class, Test19.class
 	})
-public class AllTests {
+public class AllTests {	
 	
 	protected static ICFGSupergraph superGraph = null;
+	private  static final String testProject="eu.aniketos.dasca.dataflow.test.data";
 	
 	@BeforeClass
-	public static void init(){
+	public static void init() throws IllegalArgumentException, CancelException, IOException, CoreException {
 		IJavaProject javaProject = null;
 		IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+		
 		for (IProject project : projects) {
 			try {
 				project.open(null /* IProgressMonitor */);
 			} catch (CoreException e) {
-				e.printStackTrace();
-			}
+				e.printStackTrace();			}
 			IJavaProject javaProjectintern = JavaCore.create(project);
-			if(javaProjectintern.getElementName().equals("eu.aniketos.dasca.dataflow")){
+			if(javaProjectintern.getElementName().toString().equals(testProject)){
 				javaProject = javaProjectintern;
 			}
 		}
-		try {
-			JDTJavaSourceAnalysisEngine engine = PlugInUtil.createEngine(javaProject);
-			CallGraph cg = engine.buildDefaultCallGraph();
+		System.err.println(""+javaProject.getElementName());
+		assert javaProject != null : "Project >>"+testProject+"<< not found.";
+			
+		JDTJavaSourceAnalysisEngine engine = PlugInUtil.createEngine(javaProject);
+		CallGraph cg = engine.buildDefaultCallGraph();
 
-			AnalysisCache ac = new AnalysisCache();
-			superGraph = ICFGSupergraph.make(cg, ac);
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (CoreException e) {
-			e.printStackTrace();
-		} catch (CancelException e) {
-			e.printStackTrace();
-		}
-	}
+		AnalysisCache ac = new AnalysisCache();
+		superGraph = ICFGSupergraph.make(cg, ac);
+	} 
 }

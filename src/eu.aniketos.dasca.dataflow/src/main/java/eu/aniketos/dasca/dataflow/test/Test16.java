@@ -12,7 +12,12 @@ package eu.aniketos.dasca.dataflow.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
+
+import org.eclipse.core.runtime.CoreException;
 import org.junit.Test;
+
+import com.ibm.wala.util.CancelException;
 
 import eu.aniketos.dasca.dataflow.util.SuperGraphUtil;
 
@@ -21,7 +26,7 @@ public class Test16 {
     String entryClass = "Test16";
 
     @Test
-    public void testBad() {
+    public void testBad() throws IllegalArgumentException, CancelException, IOException, CoreException {
         AllTests.init();
         int result = SuperGraphUtil.analyzeAndSaveSuperGraph(AllTests.superGraph, entryClass, "bad");
         assertEquals(1, result);
