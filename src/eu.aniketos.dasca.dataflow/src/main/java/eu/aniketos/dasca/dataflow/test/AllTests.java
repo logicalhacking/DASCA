@@ -44,7 +44,7 @@ public class AllTests {
 				e.printStackTrace();
 			}
 			IJavaProject javaProjectintern = JavaCore.create(project);
-			if(javaProjectintern.getElementName().equals("TestCases")){
+			if(javaProjectintern.getElementName().equals("eu.aniketos.dasca.dataflow")){
 				javaProject = javaProjectintern;
 			}
 		}
