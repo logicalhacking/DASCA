@@ -49,9 +49,9 @@ public class AllTests {
 				javaProject = javaProjectintern;
 			}
 		}
-		System.err.println(""+javaProject.getElementName());
 		assert javaProject != null : "Project >>"+testProject+"<< not found.";
-			
+		System.err.println(""+javaProject.getElementName());
+
 		JDTJavaSourceAnalysisEngine engine = PlugInUtil.createEngine(javaProject);
 		CallGraph cg = engine.buildDefaultCallGraph();
 

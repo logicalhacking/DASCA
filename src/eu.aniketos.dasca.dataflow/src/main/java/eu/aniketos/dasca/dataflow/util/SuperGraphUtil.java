@@ -196,13 +196,19 @@ public class SuperGraphUtil {
 
         buildAdjacencyLists(sg, sgNodes, sgNodesReversed, adjList, adjListReverse, emptyNodes, relevantIDs);
 
-        /* <<< print original adjacency list to log
+        // <<< print original adjacency list to log
         		log.debug("adjacency list before removing empty nodes:");
         		AnalysisUtil.printAdjList(adjList, log);
-        //*/
+        //
         if(removeEmptyNodes) {
             removeEmptyNodes(emptyNodes, adjList, adjListReverse, sgNodes, sgNodesReversed);
         }
+        
+        // <<< print adjacency list to log
+		log.debug("adjacency after before removing empty nodes:");
+		AnalysisUtil.printAdjList(adjList, log);
+        //
+        
         log.debug("   "+entryClass + "." + entryMethod + 
                   "add conditions to graph nodes");
         ArrayList<Integer> visited = new ArrayList<Integer>();
@@ -464,6 +470,7 @@ public class SuperGraphUtil {
                                        HashMap<Integer, ArrayList<Integer>> adjList,
                                        HashMap<Integer, HashSet<ArrayList<Integer>>> paths) {
 
+    	log.debug("     searching for "+currentId+" in adjList.");
         ArrayList<Integer> children = adjList.get(currentId);
         assert children != null : "No entry found in adjList for "+currentId;
         HashSet<ArrayList<Integer>> currentPaths = new HashSet<ArrayList<Integer>>();
