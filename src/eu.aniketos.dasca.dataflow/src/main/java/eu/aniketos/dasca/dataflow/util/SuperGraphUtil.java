@@ -202,12 +202,12 @@ public class SuperGraphUtil {
         //
         if(removeEmptyNodes) {
             removeEmptyNodes(emptyNodes, adjList, adjListReverse, sgNodes, sgNodesReversed);
+            // <<< print adjacency list to log
+    		     log.debug("adjacency after removing empty nodes:");
+    		     AnalysisUtil.printAdjList(adjList, log);
+            //
         }
         
-        // <<< print adjacency list to log
-		log.debug("adjacency after before removing empty nodes:");
-		AnalysisUtil.printAdjList(adjList, log);
-        //
         
         log.debug("   "+entryClass + "." + entryMethod + 
                   "add conditions to graph nodes");
