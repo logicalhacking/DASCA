@@ -78,9 +78,6 @@ public class PlugInUtil {
     public static JDTJavaSourceAnalysisEngine /* JavaSourceAnalysisEngine */
     createEngine(IJavaProject project) throws IOException, CoreException, IllegalArgumentException, CancelException {
         assert project != null : "You must provide a valid IJavaProject";
-       /* if (project != null) {
-        	throw new RuntimeException ("Info about project: " + project);
-        } */
 		project.open(null);
 
         JDTJavaSourceAnalysisEngine engine;
