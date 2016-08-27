@@ -58,7 +58,7 @@ public class PlugInUtil {
                 TreeSelection tselection = (TreeSelection) selection;
                 Object firstElement = tselection.getFirstElement();
                 if (firstElement instanceof IAdaptable) {
-                    IProject project = (IProject) ((IAdaptable) firstElement).getAdapter(IProject.class);
+                    IProject project = ((IAdaptable) firstElement).getAdapter(IProject.class);
                     javaProject = JavaCore.create(project);
                 }
             }
@@ -76,14 +76,11 @@ public class PlugInUtil {
      * @throws CancelException
      */
     public static JDTJavaSourceAnalysisEngine /* JavaSourceAnalysisEngine */
-    createEngine(IJavaProject project) throws IOException, CoreException, IllegalArgumentException, CancelException {
+    createJDTJavaEngine(IJavaProject project) throws IOException, CoreException, IllegalArgumentException, CancelException {
         assert project != null : "You must provide a valid IJavaProject";
 		project.open(null);
 
         JDTJavaSourceAnalysisEngine engine;
-        // engine = new JDTJavaSourceAnalysisEngine(project.getElementName());
-
-
         engine = new JDTJavaSourceAnalysisEngine(project.getElementName()) {
             @Override
             protected Iterable<Entrypoint> makeDefaultEntrypoints(AnalysisScope scope, IClassHierarchy cha) {
@@ -114,6 +111,7 @@ public class PlugInUtil {
 
             }
         };
+        
         engine.setExclusionsFile(REGRESSION_EXCLUSIONS);
 
         return engine;

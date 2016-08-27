@@ -294,6 +294,7 @@ public class AnalysisUtil {
             if(inst == null) {
                 continue;
             }
+//            ConcreteJavaMethod method = (ConcreteJavaMethod) bbic.getMethod();
             IMethod method =  bbic.getMethod();
             int lineNumber = method.getLineNumber(bbic.getLastInstructionIndex());
             map.put(inst, lineNumber);

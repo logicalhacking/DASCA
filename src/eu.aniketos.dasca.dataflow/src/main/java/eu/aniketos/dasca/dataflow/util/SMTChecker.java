@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 
 
 import com.ibm.wala.cast.ir.ssa.CAstBinaryOp;
-// import com.ibm.wala.cast.ir.ssa.AstConstants;
+//import com.ibm.wala.cast.ir.ssa.AstConstants;
 import com.ibm.wala.cast.java.ssa.AstJavaInvokeInstruction;
 import com.ibm.wala.shrikeBT.BinaryOpInstruction;
 import com.ibm.wala.shrikeBT.IBinaryOpInstruction.IOperator;
@@ -138,18 +138,6 @@ public class SMTChecker {
             return vc.divideExpr(exprLhs, exprRhs);
         } else if(op == BinaryOpInstruction.Operator.MUL) {
             return vc.multExpr(exprLhs, exprRhs);
-/* Old Shrike-based coding:        
-        } else if(op == AstConstants.BinaryOp.LT) {
-            return vc.ltExpr(exprLhs, exprRhs);
-        } else if(op == AstConstants.BinaryOp.LE) {
-            return vc.leExpr(exprLhs, exprRhs);
-        } else if(op == AstConstants.BinaryOp.EQ) {
-            return vc.eqExpr(exprLhs, exprRhs);
-        } else if(op == AstConstants.BinaryOp.GE) {
-            return vc.geExpr(exprLhs, exprRhs);
-        } else if(op == AstConstants.BinaryOp.GT) {
-            return vc.gtExpr(exprLhs, exprRhs);
-*/            
         } else if(op == CAstBinaryOp.LT) {
             return vc.ltExpr(exprLhs, exprRhs);
         } else if(op == CAstBinaryOp.LE) {
@@ -255,21 +243,6 @@ public class SMTChecker {
                     return vc.divideExpr(exprLhs, exprRhs);
                 } else if(op == BinaryOpInstruction.Operator.MUL) {
                     return vc.multExpr(exprLhs, exprRhs);
- /* Old Shrike-based coding:        
-                } else if(op == AstConstants.BinaryOp.LT) {
-                    return vc.ltExpr(exprLhs, exprRhs);
-                } else if(op == AstConstants.BinaryOp.LE) {
-                    return vc.leExpr(exprLhs, exprRhs);
-                } else if(op == AstConstants.BinaryOp.EQ) {
-                    return vc.eqExpr(exprLhs, exprRhs);
-                } else if(op == AstConstants.BinaryOp.GE) {
-                    return vc.geExpr(exprLhs, exprRhs);
-                } else if(op == AstConstants.BinaryOp.GT) {
-                    return vc.gtExpr(exprLhs, exprRhs);
-                } else if(op == AstConstants.BinaryOp.NE) {
-                    return vc.notExpr(vc.eqExpr(exprLhs, exprRhs));
-                }
-*/
                 } else if(op == CAstBinaryOp.LT) {
                     return vc.ltExpr(exprLhs, exprRhs);
                 } else if(op == CAstBinaryOp.LE) {

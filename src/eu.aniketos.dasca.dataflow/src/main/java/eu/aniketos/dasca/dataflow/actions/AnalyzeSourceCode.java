@@ -93,7 +93,7 @@ public class AnalyzeSourceCode implements IWorkbenchWindowActionDelegate {
         
         	
             try {
-                JDTJavaSourceAnalysisEngine engine = PlugInUtil.createEngine(javaProject);
+                JDTJavaSourceAnalysisEngine engine = PlugInUtil.createJDTJavaEngine(javaProject);
 
                 CallGraph cg = engine.buildDefaultCallGraph();
 
