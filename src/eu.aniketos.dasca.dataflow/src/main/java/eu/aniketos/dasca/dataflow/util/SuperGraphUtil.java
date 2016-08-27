@@ -166,7 +166,7 @@ public class SuperGraphUtil {
         if(mainEntryId == 0 && mainExitId == 0) {
             log.error("   "+entryClass + "." + entryMethod + 
             		  ": empty entry method, ensure invocation in main method");
-            return 0;
+            return -1;
         }
         HashSet<Integer> relevantIDs = new HashSet<Integer>();
         BasicBlockInContext<IExplodedBasicBlock> bbic = sgNodes.get(mainEntryId);

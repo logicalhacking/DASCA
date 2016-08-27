@@ -45,7 +45,7 @@ public class Test01 {
     public void testGood02() throws IllegalArgumentException, CancelException, IOException, CoreException {
         AllTests.init();
         int result = SuperGraphUtil.analyzeAndSaveSuperGraph(AllTests.superGraph, entryClass, "good02");
-        assertEquals(0, result);
+        assertEquals(-1, result);
         return;
     }
 }
