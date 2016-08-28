@@ -3,23 +3,17 @@ Bundle-ManifestVersion: 2
 Bundle-Name: DASCA - Dataflow Analysis
 Bundle-SymbolicName: eu.aniketos.dasca.dataflow;singleton:=true
 Bundle-Version: 0.1.0
-Bundle-Activator: eu.aniketos.dasca.dataflow.Activator
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
+Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources,
  org.eclipse.jdt.core,
  com.ibm.wala.cast,
  com.ibm.wala.cast.java,
- com.ibm.wala.ide,
  com.ibm.wala.core,
  com.ibm.wala.shrike,
- com.ibm.wala.ide.jdt,
  org.apache.log4j,
  org.junit,
  com.ibm.wala.cast.java.ecj
-Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Import-Package: org.eclipse.ui.wizards.datatransfer
 Bundle-ClassPath: .,
  lib/libcvc3-5.0.0.jar,
  walaUtil.jar,

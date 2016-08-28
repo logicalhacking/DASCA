@@ -9,7 +9,6 @@
   </parent>
   <artifactId>eu.aniketos.dasca.dataflow</artifactId>
   <version>0.1.0</version>
-  <packaging>eclipse-plugin</packaging>
   <name>DASCA - Dataflow Analysis</name>
   <dependencies>
     <dependency>
