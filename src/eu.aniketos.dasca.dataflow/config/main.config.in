@@ -4,28 +4,21 @@
 # depth = [0..2] (the higher, the better)
 analysis_depth = 2
 
-# name of java project
-analysis_project = eu.aniketos.dasca.dataflow.test.data
 
-# name of java class
-analysis_entry_class = Test13
-
-# names of analyzed methods (separate multiple methods with ',')
-analysis_entry_method = good01
 
 
 analysis_sanitizer = sanitize, readLineGood
 analysis_bad_src = readLine, readLine2
 
-analysis_exclusion_file = <path to workspace or source>/eu.aniketos.dasca.dataflow/config/Java60RegressionExclusions.txt
+analysis_exclusion_file = config/Java60RegressionExclusions.txt
 
-logging_properties_file = <path to workspace or source>/eu.aniketos.dasca.dataflow/config/log4j.properties
+logging_properties_file = config/log4j.properties
 
 #
 # information for dot generation
 
-dot_path = /tmp/graphs 
+dot_path = /tmp/graphs
 dot_remove_empty_nodes = no
 
 # java_runtime_dir = /usr/lib/jvm/java-6-openjdk-amd64/jre/lib
-java_runtime_dir = <path to Java installatin directory>>/jre/lib/
+java_runtime_dir = ../../jre/lib
