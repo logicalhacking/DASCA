@@ -4,3 +4,4 @@ src/*/.project
 src/*/target
 src/*/bin
 src/eu.aniketos.dasca.dataflow/config/main.config
+src/eu.aniketos.dasca.dataflow/main.log*
