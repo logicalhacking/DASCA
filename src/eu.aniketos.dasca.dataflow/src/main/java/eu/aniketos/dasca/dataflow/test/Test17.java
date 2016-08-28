@@ -16,6 +16,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.CoreException;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.ibm.wala.util.CancelException;
@@ -26,9 +27,14 @@ public class Test17 {
 
     String entryClass = "Test17";
 
+    @Before
+    public void initTest() throws IllegalArgumentException, CancelException, IOException{
+    	TestSuite.initTestSG(entryClass);
+    }
+    
     @Test
     public void testBad() throws IllegalArgumentException, CancelException, IOException, CoreException {
-        int result = SuperGraphUtil.analyzeAndSaveSuperGraph(AllTests.superGraph, entryClass, "bad");
+        int result = SuperGraphUtil.analyzeAndSaveSuperGraph(TestSuite.superGraph, entryClass, "bad");
         assertEquals(2, result);
         return;
     }

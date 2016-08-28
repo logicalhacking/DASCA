@@ -73,37 +73,18 @@ public class PlugInUtil {
     
 
     public static JavaSourceAnalysisEngine
-    createECJJavaEngine(Collection<String> sources, List<String> libs)  {
-    
-        JavaSourceAnalysisEngine engine = new ECJJavaSourceAnalysisEngine() {
-            @Override
-            protected Iterable<Entrypoint> makeDefaultEntrypoints(AnalysisScope scope, IClassHierarchy cha) {
-                String [] classes= {
-                     "Leu/aniketos/dasca/dataflow/test/data/Test01"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test02"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test03"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test04"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test05"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test06"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test07"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test08"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test09"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test10"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test11"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test12"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test13"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test14"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test15"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test16"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test17"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test18"
-                    ,"Leu/aniketos/dasca/dataflow/test/data/Test19"
-                };
-                return Util.makeMainEntrypoints(JavaSourceAnalysisScope.SOURCE,cha, classes);
-
-            }
-        };
-        
+    createECJJavaEngine(Collection<String> sources, List<String> libs, final String [] entryPoints)  {
+    	JavaSourceAnalysisEngine engine=null;
+    	if(null == entryPoints){
+    		engine = new ECJJavaSourceAnalysisEngine();
+    	}else{
+    		engine = new ECJJavaSourceAnalysisEngine() {
+                @Override
+                protected Iterable<Entrypoint> makeDefaultEntrypoints(AnalysisScope scope, IClassHierarchy cha) {
+                    return Util.makeMainEntrypoints(JavaSourceAnalysisScope.SOURCE,cha, entryPoints);
+                }
+            };
+    	}
         engine.setExclusionsFile(REGRESSION_EXCLUSIONS);
         populateScope(engine, sources, libs);
         return engine;

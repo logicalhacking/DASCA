@@ -57,5 +57,6 @@ public class Test01 {
         Test01 test = new Test01();
         test.good01();
         test.bad();
-    }
+        
+    } 
 }
