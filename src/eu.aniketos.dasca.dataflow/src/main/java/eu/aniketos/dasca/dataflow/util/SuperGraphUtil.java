@@ -472,7 +472,9 @@ public class SuperGraphUtil {
 
     	log.debug("     searching for "+currentId+" in adjList.");
         ArrayList<Integer> children = adjList.get(currentId);
-        assert children != null : "No entry found in adjList for "+currentId;
+        if (null == children) {
+        	throw new RuntimeException ("No entry found in adjList for "+currentId);
+        }
         HashSet<ArrayList<Integer>> currentPaths = new HashSet<ArrayList<Integer>>();
 
         for(int child : children) {
