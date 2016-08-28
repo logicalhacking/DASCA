@@ -92,6 +92,16 @@
     	<artifactId>eu.aniketos.dasca.crosslanguage</artifactId>
     	<version>0.0.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+    </dependency>
+    <dependency>
+        <groupId>org.scalatest</groupId>
+        <artifactId>scalatest_2.11</artifactId>
+    <version>3.0.0</version>
+</dependency>
   </dependencies>
   <build>
     <plugins>
