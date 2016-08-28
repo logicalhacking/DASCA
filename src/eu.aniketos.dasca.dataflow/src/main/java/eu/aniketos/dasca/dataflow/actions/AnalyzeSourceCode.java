@@ -13,6 +13,7 @@ package eu.aniketos.dasca.dataflow.actions;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -31,6 +32,7 @@ import eu.aniketos.dasca.dataflow.util.PlugInUtil;
 import eu.aniketos.dasca.dataflow.util.SuperGraphUtil;
 
 import com.ibm.wala.cast.java.client.JDTJavaSourceAnalysisEngine;
+import com.ibm.wala.cast.java.client.JavaSourceAnalysisEngine;
 import com.ibm.wala.dataflow.IFDS.ICFGSupergraph;
 import com.ibm.wala.ipa.callgraph.AnalysisCache;
 import com.ibm.wala.ipa.callgraph.CallGraph;
@@ -60,42 +62,14 @@ public class AnalyzeSourceCode implements IWorkbenchWindowActionDelegate {
      * @see IWorkbenchWindowActionDelegate#run
      */
     public void run(IAction action) {
-
-        List<IJavaProject> javaProjects = new ArrayList<IJavaProject>();
-
-        IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
-        for(IProject project: projects) {
-            try {
-                project.open(null /* IProgressMonitor */);
-            } catch (CoreException e) {
-                e.printStackTrace();
-            }
-            IJavaProject javaProject = JavaCore.create(project);
-            javaProjects.add(javaProject);
-        }
-
-        IJavaProject javaProject = null;
-        String testProject = AnalysisUtil.getPropertyString(AnalysisUtil.CONFIG_ENTRY_CLASS);
-
-        for (IJavaProject iJavaProject : javaProjects) {
-            boolean bool = iJavaProject.exists();
-            if(bool && iJavaProject.getElementName().startsWith(testProject)) {
-                javaProject = iJavaProject;
-            }
-        }
-
-        if(javaProject == null) {
-            javaProject = PlugInUtil.getSelectedIJavaProject();
-        }
-
-        if (javaProject != null) {
-        	log.debug("Info: Select Java Project: "+ javaProject.getElementName());
-        
-        	
-            try {
-                JDTJavaSourceAnalysisEngine engine = PlugInUtil.createJDTJavaEngine(javaProject);
-
-                CallGraph cg = engine.buildDefaultCallGraph();
+                Collection<String> sources = null; // TODO
+				List<String> libs = null; // TODO
+				JavaSourceAnalysisEngine engine = PlugInUtil.createECJJavaEngine(sources, libs);
+          
+                CallGraph cg;
+				try {
+					cg = engine.buildDefaultCallGraph();
+				 
 
                 log.debug("callgraph generated (size:" + cg.getNumberOfNodes() + ")");
 
@@ -111,19 +85,13 @@ public class AnalyzeSourceCode implements IWorkbenchWindowActionDelegate {
                     String entryMethod = methods[i].trim();
                     SuperGraphUtil.analyzeAndSaveSuperGraph(sg, entryClass, entryMethod);
                 }
-
-            } catch (IOException e) {
-                log.error("IOException In AnalyzeSourceCode.run: ",e);
-            } catch (CoreException e) {
-                log.error("CoreException In AnalyzeSourceCode.run: ",e);
-            } catch (IllegalArgumentException e) {
-                log.error("IllegalArgumentException In AnalyzeSourceCode.run: ",e);
-            } catch (CancelException e) {
-                log.error("CancelException In AnalyzeSourceCode.run: ",e);
-            }
-        } else {
-            log.error("Warning: You did not select a project or something failed while getting the project");
-        }
+				} catch (IOException e) {
+	                log.error("IOException In AnalyzeSourceCode.run: ",e);
+	            } catch (IllegalArgumentException e) {
+	                log.error("IllegalArgumentException In AnalyzeSourceCode.run: ",e);
+	            } catch (CancelException e) {
+	                log.error("CancelException In AnalyzeSourceCode.run: ",e);
+	            }
     }
 
     /**

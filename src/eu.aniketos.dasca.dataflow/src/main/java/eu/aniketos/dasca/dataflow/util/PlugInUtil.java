@@ -1,5 +1,6 @@
 /*
  * (C) Copyright 2010-2015 SAP SE.
+ *               2016      The University of Sheffield.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -10,27 +11,24 @@
 
 package eu.aniketos.dasca.dataflow.util;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
+import java.util.jar.JarFile;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.TreeSelection;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
+import org.junit.Assert;
 
-import com.ibm.wala.cast.java.client.JDTJavaSourceAnalysisEngine;
+import com.ibm.wala.cast.java.client.ECJJavaSourceAnalysisEngine;
 import com.ibm.wala.cast.java.client.JavaSourceAnalysisEngine;
 import com.ibm.wala.cast.java.ipa.callgraph.JavaSourceAnalysisScope;
+import com.ibm.wala.classLoader.JarFileModule;
+import com.ibm.wala.classLoader.SourceDirectoryTreeModule;
+import com.ibm.wala.classLoader.SourceFileModule;
 import com.ibm.wala.ipa.callgraph.AnalysisScope;
 import com.ibm.wala.ipa.callgraph.Entrypoint;
 import com.ibm.wala.ipa.callgraph.impl.Util;
 import com.ibm.wala.ipa.cha.IClassHierarchy;
-import com.ibm.wala.util.CancelException;
 
 public class PlugInUtil {
 
@@ -42,46 +40,42 @@ public class PlugInUtil {
     private PlugInUtil() {
     }
 
-    /**
-     * Get the selected project. Can return null if no project is selected
-     *
-     * @return
-     */
-    public static IJavaProject getSelectedIJavaProject() {
-        IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-        IJavaProject javaProject = null;
+    public static void populateScope(JavaSourceAnalysisEngine engine, Collection<String> sources, List<String> libs) {
+    	if (null != libs ){
+    		boolean foundLib = false;
+    		for (String lib : libs) {
+    			File libFile = new File(lib);
+    			if (libFile.exists()) {
+    				foundLib = true;
+    				try {
+    					engine.addSystemModule(new JarFileModule(new JarFile(libFile, false)));
+    				} catch (IOException e) {
+    					Assert.fail(e.getMessage());
+    				}
+    			}
+    		}
+    		assert foundLib : "couldn't find library file from " + libs;
+    	}
 
-        assert window == null : "Eclipse failed to load the active workbench window in BuildCallgraph.run()";
-        if (window != null) {
-            ISelection selection = window.getSelectionService().getSelection();
-            if (selection instanceof TreeSelection) {
-                TreeSelection tselection = (TreeSelection) selection;
-                Object firstElement = tselection.getFirstElement();
-                if (firstElement instanceof IAdaptable) {
-                    IProject project = ((IAdaptable) firstElement).getAdapter(IProject.class);
-                    javaProject = JavaCore.create(project);
-                }
-            }
-        }
-        return javaProject;
+    	for (String srcFilePath : sources) {
+    		String srcFileName = srcFilePath.substring(srcFilePath.lastIndexOf(File.separator) + 1);
+    		File f = new File(srcFilePath);
+    		Assert.assertTrue("couldn't find " + srcFilePath, f.exists());
+    		if (f.isDirectory()) {
+    			engine.addSourceModule(new SourceDirectoryTreeModule(f));
+    		} else {
+    			engine.addSourceModule(new SourceFileModule(f, srcFileName, null));
+    		}
+    	}
     }
 
-    /**
-     * Created the {@link JavaSourceAnalysisEngine} for a given {@link IJavaProject}
-     * @param project
-     * @return
-     * @throws IOException
-     * @throws CoreException
-     * @throws IllegalArgumentException
-     * @throws CancelException
-     */
-    public static JDTJavaSourceAnalysisEngine /* JavaSourceAnalysisEngine */
-    createJDTJavaEngine(IJavaProject project) throws IOException, CoreException, IllegalArgumentException, CancelException {
-        assert project != null : "You must provide a valid IJavaProject";
-		project.open(null);
 
-        JDTJavaSourceAnalysisEngine engine;
-        engine = new JDTJavaSourceAnalysisEngine(project.getElementName()) {
+    
+
+    public static JavaSourceAnalysisEngine
+    createECJJavaEngine(Collection<String> sources, List<String> libs)  {
+    
+        JavaSourceAnalysisEngine engine = new ECJJavaSourceAnalysisEngine() {
             @Override
             protected Iterable<Entrypoint> makeDefaultEntrypoints(AnalysisScope scope, IClassHierarchy cha) {
                 String [] classes= {
@@ -105,15 +99,13 @@ public class PlugInUtil {
                     ,"Leu/aniketos/dasca/dataflow/test/data/Test18"
                     ,"Leu/aniketos/dasca/dataflow/test/data/Test19"
                 };
-
-
                 return Util.makeMainEntrypoints(JavaSourceAnalysisScope.SOURCE,cha, classes);
 
             }
         };
         
         engine.setExclusionsFile(REGRESSION_EXCLUSIONS);
-
+        populateScope(engine, sources, libs);
         return engine;
     } 
 

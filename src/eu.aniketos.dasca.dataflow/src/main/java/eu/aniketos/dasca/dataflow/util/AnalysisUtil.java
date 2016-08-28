@@ -1,5 +1,6 @@
 /*
  * (C) Copyright 2010-2015 SAP SE.
+ *               2016      The University of Sheffield.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -30,8 +31,6 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
-
-import eu.aniketos.dasca.dataflow.Activator;
 
 import com.ibm.wala.cast.java.loader.JavaSourceLoaderImpl.ConcreteJavaMethod;
 import com.ibm.wala.cast.java.ssa.AstJavaInvokeInstruction;
@@ -219,16 +218,11 @@ public class AnalysisUtil {
         Properties properties = new Properties();
         BufferedInputStream stream;
         try {
-            Bundle bundle = Platform.getBundle(Activator.PLUGIN_ID);
             Path path = new Path(PLUGIN_MAIN_CONFIG);
             InputStream in;
-            if(bundle!=null) { // Util is called from eclipse PlugIn
-                URL fileURL = FileLocator.find(bundle, path, null);
-                in = fileURL.openStream();
-            } else { // Util is called from java Application
                 File f = new File("config/main.config");
                 in = new FileInputStream(f);
-            }
+            
             System.err.println("Reading configuration file: "+in);
             stream = new BufferedInputStream(in);
             properties.load(stream);

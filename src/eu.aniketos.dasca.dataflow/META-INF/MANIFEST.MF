@@ -15,7 +15,8 @@ Require-Bundle: org.eclipse.ui,
  com.ibm.wala.shrike,
  com.ibm.wala.ide.jdt,
  org.apache.log4j,
- org.junit
+ org.junit,
+ com.ibm.wala.cast.java.ecj
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Import-Package: org.eclipse.ui.wizards.datatransfer
