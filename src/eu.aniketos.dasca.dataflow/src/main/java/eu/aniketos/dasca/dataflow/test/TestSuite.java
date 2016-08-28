@@ -77,17 +77,28 @@ public class TestSuite {
 	public static void logConfiguration() {
 		log.info("Test Configuration:");
 		log.info("===================");
-	    log.info("Sources:");
+	    log.info("  Sources:");
 	    for (String element : sources) {
 	        log.info("    "+element);
 	    }  
-	    log.info("Libs:");
+	    log.info("  Libs:");
 	    for (String element : libs) {
 	        log.info("    "+element);
-	    }  
-	    log.info("J2SE:" + WalaProperties.J2SE_DIR);
+	    }   
+	    log.info("  J2SE directory:     " + WalaProperties.J2SE_DIR);
+	    log.info("  Analysis depth:     " + AnalysisUtil.getPropertyInteger(AnalysisUtil.CONFIG_ANALYSIS_DEPTH));
+	    log.info("  Main config file:   " + AnalysisUtil.getPropertyString("MAIN_CONFIG"));
+	    log.info("  Print subgraphs:    " + AnalysisUtil.getPropertyBoolean(AnalysisUtil.CONFIG_BOOLEAN_PRINT_SUBGRAPHS));
+		log.info("  Dot path:           " + AnalysisUtil.getPropertyString(AnalysisUtil.CONFIG_DOT_PATH));
+		log.info("  Remove empty nodes: " + AnalysisUtil.getPropertyString(AnalysisUtil.CONFIG_DOT_REMOVE_EMPTY_NODES));
+		log.info("  Analysis project:   " + AnalysisUtil.getPropertyString(AnalysisUtil.CONFIG_ANALYSIS_PROJECT));
+		log.info("  Entry class:        " + AnalysisUtil.getPropertyString(AnalysisUtil.CONFIG_ENTRY_CLASS));
+		log.info("  Entry method:       " + AnalysisUtil.getPropertyString(AnalysisUtil.CONFIG_ENTRY_METHOD));
+		log.info("  Sanitizer:          " + AnalysisUtil.getPropertyString(AnalysisUtil.CONFIG_SANITIZER));
+		log.info("  Bad sources:        " + AnalysisUtil.getPropertyString(AnalysisUtil.CONFIG_BAD_SRC));
+		log.info("  Exclusion file:     " + AnalysisUtil.getPropertyString(AnalysisUtil.CONFIG_EXCLUSION_FILE));
+
 	}
-	
 	
 	public static void initTestSG(String test) throws IllegalArgumentException, CancelException, IOException{
 		List<String> entryPoints = new ArrayList<String>();    
@@ -108,6 +119,8 @@ public class TestSuite {
 		superGraph = ICFGSupergraph.make(cg, ac);
         log.info("CG size: "+cg.getNumberOfNodes());
         log.info("SG size: "+superGraph.getNumberOfNodes());
+		logConfiguration();
+
 	}
 	
 	@BeforeClass

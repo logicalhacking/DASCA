@@ -68,7 +68,7 @@ public class AnalysisUtil {
     /**
      * Relative path to the main configuration file
      */
-    public static final String PLUGIN_MAIN_CONFIG = "config/main.config";
+    public static final String MAIN_CONFIG = "config/main.config";
 
     /**
      * Relative path to the logging configuration file
@@ -216,30 +216,24 @@ public class AnalysisUtil {
      */
     public static String getPropertyString(String name) {
         Properties properties = new Properties();
+        properties.setProperty("MAIN_CONFIG", MAIN_CONFIG);
         BufferedInputStream stream;
         try {
-            Path path = new Path(PLUGIN_MAIN_CONFIG);
             InputStream in;
-                File f = new File("config/main.config");
-                in = new FileInputStream(f);
-            
-            System.err.println("Reading configuration file: "+in);
+            File f = new File(MAIN_CONFIG);
+            in = new FileInputStream(f);
+            System.err.println("Reading configuration file: "+f);
             stream = new BufferedInputStream(in);
             properties.load(stream);
             stream.close();
         } catch (FileNotFoundException e) {
-            System.err.println("no config file found");
-            return "";
-        } catch (NullPointerException e) {
-            System.out.println(" STD no config file found (null pointer)");
-            System.err.println(" ERR no config file found (null pointer)");
-        	return "";
+            log.warn("Warning: no config file found:", e);
+            properties.setProperty("MAIN_CONFIG", MAIN_CONFIG + " (not found)");
         } catch (IOException e) {
-            e.printStackTrace();
-            return "";
+            log.error("Failure reading no config file:", e);
+            properties.setProperty("MAIN_CONFIG", MAIN_CONFIG + " (reading error)");
         }
         String value = properties.getProperty(name);
-
         return value == null ? "" : value;
     }
 
