@@ -28,7 +28,7 @@ import eu.aniketos.dasca.crosslanguage.builder.RunBuildersInParallel
 
 
 @RunWith(classOf[JUnitRunner])
-class FeatherweightInfoTest extends FlatSpec with Matchers with BeforeAndAfterAll {
+class Featherweight extends FlatSpec with Matchers with BeforeAndAfterAll {
    def ApkName: String = "de.zertapps.dvhma.featherweight.apk"
    def connections = Set[(SourceLocation, SourceLocation)](
             (new JavaSourceLocation(43, "com/borismus/webintent/WebIntent"), new JavaScriptSourceLocation(31, 12, "www/js/index.js"))
