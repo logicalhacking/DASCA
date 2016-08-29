@@ -25,11 +25,16 @@ import eu.aniketos.dasca.crosslanguage.util.SourceLocation
 import eu.aniketos.dasca.crosslanguage.builder.FilterJSFrameworks
 import scala.collection.mutable.LinkedHashSet
 import com.ibm.wala.classLoader.IMethod
+import eu.aniketos.dasca.crosslanguage.builder.CrossBuilderOption
+import eu.aniketos.dasca.crosslanguage.builder.FilterJavaCallSites
+import eu.aniketos.dasca.crosslanguage.builder.MockCordovaExec
+import eu.aniketos.dasca.crosslanguage.builder.ReplacePluginDefinesAndRequires
+import eu.aniketos.dasca.crosslanguage.builder.FilterJSFrameworks
+import eu.aniketos.dasca.crosslanguage.builder.PreciseJS
+import eu.aniketos.dasca.crosslanguage.builder.RunBuildersInParallel
 
-
-class AppTest(apk:String, expectedConnections:Set[(SourceLocation, SourceLocation)]){
+class AppTest {
    def apkDir    = "src/main/resources/";
-
    private var js2JavaHits      = -1;
    private var js2JavaMisses    = -1;
    private var js2JavaTotal     = -1;
@@ -57,7 +62,6 @@ class AppTest(apk:String, expectedConnections:Set[(SourceLocation, SourceLocatio
      100.0 * js2JavaHits / js2JavaTotal
    }
    
-
    def getJava2JSHits() = {
      java2JSHits
    }
@@ -92,13 +96,12 @@ class AppTest(apk:String, expectedConnections:Set[(SourceLocation, SourceLocatio
    def getFalsePositives() = {
      falsePositives
    }
-   
-   def analyze() = {
-      val builder = CordovaCGBuilder(new File(apkDir,apk))
-      val mcg = builder.createCallGraph
-      val crossTargets = mcg.getAllCrossTargets
+    
+   def analyze(apk:String, options:List[CrossBuilderOption], expectedConnections:Set[(SourceLocation, SourceLocation)]):Boolean = {
+      val builder = CordovaCGBuilder(new File(apkDir, apk))
+      builder.setOptions(options:_*)
+      val crossTargets = builder.createCallGraph.getAllCrossTargets
       val convertedCrossTargets = convertToSourceLocationPairs(crossTargets)
-
       val (javaPairs, jsPairs) = convertedCrossTargets.partition({case (origin, target) => origin.isInstanceOf[JavaSourceLocation]})
       java2JSTotal = javaPairs.size
       js2JavaTotal = jsPairs.size
@@ -111,9 +114,10 @@ class AppTest(apk:String, expectedConnections:Set[(SourceLocation, SourceLocatio
       truePositives  = found
       falseNegatives = notFound
       falsePositives = convertedCrossTargets -- expectedConnections
+      true
 }
-    
-  def convertToSourceLocationPairs(crossTargets: Map[(CGNode, CallSiteReference), LinkedHashSet[CGNode]]): Set[(SourceLocation, SourceLocation)] = {
+   
+   def convertToSourceLocationPairs(crossTargets: Map[(CGNode, CallSiteReference), LinkedHashSet[CGNode]]): Set[(SourceLocation, SourceLocation)] = {
     for (
       origin <- crossTargets.keys;
       target <- crossTargets.get(origin).get
@@ -131,4 +135,7 @@ class AppTest(apk:String, expectedConnections:Set[(SourceLocation, SourceLocatio
       }
     }
   }.toSet
+
+
+
 }
