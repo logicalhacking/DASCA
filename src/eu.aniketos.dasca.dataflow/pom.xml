@@ -18,6 +18,61 @@
       <scope>system</scope>
       <systemPath>${project.basedir}/lib/libcvc3-5.0.0.jar</systemPath>
     </dependency>
+       <dependency>
+      <groupId>com.ibm.wala</groupId>
+      <artifactId>com.ibm.wala.core</artifactId>
+      <version>${wala.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.wala</groupId>
+      <artifactId>com.ibm.wala.shrike</artifactId>
+      <version>${wala.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.wala</groupId>
+      <artifactId>com.ibm.wala.util</artifactId>
+      <version>${wala.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.wala</groupId>
+      <artifactId>com.ibm.wala.cast</artifactId>
+      <version>${wala.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.wala</groupId>
+      <artifactId>com.ibm.wala.cast.js</artifactId>
+      <version>${wala.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.wala</groupId>
+      <artifactId>com.ibm.wala.cast.js.rhino</artifactId>
+      <version>${wala.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.ibm.wala</groupId>
+      <artifactId>com.ibm.wala.dalvik</artifactId>
+      <version>${wala.version}</version>
+    </dependency>
+      <dependency>
+      <groupId>com.ibm.wala</groupId>
+      <artifactId>com.ibm.wala.cast.java</artifactId>
+      <version>${wala.version}</version>
+    </dependency>
+          <dependency>
+      <groupId>com.ibm.wala</groupId>
+      <artifactId>com.ibm.wala.cast.java.ecj</artifactId>
+      <version>${wala.version}</version>
+    </dependency>
+       <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+    </dependency>
+    <dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.17</version>
+</dependency>
   </dependencies>
  <build>
     <sourceDirectory>src/main/java</sourceDirectory>

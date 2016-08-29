@@ -15,7 +15,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
-import org.eclipse.core.runtime.CoreException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,21 +32,21 @@ public class Test02 {
     }
     
     @Test
-    public void testBad() throws IllegalArgumentException, CancelException, IOException, CoreException {
+    public void testBad() throws IllegalArgumentException, CancelException, IOException {
         int result = SuperGraphUtil.analyzeAndSaveSuperGraph(TestSuite.superGraph, entryClass, "bad");
         assertEquals(1, result);
         return;
     }
 
     @Test
-    public void testGood01() throws IllegalArgumentException, CancelException, IOException, CoreException {
+    public void testGood01() throws IllegalArgumentException, CancelException, IOException {
         int result = SuperGraphUtil.analyzeAndSaveSuperGraph(TestSuite.superGraph, entryClass, "good01");
         assertEquals(0, result);
         return;
     }
 
     @Test
-    public void testGood02() throws IllegalArgumentException, CancelException, IOException, CoreException {
+    public void testGood02() throws IllegalArgumentException, CancelException, IOException {
         int result = SuperGraphUtil.analyzeAndSaveSuperGraph(TestSuite.superGraph, entryClass, "good02");
         assertEquals(0, result);
         return;
