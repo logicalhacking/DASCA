@@ -25,6 +25,7 @@ import eu.aniketos.dasca.crosslanguage.builder.ReplacePluginDefinesAndRequires
 import eu.aniketos.dasca.crosslanguage.builder.FilterJSFrameworks
 import eu.aniketos.dasca.crosslanguage.builder.PreciseJS
 import eu.aniketos.dasca.crosslanguage.builder.RunBuildersInParallel
+import eu.aniketos.dasca.crosslanguage.test.Tag._;
 
 
 @RunWith(classOf[JUnitRunner])
@@ -65,56 +66,56 @@ class Featherweight_100_630 extends FlatSpec with Matchers with BeforeAndAfterAl
       app.analyze(ApkName, options, connections)
    }   
    
-   "Java -> JavaScript" should "report fourteen hits" in {
+   "Java -> JavaScript" should "report fourteen hits" taggedAs (ManuallyChecked) in {
        app.getJava2JSHits() should be (14)
    }
    
-   it should "report no misses" in {
+   it should "report no misses" taggedAs (ManuallyChecked) in {
        app.getJS2JavaMisses() should be (0)
    }
    
-   it should "report no errors" in {
+   it should "report no errors" taggedAs (ManuallyChecked) in {
        app.getJS2JavaErrors() should be (0)
    }
 
-   it should "have a precision of 100%" in {
+   it should "have a precision of 100%" taggedAs (ManuallyChecked) in {
        app.getJS2JavaPrecision() should be (100.0 +- 0.1)
    }
    
-   it should "have a recall of 100%" in {
+   it should "have a recall of 100%" taggedAs (ManuallyChecked) in {
        app.getJS2JavaRecall() should be (100.0 +- 0.1)
    } 
    
-   "JavaScript -> Java" should "report five hits" in {
+   "JavaScript -> Java" should "report five hits" taggedAs (ManuallyChecked) in {
        app.getJS2JavaHits() should be (5)
    }
    
-   it should "report no misses" in {
+   it should "report no misses" taggedAs (ManuallyChecked) in {
        app.getJS2JavaMisses() should be (0)
    }
    
-   it should "report no errors" in {
+   it should "report no errors" taggedAs (ManuallyChecked) in {
        app.getJS2JavaErrors() should be (0)
    }
 
-   it should "have a precision of 100%" in {
+   it should "have a precision of 100%" taggedAs (ManuallyChecked) in {
        app.getJS2JavaPrecision() should be (100.0 +- 0.1)
    }
    
-   it should "have a recall of 100%" in {
+   it should "have a recall of 100%" taggedAs (ManuallyChecked) in {
        app.getJS2JavaRecall() should be (100.0 +- 0.1)
    }
    
    
-   "Reported connections" should "contain all expected connections" in {
+   "Reported connections" should "contain all expected connections" taggedAs (ManuallyChecked) in {
        app.getTruePositives() should contain theSameElementsAs connections
    }
    
-   it should "not contain false negatives" in {
+   it should "not contain false negatives" taggedAs (ManuallyChecked) in {
       app.getFalseNegatives() shouldBe empty
    }
 
-   it should "not contain false positives" in {
+   it should "not contain false positives" taggedAs (ManuallyChecked) in {
       app.getFalsePositives() shouldBe empty
    }
    
