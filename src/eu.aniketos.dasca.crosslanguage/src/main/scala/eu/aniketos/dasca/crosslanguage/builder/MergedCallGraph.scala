@@ -58,6 +58,7 @@ class MergedCallGraph(val javaCG: CallGraph, val jsCG: CallGraph, val configXml:
   var paramInfo = Map[(CGNode, CallSiteReference), String]()
   var paramMap = Map[(CGNode, CallSiteReference, CGNode), Map[Int, Set[Int]]]()
 
+  
   var filterJavaCallSites = false
   var filterJSFrameworks = false
 
@@ -449,4 +450,9 @@ class MergedCallGraph(val javaCG: CallGraph, val jsCG: CallGraph, val configXml:
 
     return false
   }
+  
+    def getNumberOfNodes = javaCG.getNumberOfNodes + jsCG.getNumberOfNodes
+  
+    
+    
 }
