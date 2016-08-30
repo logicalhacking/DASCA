@@ -34,7 +34,6 @@ import eu.aniketos.dasca.crosslanguage.builder.PreciseJS
 import eu.aniketos.dasca.crosslanguage.builder.RunBuildersInParallel
 
 class AppTest {
-   def apkDir    = "src/main/resources/";
    private var js2JavaHits      = -1;
    private var js2JavaMisses    = -1;
    private var js2JavaTotal     = -1;
@@ -98,7 +97,7 @@ class AppTest {
    }
     
    def analyze(apk:String, options:List[CrossBuilderOption], expectedConnections:Set[(SourceLocation, SourceLocation)]):Boolean = {
-      val builder = CordovaCGBuilder(new File(apkDir, apk))
+      val builder = CordovaCGBuilder(new File(getClass.getResource("/"+apk).getFile));
       builder.setOptions(options:_*)
       val crossTargets = builder.createCallGraph.getAllCrossTargets
       val convertedCrossTargets = convertToSourceLocationPairs(crossTargets)
