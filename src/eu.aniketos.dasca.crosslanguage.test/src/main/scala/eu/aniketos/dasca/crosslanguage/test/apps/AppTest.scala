@@ -32,8 +32,11 @@ import eu.aniketos.dasca.crosslanguage.builder.ReplacePluginDefinesAndRequires
 import eu.aniketos.dasca.crosslanguage.builder.FilterJSFrameworks
 import eu.aniketos.dasca.crosslanguage.builder.PreciseJS
 import eu.aniketos.dasca.crosslanguage.builder.RunBuildersInParallel
+import eu.aniketos.dasca.crosslanguage.builder.MergedCallGraph
 
 class AppTest {
+   private var cg = null:MergedCallGraph;
+  
    private var js2JavaHits      = -1;
    private var js2JavaMisses    = -1;
    private var js2JavaTotal     = -1;
@@ -95,11 +98,21 @@ class AppTest {
    def getFalsePositives() = {
      falsePositives
    }
+   
+   def getCallGraphSize() = cg.getNumberOfNodes
+   
+   def getJSCallGraphSize() = cg.jsCG.getNumberOfNodes
+   
+   def getJavaCallGraphSize() = cg.javaCG.getNumberOfNodes
+   
+   
+   private var cgSize = -1
     
    def analyze(apk:String, options:List[CrossBuilderOption], expectedConnections:Set[(SourceLocation, SourceLocation)]):Boolean = {
       val builder = CordovaCGBuilder(new File(getClass.getResource("/"+apk).getFile));
       builder.setOptions(options:_*)
-      val crossTargets = builder.createCallGraph.getAllCrossTargets
+      cg = builder.createCallGraph
+      val crossTargets = cg.getAllCrossTargets
       val convertedCrossTargets = convertToSourceLocationPairs(crossTargets)
       val (javaPairs, jsPairs) = convertedCrossTargets.partition({case (origin, target) => origin.isInstanceOf[JavaSourceLocation]})
       java2JSTotal = javaPairs.size
