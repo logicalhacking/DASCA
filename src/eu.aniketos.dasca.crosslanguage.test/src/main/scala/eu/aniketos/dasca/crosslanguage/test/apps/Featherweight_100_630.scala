@@ -64,7 +64,19 @@ class Featherweight_100_630 extends FlatSpec with Matchers with BeforeAndAfterAl
    val app = new AppTest();
    override def beforeAll(){
       app.analyze(ApkName, options, connections)
-   }   
+   }  
+    
+   "Merged CallGraph" should "contain 4.3k nodes" in {
+     app.getCallGraphSize() should be (4351 +- 20)
+   }
+   
+   "JavaScriptCallGraph" should "contain 0.9k nodes" in {
+     app.getJSCallGraphSize() should be (918 +- 10)
+   }
+
+   "JavaCallGraph" should "be contain 3.4k nodes" in {
+     app.getJavaCallGraphSize() should be (3433 +- 10)
+   }
    
    "Java -> JavaScript" should "report fourteen hits" taggedAs (ManuallyChecked) in {
        app.getJava2JSHits() should be (14)

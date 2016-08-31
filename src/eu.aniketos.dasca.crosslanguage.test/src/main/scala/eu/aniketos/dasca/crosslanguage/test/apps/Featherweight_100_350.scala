@@ -66,6 +66,18 @@ class Featherweight_100_350 extends FlatSpec with Matchers with BeforeAndAfterAl
       app.analyze(ApkName, options, connections)
    }   
    
+      "Merged CallGraph" should "contain 6.6k nodes" in {
+     app.getCallGraphSize() should be (6627 +- 20)
+   }
+   
+   "JavaScriptCallGraph" should "contain 0.8k nodes" in {
+     app.getJSCallGraphSize() should be (858 +- 10)
+   }
+
+   "JavaCallGraph" should "be contain 5.7k nodes" in {
+     app.getJavaCallGraphSize() should be (5769 +- 10)
+   }
+   
    "Java -> JavaScript" should "report fourteen hits" taggedAs (ManuallyChecked) in {
        app.getJava2JSHits() should be (14)
    }
