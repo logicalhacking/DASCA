@@ -8,31 +8,22 @@
  *
  */
 
-package eu.aniketos.dasca.crosslanguage.test.apps
+package eu.aniketos.dasca.crosslanguage.test
 
 import com.ibm.wala.classLoader.CallSiteReference
 import com.ibm.wala.ipa.callgraph.CGNode
 import eu.aniketos.dasca.crosslanguage.util.Util
 import eu.aniketos.dasca.crosslanguage.builder.CordovaCGBuilder
-import eu.aniketos.dasca.crosslanguage.builder.FilterJavaCallSites
-import eu.aniketos.dasca.crosslanguage.builder.MockCordovaExec
-import eu.aniketos.dasca.crosslanguage.builder.ReplacePluginDefinesAndRequires
 import java.io.File
 import eu.aniketos.dasca.crosslanguage.util.JavaScriptSourceLocation
 import eu.aniketos.dasca.crosslanguage.util.JavaSourceLocation
-import com.ibm.wala.cast.ir.ssa.AstIRFactory
 import eu.aniketos.dasca.crosslanguage.util.SourceLocation
-import eu.aniketos.dasca.crosslanguage.builder.FilterJSFrameworks
 import scala.collection.mutable.LinkedHashSet
-import com.ibm.wala.classLoader.IMethod
 import eu.aniketos.dasca.crosslanguage.builder.CrossBuilderOption
-import eu.aniketos.dasca.crosslanguage.builder.FilterJavaCallSites
-import eu.aniketos.dasca.crosslanguage.builder.MockCordovaExec
-import eu.aniketos.dasca.crosslanguage.builder.ReplacePluginDefinesAndRequires
-import eu.aniketos.dasca.crosslanguage.builder.FilterJSFrameworks
-import eu.aniketos.dasca.crosslanguage.builder.PreciseJS
-import eu.aniketos.dasca.crosslanguage.builder.RunBuildersInParallel
 import eu.aniketos.dasca.crosslanguage.builder.MergedCallGraph
+import eu.aniketos.dasca.crosslanguage.builder._
+import com.ibm.wala.cast.ir.ssa.AstIRFactory
+import com.ibm.wala.classLoader.IMethod
 
 class AppTest {
    private var cg = null:MergedCallGraph;

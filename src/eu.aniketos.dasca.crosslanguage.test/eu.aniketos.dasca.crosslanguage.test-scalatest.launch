@@ -10,6 +10,6 @@
 <listEntry value="4"/>
 </listAttribute>
 <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
-<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="eu.aniketos.dasca.crosslanguage.test.apps"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="eu.aniketos.dasca.crosslanguage.test"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="eu.aniketos.dasca.crosslanguage.test"/>
 </launchConfiguration>

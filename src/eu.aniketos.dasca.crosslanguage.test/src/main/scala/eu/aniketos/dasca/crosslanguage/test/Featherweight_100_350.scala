@@ -8,25 +8,20 @@ z * (C) Copyright 2016 The University of Sheffield.
  *
  */
 
-package eu.aniketos.dasca.crosslanguage.test.apps
+package eu.aniketos.dasca.crosslanguage.test
 
-
-import collection.mutable.Stack
 import org.scalatest._
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import eu.aniketos.dasca.crosslanguage.util.JavaScriptSourceLocation
 import eu.aniketos.dasca.crosslanguage.util.JavaSourceLocation
 import eu.aniketos.dasca.crosslanguage.util.SourceLocation
-import eu.aniketos.dasca.crosslanguage.builder.CrossBuilderOption
 import eu.aniketos.dasca.crosslanguage.builder.FilterJavaCallSites
 import eu.aniketos.dasca.crosslanguage.builder.MockCordovaExec
 import eu.aniketos.dasca.crosslanguage.builder.ReplacePluginDefinesAndRequires
 import eu.aniketos.dasca.crosslanguage.builder.FilterJSFrameworks
-import eu.aniketos.dasca.crosslanguage.builder.PreciseJS
-import eu.aniketos.dasca.crosslanguage.builder.RunBuildersInParallel
-import eu.aniketos.dasca.crosslanguage.test.Tag._;
-import eu.aniketos.dasca.crosslanguage.test.AppInfo;
+import eu.aniketos.dasca.crosslanguage.test.Tag._
+
 
 
 @RunWith(classOf[JUnitRunner])

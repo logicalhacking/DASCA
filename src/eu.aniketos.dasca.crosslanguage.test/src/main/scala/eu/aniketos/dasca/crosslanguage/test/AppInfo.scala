@@ -13,7 +13,7 @@ package eu.aniketos.dasca.crosslanguage.test
 
 import java.io.File
 import eu.aniketos.dasca.crosslanguage.util.SourceLocation
-import eu.aniketos.dasca.crosslanguage.test.apps.AppTest
+import eu.aniketos.dasca.crosslanguage.test.AppTest
 import eu.aniketos.dasca.crosslanguage.builder.CrossBuilderOption
 
 trait AppInfo {
