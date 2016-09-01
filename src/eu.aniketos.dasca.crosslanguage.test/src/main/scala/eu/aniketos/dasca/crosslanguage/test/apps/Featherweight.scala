@@ -26,12 +26,13 @@ import eu.aniketos.dasca.crosslanguage.builder.FilterJSFrameworks
 import eu.aniketos.dasca.crosslanguage.builder.PreciseJS
 import eu.aniketos.dasca.crosslanguage.builder.RunBuildersInParallel
 import eu.aniketos.dasca.crosslanguage.test.Tag._;
+import eu.aniketos.dasca.crosslanguage.test.AppInfo;
 
 
 @RunWith(classOf[JUnitRunner])
 class Featherweight extends FlatSpec with Matchers with BeforeAndAfterAll {
-   def ApkName: String = "de.zertapps.dvhma.featherweight.apk"
-   def connections = Set[(SourceLocation, SourceLocation)](
+   def apkName: String = "de.zertapps.dvhma.featherweight.apk"
+   def truePositives = Set[(SourceLocation, SourceLocation)](
             (new JavaSourceLocation(43, "com/borismus/webintent/WebIntent"), new JavaScriptSourceLocation(31, 12, "www/js/index.js"))
            ,(new JavaSourceLocation(145, "de/zertapps/dvhma/plugins/storage/DVHMAStorage"), new JavaScriptSourceLocation(77, 1, "www/js/index.js"))
            ,(new JavaSourceLocation(126, "de/zertapps/dvhma/plugins/storage/DVHMAStorage"), new JavaScriptSourceLocation(77, 1, "www/js/index.js"))
@@ -48,6 +49,9 @@ class Featherweight extends FlatSpec with Matchers with BeforeAndAfterAll {
            ,(new JavaScriptSourceLocation(16, 12, "www/plugins/de.zertapps.dvhma.plugins.storage/www/DVHMA-Storage.js"), new JavaSourceLocation(43, "de/zertapps/dvhma/plugins/storage/DVHMAStorage"))
            ,(new JavaScriptSourceLocation(20, 12, "www/plugins/de.zertapps.dvhma.plugins.storage/www/DVHMA-Storage.js"), new JavaSourceLocation(43, "de/zertapps/dvhma/plugins/storage/DVHMAStorage")) 
        )
+   def falsePositives = Set[(SourceLocation, SourceLocation)]()
+   def falseNegatives = Set[(SourceLocation, SourceLocation)]()
+       
    def options = List(
        FilterJavaCallSites
       ,MockCordovaExec
@@ -58,7 +62,7 @@ class Featherweight extends FlatSpec with Matchers with BeforeAndAfterAll {
        
    val app = new AppTest();
    override def beforeAll(){
-      app.analyze(ApkName, options, connections)
+      app.analyze(apkName, options, truePositives)
    }   
    
    "Merged CallGraph" should "contain 6.6k nodes" in {
@@ -116,7 +120,7 @@ class Featherweight extends FlatSpec with Matchers with BeforeAndAfterAll {
    
    
    "Reported connections" should "contain all expected connections" taggedAs (ManuallyChecked) in {
-       app.getTruePositives() should contain theSameElementsAs connections
+       app.getTruePositives() should contain theSameElementsAs truePositives
    }
    
    it should "not contain false negatives" taggedAs (ManuallyChecked) in {
