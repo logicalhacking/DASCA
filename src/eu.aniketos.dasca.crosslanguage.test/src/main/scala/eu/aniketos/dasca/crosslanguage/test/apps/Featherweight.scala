@@ -79,19 +79,19 @@ class Featherweight extends FlatSpec with Matchers with BeforeAndAfterAll {
    }
    
    it should "report no misses" taggedAs (ManuallyChecked) in {
-       app.getJS2JavaMisses() should be (0)
+       app.getJava2JSMisses() should be (0)
    }
    
    it should "report no errors" taggedAs (ManuallyChecked) in {
-       app.getJS2JavaErrors() should be (0)
+       app.getJava2JSErrors() should be (0)
    }
 
    it should "have a precision of 100%" taggedAs (ManuallyChecked) in {
-       app.getJS2JavaPrecision() should be (100.0 +- 0.1)
+       app.getJava2JSPrecision() should be (100.0 +- 0.1)
    }
    
    it should "have a recall of 100%" taggedAs (ManuallyChecked) in {
-       app.getJS2JavaRecall() should be (100.0 +- 0.1)
+       app.getJava2JSRecall() should be (100.0 +- 0.1)
    } 
    
    "JavaScript -> Java" should "report five hits" taggedAs (ManuallyChecked) in {
