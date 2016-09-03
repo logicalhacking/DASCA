@@ -56,7 +56,7 @@ class Featherweight extends FlatSpec with Matchers with BeforeAndAfterAll {
        
    val app = new AppTest();
    override def beforeAll(){
-      app.analyze(apkName, options, truePositives++falseNegatives)
+      app.analyze(apkName, options, truePositives++falseNegatives) // ca. 15sec
    }   
    
    "Test Specification" should "be consistent (truePositives ∩ falsePositives = ∅)" in {
