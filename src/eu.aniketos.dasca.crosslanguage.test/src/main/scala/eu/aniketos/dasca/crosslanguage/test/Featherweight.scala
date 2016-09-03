@@ -56,8 +56,20 @@ class Featherweight extends FlatSpec with Matchers with BeforeAndAfterAll {
        
    val app = new AppTest();
    override def beforeAll(){
-      app.analyze(apkName, options, truePositives)
+      app.analyze(apkName, options, truePositives++falseNegatives)
    }   
+   
+   "Test Specification" should "be consistent (truePositives ∩ falsePositives = ∅)" in {
+      truePositives intersect falsePositives shouldBe empty
+   }
+   
+   it should "be consistent (truePositives ∩ falseNegatives = ∅)" in {
+      truePositives intersect falseNegatives shouldBe empty
+   }
+   
+   it should "be consistent (falsePositives ∩ falseNegatives = ∅)" in {
+      falsePositives intersect falseNegatives shouldBe empty
+   }
    
    "Merged CallGraph" should "contain 6.6k nodes" in {
      app.getCallGraphSize() should be (6631 +- 20)
