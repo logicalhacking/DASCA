@@ -67,8 +67,8 @@ class Featherweight_100_630 extends FlatSpec with Matchers with BeforeAndAfterAl
       truePositives intersect falsePositives shouldBe empty
    }
    
-   it should "be consistent (truePositives ∩ falseNegatives = ∅)" in {
-      truePositives intersect falseNegatives shouldBe empty
+    it should "be consistent (truePositives ∩ falseNegatives = falseNegatives)" in {
+      truePositives intersect falseNegatives should contain theSameElementsAs falseNegatives
    }
    
    it should "be consistent (falsePositives ∩ falseNegatives = ∅)" in {
