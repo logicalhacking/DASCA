@@ -8,6 +8,7 @@
   * Scala IDE
   * Scala Maven Plugin (http://scala-ide.org/docs/tutorials/m2eclipse/)
   * m2e plugin 
+  * Scalatest Runner (optional)
 * CVC3 including the Java bindings for CVC3
 * apktool 
 
