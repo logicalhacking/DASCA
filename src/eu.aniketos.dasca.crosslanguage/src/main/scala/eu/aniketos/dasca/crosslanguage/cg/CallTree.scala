@@ -18,8 +18,12 @@ import com.ibm.wala.cast.js.loader.JavaScriptLoader
 import com.ibm.wala.cast.js.types.JavaScriptMethods
 
 class CallTree( data:CGNode, parent:CallTree,level:Integer){
-	private var children = List[CallTree]()
 
+  private var children = List[CallTree]()
+  private val indent = 5
+  
+  
+	
 	def this(data:CGNode) = this(data, null, 0)
 	
 	def addChildren(data:CGNode) = children :+ new CallTree(data, this, level+1)
@@ -48,44 +52,6 @@ class CallTree( data:CGNode, parent:CallTree,level:Integer){
 	def getLevel() = level
 	
 	
-	def printPath(method:CallSiteReference) = {
-		var JSPart   = List[CGNode]()
-	  var JavaPart = List[CGNode]()
-	
-		val it = getPathOfNode().reverse.iterator
-		
-		for(node <- it){
-			if(node.getMethod().getDeclaringClass().getClassLoader().getLanguage()!=Language.JAVA){
-				JSPart :+ node
-			}else{
-				JavaPart :+ node
-			}
-		}
-		
-		System.out.println("JavaScript Part: ");
-			for(JSNode <- JSPart.iterator){
-				val Entryposition = (JSNode.getMethod().asInstanceOf[JavaScriptLoader#JavaScriptMethodObject]).getEntity().getPosition().toString();
-				val methodName =  (JSNode.getMethod().asInstanceOf[JavaScriptLoader#JavaScriptMethodObject]).getEntity().toString();
-				val name = (JSNode.getMethod().asInstanceOf[JavaScriptLoader#JavaScriptMethodObject]).toString();
-				System.out.println("FilePosition:	"+Entryposition);
-				System.out.println("	Method name: "+ methodName+" ");
-				System.out.println("		name: "+ name);
-				System.out.print("  ->");
-			}
-			
-		System.out.println("Java Part: ");
-			for(JavaNode <- JavaPart.iterator){
-				System.out.print(JavaNode.getMethod().getDeclaringClass().getName().getClassName()+": ");
-				System.out.print("method: "+ JavaNode.getMethod().getName()+", ");
-				System.out.println("path: "+JavaNode.getMethod().getDeclaringClass().getName().getPackage().toString());
-				System.out.print("  ->");
-			}
-		
-		System.out.print(method.getDeclaredTarget().getDeclaringClass().getName().getClassName()+": ");
-		System.out.print("method: "+ method.getDeclaredTarget().getName()+", ");
-		System.out.println("path: "+ method.getDeclaredTarget().getDeclaringClass().getName().getPackage().toString());
-		System.out.println("------------");
-	}
-	
+
 	
 }
