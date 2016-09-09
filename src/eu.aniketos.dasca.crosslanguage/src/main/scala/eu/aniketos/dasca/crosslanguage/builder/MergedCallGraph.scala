@@ -292,48 +292,46 @@ class MergedCallGraph(val javaCG: CallGraph, val jsCG: CallGraph, val configXml:
     }
   }
 
-  
   /**
-	 * Return all possible targets nodes (i.e., representing methods that are possibly invoked (either 
-	 * within the same programming language or cross language) by the implementation of the method 
-	 * that the node {@code node} represents). 
-	 * @param cg                                                                                                                                                                   bvn 
-	 * @param node
-	 * @return 
-	 */
-	def getAllPossibleTargetNodes(node:CGNode) = 
-	{
-		 val ir = node.getIR();
-		 val targetNodes= Set.empty[CGNode];
-		 
-		 if(Util.isJavaNode(node)){
-			 // Java Node
-		   val it = node.iterateCallSites();
-		   while (it.hasNext()){
-		         targetNodes.union(this.getPossibleTargets(node, it.next()));
-			 }
-		 }else{
-			 // JavaScript Node
-		   val it = ir.iterateAllInstructions();
-		   while (it.hasNext()){
-		         val ssa = it.next();
-		         if (ssa.isInstanceOf[JavaScriptInvoke]) {
-		           val invoke = ssa.asInstanceOf[JavaScriptInvoke];
-		                 // see http://wala.sourceforge.net/files/WALAJavaScriptTutorial.pdf, page 11                 
-		                 if (invoke.getCallSite().getDeclaredTarget().equals(
-		                		                     JavaScriptMethods.dispatchReference)) {
-		                     targetNodes.union(this.getPossibleTargets(node, invoke.getCallSite()));
-		                 }
-		         }
-			 }			 
-		 }
-		 // get Cross Calls
-		 val it = node.iterateCallSites();
-		 while(it.hasNext()) {
-	         targetNodes.union(this.getCrossTargets(node, it.next()));
-		 }
-		 targetNodes;
-	}
+   * Return all possible targets nodes (i.e., representing methods that are possibly invoked (either
+   * within the same programming language or cross language) by the implementation of the method
+   * that the node {@code node} represents).
+   * @param cg                                                                                                                                                                   bvn
+   * @param node
+   * @return
+   */
+  def getAllPossibleTargetNodes(node: CGNode) = {
+    val ir = node.getIR();
+    val targetNodes = Set.empty[CGNode];
+
+    if (Util.isJavaNode(node)) {
+      // Java Node
+      val it = node.iterateCallSites();
+      while (it.hasNext()) {
+        targetNodes.union(this.getPossibleTargets(node, it.next()));
+      }
+    } else {
+      // JavaScript Node
+      val it = ir.iterateAllInstructions();
+      while (it.hasNext()) {
+        val ssa = it.next();
+        if (ssa.isInstanceOf[JavaScriptInvoke]) {
+          val invoke = ssa.asInstanceOf[JavaScriptInvoke];
+          // see http://wala.sourceforge.net/files/WALAJavaScriptTutorial.pdf, page 11                 
+          if (invoke.getCallSite().getDeclaredTarget().equals(
+            JavaScriptMethods.dispatchReference)) {
+            targetNodes.union(this.getPossibleTargets(node, invoke.getCallSite()));
+          }
+        }
+      }
+    }
+    // get Cross Calls
+    val it = node.iterateCallSites();
+    while (it.hasNext()) {
+      targetNodes.union(this.getCrossTargets(node, it.next()));
+    }
+    targetNodes;
+  }
 
   
   private def addCrossCall(from: CGNode, csr: CallSiteReference, to: CGNode, params: Map[Int, Set[Int]], param: String): Unit = {
