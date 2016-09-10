@@ -15,19 +15,34 @@ import com.ibm.wala.ipa.callgraph.CGNode;
 class CallTree(value: CGNode, children: List[CallTree]) {
   def this(value: CGNode) = this(value, null)
 
-  private val indent = 5
-
   def contains(v: CGNode): Boolean = {
     if (value == v) {
       true
     } else {
-      (children.map { c => c.contains(v) }).fold(false) { (a, b) => a || b }
+      if (null == children) {
+        false
+      } else {
+        (children.map { c => c.contains(v) }).fold(false) { (a, b) => a || b }
+      }
+    }
+  }
+
+  def toString(prefix: String): String = {
+    def childrenToString(c: List[CallTree]): String = c match {
+      case null => ""
+      case Nil => ""
+      case c :: Nil => "\n" + prefix + "└─ " + c.toString(prefix + "   ")
+      case c :: tail => "\n" + prefix + "├─ " + c.toString(prefix + "│  ") + childrenToString(tail)
+    }
+
+    if (null == value) {
+      "null:CallTree"
+    } else {
+      value.toString() + childrenToString(children)
     }
   }
 
   override def toString(): String = {
-    value.getMethod().getName().toString() + "\n" + ((children.map { c => "├── " + c.toString() + "\n" })
-      .fold("") { (a, b) => a + b })
+    toString("")
   }
-
 }
