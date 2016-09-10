@@ -302,13 +302,13 @@ class MergedCallGraph(val javaCG: CallGraph, val jsCG: CallGraph, val configXml:
    */
   def getAllPossibleTargetNodes(node: CGNode) = {
     val ir = node.getIR();
-    val targetNodes = Set.empty[CGNode];
+    var targetNodes = Set[CGNode]();
 
     if (Util.isJavaNode(node)) {
       // Java Node
       val it = node.iterateCallSites();
       while (it.hasNext()) {
-        targetNodes.union(this.getPossibleTargets(node, it.next()));
+       targetNodes= targetNodes.union(this.getPossibleTargets(node, it.next()));
       }
     } else {
       // JavaScript Node
@@ -320,7 +320,7 @@ class MergedCallGraph(val javaCG: CallGraph, val jsCG: CallGraph, val configXml:
           // see http://wala.sourceforge.net/files/WALAJavaScriptTutorial.pdf, page 11                 
           if (invoke.getCallSite().getDeclaredTarget().equals(
             JavaScriptMethods.dispatchReference)) {
-            targetNodes.union(this.getPossibleTargets(node, invoke.getCallSite()));
+            targetNodes = targetNodes.union(this.getPossibleTargets(node, invoke.getCallSite()));
           }
         }
       }
@@ -328,11 +328,10 @@ class MergedCallGraph(val javaCG: CallGraph, val jsCG: CallGraph, val configXml:
     // get Cross Calls
     val it = node.iterateCallSites();
     while (it.hasNext()) {
-      targetNodes.union(this.getCrossTargets(node, it.next()));
+      targetNodes = targetNodes.union(this.getCrossTargets(node, it.next()));
     }
     targetNodes;
   }
-
   
   private def addCrossCall(from: CGNode, csr: CallSiteReference, to: CGNode, params: Map[Int, Set[Int]], param: String): Unit = {
     addCrossCall(from, csr, to, params)
