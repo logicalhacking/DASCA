@@ -10,48 +10,24 @@
 
 package eu.aniketos.dasca.crosslanguage.cg;
 
-import java.util.ArrayList
-import com.ibm.wala.classLoader.CallSiteReference
-import com.ibm.wala.classLoader.Language
 import com.ibm.wala.ipa.callgraph.CGNode;
-import com.ibm.wala.cast.js.loader.JavaScriptLoader
-import com.ibm.wala.cast.js.types.JavaScriptMethods
 
-class CallTree( data:CGNode, parent:CallTree,level:Integer){
+class CallTree(value: CGNode, children: List[CallTree]) {
+  def this(value: CGNode) = this(value, null)
 
-  private var children = List[CallTree]()
   private val indent = 5
-  
-  
-	
-	def this(data:CGNode) = this(data, null, 0)
-	
-	def addChildren(data:CGNode) = children :+ new CallTree(data, this, level+1)
-	
-	/**
-	 * this method return the path from current Node to root
-	 * @return  
-	 * return An ArrayList which contains path of currentNode 
-	 */
-	def getPathOfNode():List[CGNode] = {
-		var path = List[CGNode]()
-		var currentNode = this
-		do{
-	       path :+ this
-     		 currentNode = currentNode.getParent()
-		     if(currentNode.getParent()==null){
-			       path :+ currentNode.getValue()
-		     }
-		}while(currentNode.getParent()!=null);
-		return path;
-	}
-	
-	def getValue() = data
-	def getParent() = parent
-	def getChildren() = children
-	def getLevel() = level
-	
-	
 
-	
+  def contains(v: CGNode): Boolean = {
+    if (value == v) {
+      true
+    } else {
+      (children.map { c => c.contains(v) }).fold(false) { (a, b) => a || b }
+    }
+  }
+
+  override def toString(): String = {
+    value.getMethod().getName().toString() + "\n" + ((children.map { c => "├── " + c.toString() + "\n" })
+      .fold("") { (a, b) => a + b })
+  }
+
 }

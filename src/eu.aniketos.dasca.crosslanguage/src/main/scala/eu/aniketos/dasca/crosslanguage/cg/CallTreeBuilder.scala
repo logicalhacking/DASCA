@@ -27,70 +27,28 @@ import eu.aniketos.dasca.crosslanguage.builder.CordovaCGBuilder
 import eu.aniketos.dasca.crosslanguage.builder.CrossBuilderOption
 import collection.JavaConverters._
 
-class CallTreeBuilder {
-	var queue     = new LinkedList[CGNode]();
-	var rootqueue = new LinkedList[CallTree]();
-		
-	def buildCallForest(cg:MergedCallGraph, sources:List[CGNode], sinks:List[CGNode]):List[CallTree] = {
-	  return sources.map { src  => buildCallTree(cg,src,sinks) }.filter { x => null != x } 
-	}
-	  
-	def buildCallTree(cg:MergedCallGraph, root: CGNode, sinks:List[CGNode]):CallTree = {
-      var ct = null:CallTree
-  	  var visited = List[CGNode]()
-		  var NumofCount  = 0; 
-			queue.add(root)
- 			while(!queue.isEmpty()){
- 			    var currentNode = queue.poll()
-			    var RootOfCurrentNode = rootqueue.poll()
-			
-			    if(!visited.contains(currentNode)){
-				      visited :+ currentNode
-			        // search for the whether this node contains the method
-		          var it = currentNode.iterateCallSites()
-		          var method = null:CallSiteReference
-		          
-		          while (it.hasNext()) 
-		              method = it.next()
-		              // if this node contains the method we want
-				          // print the path
-			            if(sinks.contains(method.asInstanceOf[CallSiteReference].getDeclaredTarget())){ 
-					          //  RootOfCurrentNode.printPath(method)
-					            NumofCount = NumofCount+1
-				          }else{
-					          // if not find the method in current Node,
-					          // add this node to the Node tree which used to create the path
-					          if(currentNode.equals(root)){
-						            var tree = new CallTree(currentNode)
-						            createTree(cg,currentNode,method,tree)
-					          }else{
-						            createTree(cg,currentNode,method,RootOfCurrentNode)
-					          } 
-				         } 
+object CallTreeBuilder {
+  def buildCallForest(cg: MergedCallGraph, sources: List[CGNode], sinks: List[CGNode]): List[CallTree] = {
+    return sources.map { src => buildCallTree(cg, src, sinks) }.filter { x => null != x }
+  }
+
+  def buildCallTree(cg: MergedCallGraph, root: CGNode, sinks: List[CGNode]): CallTree = {
+    build(cg, List[CGNode](), sinks, root)
+  }
+
+  private def build(cg: MergedCallGraph, visited: List[CGNode], sinks: List[CGNode], root: CGNode): CallTree = {
+    if (sinks.contains(root)) {
+      return new CallTree(root)
+    } else {
+      val targetNodes = cg.getAllPossibleTargetNodes(root).filterNot { n => visited.contains(n) }
+      if (targetNodes.isEmpty) {
+        return null
+      } else {
+        val children = targetNodes.toList.map { x => build(cg, visited ++ targetNodes, sinks, x) }
+          .filterNot { x => (null == x) }
+        return new CallTree(root, children)
       }
-	  }
-		return ct
-	}			
-			
-	/**
-	 *  this method is used to create the Node Tree.	
-	 * @param cg   cg is the call graph
-	 * @param currentNode  this parameter is the node that be search 
-	 * @param method		method is the function that need to find in a particular node
-	 * @param RootOfCurrentNode the previous node that has be search which is the parent of current node
-	 */
-	def createTree(cg:MergedCallGraph, currentNode: CGNode, method:CallSiteReference, RootOfCurrentNode:CallTree) = {
-		var n = null:CGNode
-		var child = null:CallTree
-		var targetNode =  cg.getAllPossibleTargetNodes(currentNode)
-		var it = targetNode.iterator
-		for (n <- it){
-			queue.add(n);
-			if(RootOfCurrentNode!=null){
-			  child = new CallTree(n,RootOfCurrentNode,RootOfCurrentNode.getLevel()+1);
-			  rootqueue.add(child);
-			}
-		}
-	}
-	
+
+    }
+  }
 }
