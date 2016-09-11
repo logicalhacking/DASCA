@@ -29,9 +29,11 @@ cloning the repository.
   ``${ANDROID_HOME}/platforms/android-19/android.jar`` should be a valid path.
 * Install ``apktool_2.0.0.jar`` into your local maven repository:
 ```
+cd $(mktemp -d)
+
 wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.0.0.jar
-mvn install:install-file -Dfile=apktool_2.0.0.jar -DgroupId=apktool \
-    -DartifactId=apktool -Dpackaging=jar -Dversion=2.0.0
+
+mvn install:install-file -Dfile=apktool_2.0.0.jar -DgroupId=apktool -DartifactId=apktool -Dpackaging=jar -Dversion=2.0.0
 ```
 
 ### How to Compile
