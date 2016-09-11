@@ -5,10 +5,13 @@
 * Java 6 (core libraries for the WALA analysis)
 * Android SDK (to obtain dx.jar)
 * Eclipse Neon, including
-  * Scala IDE
-  * Scala Maven Plugin (http://scala-ide.org/docs/tutorials/m2eclipse/)
-  * m2e plugin 
-  * Scalatest Runner (optional)
+  * From http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site
+    * Scala IDE
+    * Scalatest Runner (optional)
+  * From http://alchim31.free.fr/m2e-scala/update-site
+    * "Maven for Scala" - Maven Integration for Eclipse
+  * From http://download.eclipse.org/releases/neon
+    * m2e - Maven Integration for Eclipse
 * CVC3 including the Java bindings for CVC3
 * apktool 
 
