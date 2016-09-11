@@ -5,13 +5,9 @@
 * Java 6 (core libraries for the WALA analysis)
 * Android SDK (to obtain dx.jar)
 * Eclipse Neon, including
-  * From http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site
-    * Scala IDE
-    * Scalatest Runner (optional)
-  * From http://alchim31.free.fr/m2e-scala/update-site
-    * "Maven for Scala" - Maven Integration for Eclipse
-  * From http://download.eclipse.org/releases/neon
-    * m2e - Maven Integration for Eclipse
+  * From http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site : Scala IDE and Scalatest Runner (optional)
+  * From http://alchim31.free.fr/m2e-scala/update-site : "Maven for Scala" - Maven Integration for Eclipse
+  * From http://download.eclipse.org/releases/neon : m2e - Maven Integration for Eclipse
 * CVC3 including the Java bindings for CVC3
 * apktool 
 
@@ -34,9 +30,7 @@ cloning the repository.
 
 ```
 cd $(mktemp -d)
-
 wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.0.0.jar
-
 mvn install:install-file -Dfile=apktool_2.0.0.jar -DgroupId=apktool -DartifactId=apktool -Dpackaging=jar -Dversion=2.0.0
 ```
 
