@@ -31,6 +31,7 @@ cloning the repository.
   the Android SDK has API 19 installed, i.e.,
   ``${ANDROID_HOME}/platforms/android-19/android.jar`` should be a valid path.
 * Install ``apktool_2.0.0.jar`` into your local maven repository:
+
 ```
 cd $(mktemp -d)
 
