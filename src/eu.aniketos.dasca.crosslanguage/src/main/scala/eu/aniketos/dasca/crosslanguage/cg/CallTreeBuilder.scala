@@ -44,6 +44,13 @@ object CallTreeBuilder {
     }
 
     // Base case
+    // root is one of the sinks (i.e., root is part of the analysed project and, thus, the 
+    // call graph
+    if (sinks.contains(root))
+        return new CallTree(root)
+    
+    // root is only part of the call sites iterator (i.e., defined outside of the analysis 
+    // scope
     val it = root.iterateCallSites()
     var m = null: CallSiteReference
     var children = List[CGNode]()
