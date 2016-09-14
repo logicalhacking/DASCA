@@ -58,20 +58,25 @@ projects (i.e., `eu.aniketos.dasca.*`) should compile without errors.
 
 ## Troubleshooting
 ### Unavailable external JARs
-The build process for WALA uses Ant scripts to download JAR libraries from third-party web sites, which might
-become unavailable. This leads to Maven throwing errors when compiling WALA due to unavailable JAR files, e.g.
+The build process for WALA uses Ant scripts to download JAR libraries
+from third-party web sites, which might become unavailable. This leads
+to Maven throwing errors when compiling WALA due to unavailable JAR
+files, e.g.
 ```
 [ERROR] DASCA/externals/WALA/com.ibm.wala.cast.js.test.data/build.xml:45: Can't get http://ajaxslt.googlecode.com/files/ajaxslt-0-7.tar.gz to DASCA/externals/WALA/com.ibm.wala.cast.js.test.data/temp.folder/ajaxslt-0-7.tar.gz
 ```
-If the affected sub-project is not needed for the DASCA projects (such as the com.ibm.wala.cast.js.test.data
-project), the error might be resolved by skipping the compilation of a few WALA projects, e.g.
+If the affected sub-project is not needed for the DASCA projects (such
+as the com.ibm.wala.cast.js.test.data project), the error might be
+resolved by skipping the compilation of a few WALA projects, e.g.
 ```
 mvn -P wala -pl '!:com.ibm.wala.cast.js.test.data,!:com.ibm.wala.cast.js.html.nu_validator,!:com.ibm.wala.cast.js.test,!:com.ibm.wala.cast.js.rhino.test' install -DskipTests=true -q
 ```
 
-### WALA throws errors such as ``java.lang.Error: unexpected dynamic invoke type 8``
-Make sure the ``wala.properties`` file is correctly configured with the path to the Java 6 JDK. By default,
-WALA uses the JDK that is runs with also for the analysis, which is likely to be Java 8.
+### WALA errors
+* ``java.lang.Error: unexpected dynamic invoke type 8`` Make sure the
+  ``wala.properties`` file is correctly configured with the path to the
+  Java 6 JDK. By default, WALA uses the JDK that is runs with also for
+  the analysis, which is likely to be Java 8.
 
 ## Team 
 Main contact: [Achim D. Brucker](http://www.brucker.ch/)
@@ -82,7 +87,7 @@ Main contact: [Achim D. Brucker](http://www.brucker.ch/)
 * Tim Herres
 
 
-### Publications
+## Publications
 * Achim D. Brucker and Michael Herzberg. [On the Static Analysis of
   Hybrid Mobile Apps: A Report on the State of Apache Cordova
   Nation.](https://www.brucker.ch/bibliography/download/2016/brucker.ea-cordova-security-2016.pdf)
