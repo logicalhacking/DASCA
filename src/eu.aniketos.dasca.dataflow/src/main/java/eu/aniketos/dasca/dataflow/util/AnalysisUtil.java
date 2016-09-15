@@ -336,7 +336,7 @@ public class AnalysisUtil {
         for(BasicBlockInContext<IExplodedBasicBlock> bbic : sgNodes.values()) {
             SSAInstruction inst = bbic.getLastInstruction();
             if(inst != null && inst instanceof SSAConditionalBranchInstruction) {
-                log.debug("conditional branch instruction: " + inst.toString());
+                log.debug("conditional branch instruction: " + inst);
                 list.add(inst);
             }
         }
