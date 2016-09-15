@@ -40,33 +40,39 @@ class AllScriptsExtractor(apkUnzipDir: File) extends DefaultSourceExtractor {
     val AbsolutePathRegex = """.+android_asset/(.+)""".r
     val RemotePathRegex = """(https?://.+)""".r
 
-    override def getScriptFromUrl(urlString: String, scriptTag: ITag) = {
-      try {
-        // For some reason, some people use absolute script paths in their Cordova apps...
-        val scriptSrc = urlString match {
-          case AbsolutePathRegex(rel) => new File(new File(apkUnzipDir, "assets"), rel).toURI().toURL()
-          case RemotePathRegex(urlString) => {
-            val url = new URL(urlString)
-            logger.debug(s"Downloading $urlString...")
-            val dest = new File(new File(apkUnzipDir, "downloaded"), url.getFile)
-            dest.getParentFile.mkdirs()
-            val stream = url.openStream()
-            FileUtils.copyInputStreamToFile(stream, dest)
-            IOUtils.closeQuietly(stream)
-            dest.toURI().toURL()
+    override def handleScript(tag: ITag) = {
+      val content = tag.getAttributeByName("src");
+      if (content != null) {
+        val urlString = content.fst
+        try {
+          // For some reason, some people use absolute script paths in their Cordova apps...
+          val scriptSrc = urlString match {
+            case AbsolutePathRegex(rel) => new File(new File(apkUnzipDir, "assets"), rel).toURI().toURL()
+            case RemotePathRegex(urlString) => {
+              val url = new URL(urlString)
+              logger.debug(s"Downloading $urlString...")
+              val dest = new File(new File(apkUnzipDir, "downloaded"), url.getFile)
+              dest.getParentFile.mkdirs()
+              val stream = url.openStream()
+              FileUtils.copyInputStreamToFile(stream, dest)
+              IOUtils.closeQuietly(stream)
+              dest.toURI().toURL()
+            }
+            case _ => new URL(entrypoint, urlString)
           }
-          case _ => new URL(entrypoint, urlString)
-        }
-        if (!new File(scriptSrc.getFile).isFile()) {
-          // Try again with all lower-case letter, otherwise files may be missed on case-sensitive file systems
-          if (!new File(scriptSrc.getFile.toLowerCase()).isFile()) {
-            throw new IOException(s"$scriptSrc does not exist on the file system!")
+          if (!new File(scriptSrc.getFile).isFile()) {
+            // Try again with all lower-case letter, otherwise files may be missed on case-sensitive file systems
+            if (!new File(scriptSrc.getFile.toLowerCase()).isFile()) {
+              throw new IOException(s"$scriptSrc does not exist on the file system!")
+            }
           }
+          extractedScripts += scriptSrc
+        } catch {
+          case ioe: IOException => logger.warn(s"Could not fetch script $urlString!", ioe)
         }
-        extractedScripts += scriptSrc
-      } catch {
-        case ioe: IOException => logger.warn(s"Could not fetch script $urlString!", ioe)
       }
     }
+
   }
+
 }
