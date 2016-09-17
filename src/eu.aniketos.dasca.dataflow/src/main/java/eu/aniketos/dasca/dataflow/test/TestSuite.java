@@ -35,25 +35,25 @@ import com.ibm.wala.util.CancelException;
 
 @RunWith(Suite.class)
 @SuiteClasses({ 
-	 Test01.class
-	,Test02.class
-	,Test03.class
-	,Test04.class
-	,Test05.class
-	,Test06.class
-	,Test07.class
-	,Test08.class 
-	,Test09.class
-	,Test10.class
-	,Test11.class
-	,Test12.class
-	,Test13.class
-	,Test14.class
-	,Test15.class
-	,Test16.class
-	,Test17.class
-	,Test18.class
-	,Test19.class  
+	 Test01.class,
+	 Test02.class,
+	 Test03.class,
+	 Test04.class,
+	 Test05.class,
+	 Test06.class,
+	 Test07.class,
+	 Test08.class,
+	 Test09.class,
+	 Test10.class,
+	 Test11.class,
+	 Test12.class,
+	 Test13.class,
+	 Test14.class,
+	 Test15.class,
+	 Test16.class,
+	 Test17.class,
+	 Test18.class,
+	 Test19.class  
 	})
 
 public class TestSuite {	
