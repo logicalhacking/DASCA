@@ -94,7 +94,8 @@ public class SuperGraphUtil {
                 }
             } else {
                 if(!acceptedMethods.contains(method)) {
-                    log.debug("supergraph cut at '" + bbic.getNumber() + " -> " + nextChild.getNumber() + " (" + nextChild.toString() + ")'");
+			log.debug("supergraph cut at '" + bbic.getNumber() + " -> " + nextChild.getNumber() + " ("
+					+ nextChild.toString() + ")'");
                     continue;
                 }
             }
@@ -138,11 +139,13 @@ public class SuperGraphUtil {
         while (completeIterator.hasNext()) {
             BasicBlockInContext<IExplodedBasicBlock> current = completeIterator.next();
             sgNodes.put(i, current);
+            log.debug("sgNodes: insert node "+i+" ==>  "+current);
             sgNodesReversed.put(current, i);
             Iterator<SSAInstruction> instIt = current.iterator();
             while (instIt.hasNext()) {
                 SSAInstruction inst = instIt.next();
                 sgNodesInstId.put(inst, i);
+                log.debug("   sgNodesInstId: insert node "+i+" ==>  "+inst);
                 /* add to include other required methods into CFG
                 				if(inst instanceof AstJavaInvokeInstruction){
                 					AstJavaInvokeInstruction in = (AstJavaInvokeInstruction) inst;
@@ -158,14 +161,19 @@ public class SuperGraphUtil {
             // find entry and exit nodes
             if(signature.contains(entryClass) && signature.contains(entryMethod) && current.isEntryBlock()) { // FIXME: entry/exit nodes definition via name is too weak
                 mainEntryId = i;
+                log.error("Found Entry Block "+i+"("+entryClass+" / "+entryMethod+":");
+                log.error("    "+signature);
             } else if(signature.contains(entryClass) && signature.contains(entryMethod) && current.isExitBlock()) {
                 mainExitId = i;
+                log.error("Found Exit Block "+i+"("+entryClass+" / "+entryMethod+":");
+                log.error("    "+signature);
             }
             i++;
         }
         if(mainEntryId == 0 && mainExitId == 0) {
             log.error("   "+entryClass + "." + entryMethod + 
-            		  ": empty entry method, ensure invocation in main method");
+            		  ": empty entry method, ensure invocation in main method " +
+            		  "(mainEntryId = " +mainEntryId + " / mainExitId = " + mainExitId + ")");
             return -1;
         }
         HashSet<Integer> relevantIDs = new HashSet<Integer>();
@@ -182,6 +190,7 @@ public class SuperGraphUtil {
             if(!relevantIDs.contains(j)) {
                 sgNodesReversed.remove(tmp);
                 sgNodes.remove(j);
+                log.debug("   removing node: "+j);
             }
         }
 
@@ -347,6 +356,9 @@ public class SuperGraphUtil {
                     if(isNotMutuallyExclusive) {
                         boolean isNotSanitized = true;
                         if(analysisLevel >= AnalysisUtil.ANALYSIS_DEPTH_SANITIZING) {
+                            log.debug("Calling isNotSanitized:");
+                            log.debug("    Source (" + sgNodesInstId.get(source.toString()) + "): " + source);
+                            log.debug("    Sink (" + sgNodesInstId.get(sink.toString()) + "):   " + sink);
                             isNotSanitized = isNotSanitized(sgNodesInstId.get(source), sgNodesInstId.get(sink), adjList, finalConditions, expressions, vc, conditionsIdList, sanitizer, sgNodes);
                         }
                         if(isNotSanitized) {
@@ -462,7 +474,7 @@ public class SuperGraphUtil {
         Expr completeExpr = vc.andExpr(allExpr);
         SatResult satResult = vc.checkUnsat(completeExpr);
         boolean satisfiable = satResult.equals(SatResult.SATISFIABLE);
-        log.info("     checking expression [" + (satisfiable?"SAT":"UNSAT") + "]: " + completeExpr);
+        log.info("   isPossibleFlow: checking expression [" + (satisfiable?"SAT":"UNSAT") + "]: " + completeExpr);
         return satisfiable;
     }
 
@@ -528,10 +540,13 @@ public class SuperGraphUtil {
         vc.pop();
         vc.push();
         if(expr.toString().equalsIgnoreCase("null")) {
+        	log.debug("    isNotMutuallyExclusive: EXPR: "+expr+" is NULL (combinedConditions: " 
+                       + combinedConditions + "/ expressions: " + expressions +")"); 
             return true;
         }
         SatResult satResult = vc.checkUnsat(expr);
         boolean satisfiable = satResult.equals(SatResult.SATISFIABLE);
+        log.info("   isNotMutuallyExclusive: checking expression [" + (satisfiable?"SAT":"UNSAT") + "]: " + expr);
         return satisfiable;
     }
 
@@ -543,6 +558,7 @@ public class SuperGraphUtil {
         for (int i=0; i<nodeIds.size(); i++) {
             Integer conditionId = nodeIds.get(i);
             Expr tmpExpr = expressions.get(Math.abs(conditionId));
+            log.debug("    expressions["+conditionId+"] = "+tmpExpr);
             if(conditionId<0) {
                 tmpExpr = vc.notExpr(tmpExpr);
             }
