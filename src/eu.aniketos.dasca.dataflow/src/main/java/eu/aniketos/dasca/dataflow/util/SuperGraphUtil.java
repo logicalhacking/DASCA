@@ -129,7 +129,7 @@ public class SuperGraphUtil {
 
         HashMap<Integer, BasicBlockInContext<IExplodedBasicBlock>> sgNodes = new HashMap<Integer, BasicBlockInContext<IExplodedBasicBlock>>();
         HashMap<BasicBlockInContext<IExplodedBasicBlock>, Integer> sgNodesReversed = new HashMap<BasicBlockInContext<IExplodedBasicBlock>, Integer>();
-        HashMap<SSAInstruction, Integer> sgNodesInstId = new HashMap<SSAInstruction, Integer>();
+        HashMap<SSAInstructionKey, Integer> sgNodesInstId = new HashMap<SSAInstructionKey, Integer>();
         ArrayList<MethodReference> acceptedMethods = new ArrayList<MethodReference>();
 
         // Add all blocks into a Map with a unique identifier in both directions and find entry/exit node
@@ -144,7 +144,7 @@ public class SuperGraphUtil {
             Iterator<SSAInstruction> instIt = current.iterator();
             while (instIt.hasNext()) {
                 SSAInstruction inst = instIt.next();
-                sgNodesInstId.put(inst, i);
+                sgNodesInstId.put(new SSAInstructionKey(inst), i);
                 log.debug("   sgNodesInstId: insert node "+i+" ==>  "+inst);
                 /* add to include other required methods into CFG
                 				if(inst instanceof AstJavaInvokeInstruction){
@@ -276,13 +276,13 @@ public class SuperGraphUtil {
         ArrayList<SSAInstruction> conditionsList = AnalysisUtil.getConditions(sgNodes);
         ArrayList<Integer> conditionsIdList = new ArrayList<Integer>();
         for (SSAInstruction cond : conditionsList) {
-            conditionsIdList.add(sgNodesInstId.get(cond));
+            conditionsIdList.add(sgNodesInstId.get(new SSAInstructionKey(cond)));
         }
 //*/
 //*  <<< get the corresponding source code line number for each condition (node id) inside the callgraph
         HashMap<Integer, Integer> conditionLineNumber = new HashMap<Integer, Integer>();
         for (SSAInstruction instCondition : conditionsList) {
-            int nodeId = sgNodesInstId.get(instCondition);
+            int nodeId = sgNodesInstId.get(new SSAInstructionKey(instCondition));
             int lineNumber = lineNumbers.get(instCondition);
             conditionLineNumber.put(nodeId, lineNumber);
         }
@@ -297,13 +297,13 @@ public class SuperGraphUtil {
         vc.pop();
         vc.push();
         for (SSAInstruction instCondition : conditionsList) {
-            int condId = sgNodesInstId.get(instCondition);
+            int condId = sgNodesInstId.get(new SSAInstructionKey(instCondition));
             if(loops.keySet().contains(condId)) {
                 Expr expr = SMTChecker.getExprForLoop(vc , instCondition, entryIR);
-                expressions.put(sgNodesInstId.get(instCondition), expr);
+                expressions.put(sgNodesInstId.get(new SSAInstructionKey(instCondition)), expr);
             } else {
                 Expr expr = SMTChecker.getExprForConditionalBranchInstruction(vc , instCondition, entryIR);
-                expressions.put(sgNodesInstId.get(instCondition), expr);
+                expressions.put(sgNodesInstId.get(new SSAInstructionKey(instCondition)), expr);
             }
             vc.pop();
             vc.push();
@@ -357,9 +357,9 @@ public class SuperGraphUtil {
                         boolean isNotSanitized = true;
                         if(analysisLevel >= AnalysisUtil.ANALYSIS_DEPTH_SANITIZING) {
                             log.debug("Calling isNotSanitized:");
-                            log.debug("    Source (" + sgNodesInstId.get(source.toString()) + "): " + source);
-                            log.debug("    Sink (" + sgNodesInstId.get(sink.toString()) + "):   " + sink);
-                            isNotSanitized = isNotSanitized(sgNodesInstId.get(source), sgNodesInstId.get(sink), adjList, finalConditions, expressions, vc, conditionsIdList, sanitizer, sgNodes);
+                            log.debug("    Source (" + sgNodesInstId.get(new SSAInstructionKey(source)) + "): " + source);
+                            log.debug("    Sink (" + sgNodesInstId.get(new SSAInstructionKey(sink)) + "):   " + sink);
+                            isNotSanitized = isNotSanitized(sgNodesInstId.get(new SSAInstructionKey(source)), sgNodesInstId.get(new SSAInstructionKey(sink)), adjList, finalConditions, expressions, vc, conditionsIdList, sanitizer, sgNodes);
                         }
                         if(isNotSanitized) {
                             weaknessCount++;
@@ -522,13 +522,13 @@ public class SuperGraphUtil {
      */
     private static boolean isNotMutuallyExclusive(SSAInstruction sink,
             SSAInstruction source,
-            HashMap<SSAInstruction, Integer> sgNodesInstId,
+            HashMap<SSAInstructionKey, Integer> sgNodesInstId,
             HashMap<Integer,ArrayList<Integer>> finalConditions,
             HashMap<Integer, Expr> expressions, ValidityChecker vc) {
         vc.pop();
         vc.push();
-        int sourceId = sgNodesInstId.get(source);
-        int sinkId = sgNodesInstId.get(sink);
+        int sourceId = sgNodesInstId.get(new SSAInstructionKey(source));
+        int sinkId = sgNodesInstId.get(new SSAInstructionKey(sink));
         ArrayList<Integer> combinedConditions = new ArrayList<Integer>();
         if(finalConditions.containsKey(sourceId)) {
             combinedConditions.addAll(finalConditions.get(sourceId));
