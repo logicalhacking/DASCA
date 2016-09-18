@@ -336,17 +336,17 @@ public class SuperGraphUtil {
 
         //*  <<< get possible vulnerabilities for each SQL execute
 
-        HashMap<SSAInstruction, ArrayList<SSAInstruction>> sinkSources = new HashMap<SSAInstruction, ArrayList<SSAInstruction>>();
+        HashMap<SSAInstructionKey, ArrayList<SSAInstruction>> sinkSources = new HashMap<SSAInstructionKey, ArrayList<SSAInstruction>>();
         for (SSAInstruction ssaInstruction : sqlExecutes) {
             boolean isPreparedStmt = ssaInstruction.toString().contains("Prepared");
-            sinkSources.put(ssaInstruction, AnalysisUtil.analyzeStatementExecute(ssaInstruction, definitions, isPreparedStmt, badMethods));
+            sinkSources.put(new SSAInstructionKey(ssaInstruction), AnalysisUtil.analyzeStatementExecute(ssaInstruction, definitions, isPreparedStmt, badMethods));
         }
         boolean containsVulnerability = false;
         for (SSAInstruction sink : sqlExecutes) {
-            if(!sinkSources.containsKey(sink)) { // no vulnerability possible
+            if(!sinkSources.containsKey(new SSAInstructionKey(sink))) { // no vulnerability possible
                 continue;
             }
-            ArrayList<SSAInstruction> badSources = sinkSources.get(sink);
+            ArrayList<SSAInstruction> badSources = sinkSources.get(new SSAInstructionKey(sink));
             if(badSources != null) {
                 for (SSAInstruction source : badSources) {
                     boolean isNotMutuallyExclusive = true;
