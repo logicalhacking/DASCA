@@ -114,14 +114,18 @@ public class TestSuite {
 
 	}
 	
-	public static void initTestSG(String test) throws IllegalArgumentException, CancelException, IOException{
+	public static void initTestSG(String test, boolean force) 
+			throws IllegalArgumentException, CancelException, IOException{
+		if ((null != superGraph) && !force) return;
+		
 		List<String> entryPoints = new ArrayList<String>();    
 		if (null != test) {
+			log.info("Generating Global SG:");
 			entryPoints.add("Leu/aniketos/dasca/dataflow/test/data/"+test);
 		}else{
+			log.info("Generating Test Specific SG ("+ test +"):");
 			entryPoints.addAll(Arrays.asList(customEntryPoints));
 		}
-		log.info("Generating Test  Specific SG ("+ test +"):");
 	    for (String element : entryPoints) {
 	        log.info("    "+element);
 	    }  
@@ -136,14 +140,22 @@ public class TestSuite {
 		logConfiguration();
 
 	}
+
+	public static void initTestSG(String test)
+			throws IllegalArgumentException, CancelException, IOException{
+		initTestSG(test, false);
+	}
+	public static void initTestSG() 
+			throws IllegalArgumentException, CancelException, IOException{
+		initTestSG(null);
+	}	
 	
 	@BeforeClass
 	public static void setUp() throws IllegalArgumentException, CancelException, IOException {
-		if (null != superGraph){
-			return;
-		}
+		if (null != superGraph) return;
 		sources = Arrays.asList(testDir);
 		libs = Arrays.asList(WalaProperties.getJ2SEJarFiles());
 		logConfiguration();
-		initTestSG(null);	} 
+		initTestSG();	
+	} 
 }
