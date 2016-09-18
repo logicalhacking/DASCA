@@ -4,4 +4,9 @@ sun\/awt\/.*
 sun\/swing\/.*
 com\/sun\/.*
 sun\/.*
-
+org\/apache\/xerces\/.*
+libcore\/.*
+com\/android\/internal\/.*
+com\/htc\/.*
+dalvik\/.*
+java\/io\/Object.*
