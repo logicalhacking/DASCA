@@ -795,7 +795,7 @@ public class SuperGraphUtil {
             }
             finalConditions.put(currentId, conditions);
         }
-        if (null == currentInstruction) return true;
+
         System.out.println(""+currentInstruction);
         boolean isRealIfElse = false;
         for(int i=0; i<children.size(); i++) {
