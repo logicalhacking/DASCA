@@ -99,7 +99,7 @@ public class TestSuite {
 	    for (String element : libs) {
 	        log.info("    "+element);
 	    }   
-	    log.info("  J2SE directory:     " + WalaProperties.J2SE_DIR);
+	    log.info("  J2SE directory:     " + AnalysisUtil.getPropertyString(WalaProperties.J2SE_DIR));
 	    log.info("  Analysis depth:     " + AnalysisUtil.getPropertyInteger(AnalysisUtil.CONFIG_ANALYSIS_DEPTH));
 	    log.info("  Main config file:   " + AnalysisUtil.getPropertyString("MAIN_CONFIG"));
 	    log.info("  Print subgraphs:    " + AnalysisUtil.getPropertyBoolean(AnalysisUtil.CONFIG_BOOLEAN_PRINT_SUBGRAPHS));
