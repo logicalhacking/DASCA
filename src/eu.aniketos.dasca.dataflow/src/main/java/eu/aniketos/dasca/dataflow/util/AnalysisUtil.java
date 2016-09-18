@@ -271,9 +271,9 @@ public class AnalysisUtil {
      * @param print
      * @return
      */
-    public static HashMap<SSAInstruction, Integer> getLineNumbers(HashMap<Integer,BasicBlockInContext<IExplodedBasicBlock>> sgNodes) {
+    public static HashMap<SSAInstructionKey, Integer> getLineNumbers(HashMap<Integer,BasicBlockInContext<IExplodedBasicBlock>> sgNodes) {
         log.debug("** get source code line number for each instruction");
-        HashMap<SSAInstruction, Integer> map = new HashMap<SSAInstruction, Integer>();
+        HashMap<SSAInstructionKey, Integer> map = new HashMap<SSAInstructionKey, Integer>();
         for(BasicBlockInContext<IExplodedBasicBlock> bbic : sgNodes.values()) {
             SSAInstruction inst = bbic.getLastInstruction();
             if(inst == null) {
@@ -282,7 +282,7 @@ public class AnalysisUtil {
 //            ConcreteJavaMethod method = (ConcreteJavaMethod) bbic.getMethod();
             IMethod method =  bbic.getMethod();
             int lineNumber = method.getLineNumber(bbic.getLastInstructionIndex());
-            map.put(inst, lineNumber);
+            map.put(new SSAInstructionKey(inst), lineNumber);
             log.debug(lineNumber + ". " + inst);
         }
         return map;

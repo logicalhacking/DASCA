@@ -269,7 +269,7 @@ public class SuperGraphUtil {
 //*/
 
 //*  <<< get source code line number for each instruction
-        HashMap<SSAInstruction, Integer> lineNumbers = AnalysisUtil.getLineNumbers(sgNodes);
+        HashMap<SSAInstructionKey, Integer> lineNumbers = AnalysisUtil.getLineNumbers(sgNodes);
 //*/
 
 //*  <<< get the corresponding instruction for each condition inside the callgraph
@@ -283,7 +283,7 @@ public class SuperGraphUtil {
         HashMap<Integer, Integer> conditionLineNumber = new HashMap<Integer, Integer>();
         for (SSAInstruction instCondition : conditionsList) {
             int nodeId = sgNodesInstId.get(new SSAInstructionKey(instCondition));
-            int lineNumber = lineNumbers.get(instCondition);
+            int lineNumber = lineNumbers.get(new SSAInstructionKey(instCondition));
             conditionLineNumber.put(nodeId, lineNumber);
         }
 
@@ -364,7 +364,7 @@ public class SuperGraphUtil {
                         if(isNotSanitized) {
                             weaknessCount++;
                             containsVulnerability = true;
-                            log.warn("SQL execute [" + lineNumbers.get(sink) + "] with bad source readLine [" + lineNumbers.get(source) + "] (" + entryClass + "." + entryMethod + ")");
+                            log.warn("SQL execute [" + lineNumbers.get(new SSAInstructionKey(sink)) + "] with bad source readLine [" + lineNumbers.get(new SSAInstructionKey(source)) + "] (" + entryClass + "." + entryMethod + ")");
                         }
                     }
                 }
