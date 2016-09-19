@@ -75,16 +75,16 @@ class Featherweight_100_630 extends FlatSpec with Matchers with BeforeAndAfterAl
       falsePositives intersect falseNegatives shouldBe empty
    }   
    
-   "Merged CallGraph" should "contain 4.3k nodes" in {
-     app.getCallGraphSize() should be (4351 +- 20)
+   "Merged CallGraph" should "contain 4.2k nodes" in {
+     app.getCallGraphSize() should be (4241 +- 200)
    }
    
    "JavaScriptCallGraph" should "contain 0.9k nodes" in {
      app.getJSCallGraphSize() should be (918 +- 10)
    }
 
-   "JavaCallGraph" should "be contain 3.4k nodes" in {
-     app.getJavaCallGraphSize() should be (3433 +- 10)
+   "JavaCallGraph" should "be contain 3.3k nodes" in {
+     app.getJavaCallGraphSize() should be (3323 +- 170)
    }
    
    "Java -> JavaScript" should "report fourteen hits" taggedAs (ManuallyChecked) in {
