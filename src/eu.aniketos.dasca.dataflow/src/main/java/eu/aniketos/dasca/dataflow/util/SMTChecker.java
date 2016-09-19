@@ -17,7 +17,6 @@ import org.apache.log4j.Logger;
 
 
 import com.ibm.wala.cast.ir.ssa.CAstBinaryOp;
-//import com.ibm.wala.cast.ir.ssa.AstConstants;
 import com.ibm.wala.cast.java.ssa.AstJavaInvokeInstruction;
 import com.ibm.wala.shrikeBT.BinaryOpInstruction;
 import com.ibm.wala.shrikeBT.IBinaryOpInstruction.IOperator;
