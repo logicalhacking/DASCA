@@ -53,7 +53,7 @@ mvn -P wala clean install -DskipTests=true -q
 ```
 After this, all projects can be imported into a fresh Eclipse
 workspace using `File -> Import -> Maven -> Existing Maven Projects`:
- 1. Select the DASCA ``src`` folder as source for the import
+ 1. Select the DASCA `src` folder as source for the import
  2. Import all offered projects (WALA and DASCA)
 
 While some Wala projects may contain compilation errors, all DASCA 
