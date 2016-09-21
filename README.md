@@ -4,11 +4,11 @@
 * Java 8
 * Android SDK (to obtain dx.jar)
 * Eclipse Neon, including
-  * From http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site : Scala IDE and Scalatest Runner (optional)
-  * From http://alchim31.free.fr/m2e-scala/update-site : "Maven for Scala" - Maven Integration for Eclipse
-  * From http://download.eclipse.org/releases/neon : m2e - Maven Integration for Eclipse
-* CVC3 including the Java bindings for CVC3
-* apktool 
+  * [Scala IDE and Scalatest Runner (optional)](http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site)
+  * ["Maven for Scala" - Maven Integration for Eclipse](http://alchim31.free.fr/m2e-scala/update-site)
+  * [m2e - Maven Integration for Eclipse](http://download.eclipse.org/releases/neon)
+* [CVC3](http://cs.nyu.edu/acsys/cvc3/) including the Java bindings for CVC3
+* [apktool](https://ibotpeaches.github.io/Apktool/)
 
 
 ### Checkout
@@ -22,9 +22,9 @@ cloning the repository.
 
 
 ### Resolving external dependencies
-* Ensure that the environment variable ``ANDROID_HOME`` is set correctly and that
+* Ensure that the environment variable `ANDROID_HOME` is set correctly and that
   the Android SDK has API 19 installed, i.e.,
-  ``${ANDROID_HOME}/platforms/android-19/android.jar`` should be a valid path.
+  `${ANDROID_HOME}/platforms/android-19/android.jar` should be a valid path.
 * Install ``apktool_2.0.0.jar`` into your local maven repository:
 
 ```
@@ -34,16 +34,22 @@ mvn install:install-file -Dfile=apktool_2.0.0.jar -DgroupId=apktool -DartifactId
 ```
 
 ### WALA configuration
-WALA might needs to know the location of the Java JDK (the current setup is tested with JDK version 6 and 8). This is configured in the ``wala.properties`` file, e.g.
+WALA might needs to know the location of the Java JDK (the current
+setup is tested with JDK version 6 and 8). This is configured in the
+``wala.properties`` file, e.g.
+
 ```
 cd DASCA/
 echo "java_runtime_dir = <PATH-TO-JDK>" >> externals/WALA/com.ibm.wala.core/dat/wala.properties
 ```
-Don't forget to adjust the path to the Java JDK accordingly, i.e., the `<PATH-TO-JDK>` should point to the directory containing the file `rt.lib`.
+Don't forget to adjust the path to the Java JDK accordingly, i.e.,
+the `<PATH-TO-JDK>` should point to the directory containing the file
+`rt.lib`.
 
-If `java_runtime_dir` is not configured, WALA will use the JDK-libaries of the JDK used for 
-executing WALA. This should work in most of the cases, i.e., providing a better "out-of-the-box"
-expierence. 
+If `java_runtime_dir` is not configured, WALA will use the
+JDK-libaries of the JDK used for executing WALA. This should work in
+most of the cases, i.e., providing a better "out-of-the-box"
+expierence.
 
 ### How to Compile
 First resolve the dependencies using maven:
