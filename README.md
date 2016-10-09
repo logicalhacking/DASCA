@@ -34,9 +34,15 @@ mvn install:install-file -Dfile=apktool_2.0.0.jar -DgroupId=apktool -DartifactId
 ```
 
 ### WALA configuration
-WALA might needs to know the location of the Java JDK (the current
-setup is tested with JDK version 6 and 8). This is configured in the
-``wala.properties`` file, e.g.
+DASCA (and the underlying WALA setup) is tested with Java version 8 
+(and version 6). If DASCA is installed using Java 8, there should be 
+no need for updating the WALA configuration. 
+
+If you experience problems or want to optimize the performance (e.g., 
+by analyzing the programs based on a different Java version), you 
+might need to configure the the location of the Java JDK. The JDK used
+as part of the static analysis is configured in the `wala.properties` 
+file, e.g.
 
 ```
 cd DASCA/
@@ -45,11 +51,6 @@ echo "java_runtime_dir = <PATH-TO-JDK>" >> externals/WALA/com.ibm.wala.core/dat/
 Don't forget to adjust the path to the Java JDK accordingly, i.e.,
 the `<PATH-TO-JDK>` should point to the directory containing the file
 `rt.lib`.
-
-If `java_runtime_dir` is not configured, WALA will use the
-JDK-libaries of the JDK used for executing WALA. This should work in
-most of the cases, i.e., providing a better "out-of-the-box"
-expierence.
 
 ### How to Compile
 First resolve the dependencies using maven:
