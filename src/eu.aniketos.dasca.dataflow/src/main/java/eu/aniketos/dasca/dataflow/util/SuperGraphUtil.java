@@ -95,8 +95,8 @@ public class SuperGraphUtil {
                 }
             } else {
                 if(!acceptedMethods.contains(method)) {
-			log.debug("supergraph cut at '" + bbic.getNumber() + " -> " + nextChild.getNumber() + " ("
-					+ nextChild.toString() + ")'");
+                    log.debug("supergraph cut at '" + bbic.getNumber() + " -> " + nextChild.getNumber() + " ("
+                              + nextChild.toString() + ")'");
                     continue;
                 }
             }
@@ -172,15 +172,15 @@ public class SuperGraphUtil {
             i++;
         }
         if(mainEntryId == 0 && mainExitId == 0) {
-            log.error("   "+entryClass + "." + entryMethod + 
-            		  ": empty entry method, ensure invocation in main method " +
-            		  "(mainEntryId = " +mainEntryId + " / mainExitId = " + mainExitId + ")");
+            log.error("   "+entryClass + "." + entryMethod +
+                      ": empty entry method, ensure invocation in main method " +
+                      "(mainEntryId = " +mainEntryId + " / mainExitId = " + mainExitId + ")");
             return -1;
         }
         HashSet<Integer> relevantIDs = new HashSet<Integer>();
         BasicBlockInContext<IExplodedBasicBlock> bbic = sgNodes.get(mainEntryId);
         acceptedMethods.add(bbic.getMethod().getReference());
-        log.error("   "+entryClass + "." + entryMethod + 
+        log.error("   "+entryClass + "." + entryMethod +
                   "start recursive graph building");
         relevantPathSearch(relevantIDs, sg, sgNodes, sgNodesReversed, acceptedMethods, mainEntryId, mainExitId);
 
@@ -196,7 +196,7 @@ public class SuperGraphUtil {
         }
 
         // build separate adjacency list
-        log.debug("   "+entryClass + "." + entryMethod + 
+        log.debug("   "+entryClass + "." + entryMethod +
                   "build seperate adjacency list");
         HashMap<Integer, ArrayList<Integer>> adjList = new HashMap<Integer, ArrayList<Integer>>();
         HashMap<Integer, ArrayList<Integer>> adjListReverse = new HashMap<Integer, ArrayList<Integer>>();
@@ -207,19 +207,19 @@ public class SuperGraphUtil {
         buildAdjacencyLists(sg, sgNodes, sgNodesReversed, adjList, adjListReverse, emptyNodes, relevantIDs);
 
         // <<< print original adjacency list to log
-        		log.debug("adjacency list before removing empty nodes:");
-        		AnalysisUtil.printAdjList(adjList, log);
+        log.debug("adjacency list before removing empty nodes:");
+        AnalysisUtil.printAdjList(adjList, log);
         //
         if(removeEmptyNodes) {
             removeEmptyNodes(emptyNodes, adjList, adjListReverse, sgNodes, sgNodesReversed);
             // <<< print adjacency list to log
-    		     log.debug("adjacency after removing empty nodes:");
-    		     AnalysisUtil.printAdjList(adjList, log);
+            log.debug("adjacency after removing empty nodes:");
+            AnalysisUtil.printAdjList(adjList, log);
             //
         }
-        
-        
-        log.debug("   "+entryClass + "." + entryMethod + 
+
+
+        log.debug("   "+entryClass + "." + entryMethod +
                   "add conditions to graph nodes");
         ArrayList<Integer> visited = new ArrayList<Integer>();
         ArrayList<Integer> currentConditions = new ArrayList<Integer>();
@@ -483,10 +483,10 @@ public class SuperGraphUtil {
                                        HashMap<Integer, ArrayList<Integer>> adjList,
                                        HashMap<Integer, HashSet<ArrayList<Integer>>> paths) {
 
-    	log.debug("     searching for "+currentId+" in adjList.");
+        log.debug("     searching for "+currentId+" in adjList.");
         ArrayList<Integer> children = adjList.get(currentId);
         if (null == children) {
-        	throw new RuntimeException ("No entry found in adjList for "+currentId);
+            throw new RuntimeException ("No entry found in adjList for "+currentId);
         }
         HashSet<ArrayList<Integer>> currentPaths = new HashSet<ArrayList<Integer>>();
 
@@ -541,8 +541,8 @@ public class SuperGraphUtil {
         vc.pop();
         vc.push();
         if(expr.toString().equalsIgnoreCase("null")) {
-        	log.debug("    isNotMutuallyExclusive: EXPR: "+expr+" is NULL (combinedConditions: " 
-                       + combinedConditions + "/ expressions: " + expressions +")"); 
+            log.debug("    isNotMutuallyExclusive: EXPR: "+expr+" is NULL (combinedConditions: "
+                      + combinedConditions + "/ expressions: " + expressions +")");
             return true;
         }
         SatResult satResult = vc.checkUnsat(expr);

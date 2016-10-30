@@ -124,7 +124,7 @@ public class SMTChecker {
         }
 
         IOperator op = binOpInstruction.getOperator();
-        
+
         if(op == BinaryOpInstruction.Operator.OR) {
             return vc.orExpr(exprLhs, exprRhs);
         } else if(op == BinaryOpInstruction.Operator.AND) {
@@ -254,7 +254,7 @@ public class SMTChecker {
                     return vc.gtExpr(exprLhs, exprRhs);
                 } else if(op == CAstBinaryOp.NE) {
                     return vc.notExpr(vc.eqExpr(exprLhs, exprRhs));
-                }                    
+                }
             } else if(defInst instanceof SSAUnaryOpInstruction) { // WALA uses unary operation ONLY for negation
                 SSAUnaryOpInstruction unaryInst = (SSAUnaryOpInstruction) defInst;
 

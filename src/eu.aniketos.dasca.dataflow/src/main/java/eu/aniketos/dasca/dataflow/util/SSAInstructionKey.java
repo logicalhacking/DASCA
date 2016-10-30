@@ -14,32 +14,32 @@ import com.ibm.wala.ssa.SSAInstruction;
 
 public class SSAInstructionKey {
 
-	private final SSAInstruction key;
-	public SSAInstructionKey(SSAInstruction key) {
-		this.key = key;
-	}
-	
-	public int hashCode(){
-		return key.hashCode();
-	}
+    private final SSAInstruction key;
+    public SSAInstructionKey(SSAInstruction key) {
+        this.key = key;
+    }
 
-	public String toString(){
-		if (null == key){
-			return "null (key)";
-		}else{
-			return key.toString();
-		}		
-	}
-	
-	public boolean equals(Object obj){
-		if (null == obj){
-			return false;
-		}else{
-			if (obj instanceof SSAInstructionKey){
- 			    return key == ((SSAInstructionKey) obj).key;			
-			}else{
-				return false;
-			}
-		}
-	}
+    public int hashCode() {
+        return key.hashCode();
+    }
+
+    public String toString() {
+        if (null == key) {
+            return "null (key)";
+        } else {
+            return key.toString();
+        }
+    }
+
+    public boolean equals(Object obj) {
+        if (null == obj) {
+            return false;
+        } else {
+            if (obj instanceof SSAInstructionKey) {
+                return key == ((SSAInstructionKey) obj).key;
+            } else {
+                return false;
+            }
+        }
+    }
 }

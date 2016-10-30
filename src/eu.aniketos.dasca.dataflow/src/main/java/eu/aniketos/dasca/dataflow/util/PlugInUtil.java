@@ -41,53 +41,53 @@ public class PlugInUtil {
     }
 
     public static void populateScope(JavaSourceAnalysisEngine engine, Collection<String> sources, List<String> libs) {
-    	if (null != libs ){
-    		boolean foundLib = false;
-    		for (String lib : libs) {
-    			File libFile = new File(lib);
-    			if (libFile.exists()) {
-    				foundLib = true;
-    				try {
-    					engine.addSystemModule(new JarFileModule(new JarFile(libFile, false)));
-    				} catch (IOException e) {
-    					Assert.fail(e.getMessage());
-    				}
-    			}
-    		}
-    		assert foundLib : "couldn't find library file from " + libs;
-    	}
+        if (null != libs ) {
+            boolean foundLib = false;
+            for (String lib : libs) {
+                File libFile = new File(lib);
+                if (libFile.exists()) {
+                    foundLib = true;
+                    try {
+                        engine.addSystemModule(new JarFileModule(new JarFile(libFile, false)));
+                    } catch (IOException e) {
+                        Assert.fail(e.getMessage());
+                    }
+                }
+            }
+            assert foundLib : "couldn't find library file from " + libs;
+        }
 
-    	for (String srcFilePath : sources) {
-    		String srcFileName = srcFilePath.substring(srcFilePath.lastIndexOf(File.separator) + 1);
-    		File f = new File(srcFilePath);
-    		Assert.assertTrue("couldn't find " + srcFilePath, f.exists());
-    		if (f.isDirectory()) {
-    			engine.addSourceModule(new SourceDirectoryTreeModule(f));
-    		} else {
-    			engine.addSourceModule(new SourceFileModule(f, srcFileName, null));
-    		}
-    	}
+        for (String srcFilePath : sources) {
+            String srcFileName = srcFilePath.substring(srcFilePath.lastIndexOf(File.separator) + 1);
+            File f = new File(srcFilePath);
+            Assert.assertTrue("couldn't find " + srcFilePath, f.exists());
+            if (f.isDirectory()) {
+                engine.addSourceModule(new SourceDirectoryTreeModule(f));
+            } else {
+                engine.addSourceModule(new SourceFileModule(f, srcFileName, null));
+            }
+        }
     }
 
 
-    
+
 
     public static JavaSourceAnalysisEngine
     createECJJavaEngine(Collection<String> sources, List<String> libs, final String [] entryPoints)  {
-    	JavaSourceAnalysisEngine engine=null;
-    	if(null == entryPoints){
-    		engine = new ECJJavaSourceAnalysisEngine();
-    	}else{
-    		engine = new ECJJavaSourceAnalysisEngine() {
+        JavaSourceAnalysisEngine engine=null;
+        if(null == entryPoints) {
+            engine = new ECJJavaSourceAnalysisEngine();
+        } else {
+            engine = new ECJJavaSourceAnalysisEngine() {
                 @Override
                 protected Iterable<Entrypoint> makeDefaultEntrypoints(AnalysisScope scope, IClassHierarchy cha) {
                     return Util.makeMainEntrypoints(JavaSourceAnalysisScope.SOURCE,cha, entryPoints);
                 }
             };
-    	}
+        }
         engine.setExclusionsFile(REGRESSION_EXCLUSIONS);
         populateScope(engine, sources, libs);
         return engine;
-    } 
+    }
 
 }
