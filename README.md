@@ -12,7 +12,7 @@
 
 
 ### Checkout
-Note that this repository imports WALA as a submodule. Thus,
+Note that this repository imports [WALA](http://wala.sf.net) as a submodule. Thus,
 you either need to recursively clone this repository, e.g.,
 ```
 git clone --recursive https://git.logicalhacking.com/DASCA/DASCA.git
@@ -63,7 +63,7 @@ workspace using `File -> Import -> Maven -> Existing Maven Projects`:
  1. Select the DASCA `src` folder as source for the import
  2. Import all offered projects (WALA and DASCA)
 
-While some Wala projects may contain compilation errors, all DASCA 
+While some WALA projects may contain compilation errors, all DASCA 
 projects (i.e., `eu.aniketos.dasca.*`) should compile without errors.
 
 ## Team 
