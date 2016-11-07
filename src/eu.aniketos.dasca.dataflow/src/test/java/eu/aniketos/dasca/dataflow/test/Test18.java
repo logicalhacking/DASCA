@@ -27,10 +27,10 @@ public class Test18 {
     String entryClass = "Test18";
 
     @Before
-    public void initTest() throws IllegalArgumentException, CancelException, IOException{
-    	TestSuite.initTestSG(entryClass);
+    public void initTest() throws IllegalArgumentException, CancelException, IOException {
+        TestSuite.initTestSG(entryClass);
     }
-    
+
     @Test
     public void testBad() throws IllegalArgumentException, CancelException, IOException {
         int result = SuperGraphUtil.analyzeAndSaveSuperGraph(TestSuite.superGraph, entryClass, "bad");

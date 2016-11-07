@@ -25,14 +25,14 @@ import eu.aniketos.dasca.dataflow.util.SuperGraphUtil;
 public class Test07 {
 
     String entryClass = "Test07";
-    
+
     @Before
-    public void initTest() throws IllegalArgumentException, CancelException, IOException{
-    	TestSuite.initTestSG(entryClass);
+    public void initTest() throws IllegalArgumentException, CancelException, IOException {
+        TestSuite.initTestSG(entryClass);
     }
-    
+
     @Test
-    public void testBad() throws IllegalArgumentException, CancelException, IOException{
+    public void testBad() throws IllegalArgumentException, CancelException, IOException {
         int result = SuperGraphUtil.analyzeAndSaveSuperGraph(TestSuite.superGraph, entryClass, "bad");
         assertEquals(1, result);
         return;
