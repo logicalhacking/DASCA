@@ -74,6 +74,8 @@ Main contact: [Achim D. Brucker](http://www.brucker.ch/)
 * [Michael Herzberg](http://www.dcs.shef.ac.uk/cgi-bin/makeperson?M.Herzberg)
 * Tim Herres
 
+## License
+This project is licensed under the Eclipse Public License 1.0. 
 
 ## Publications
 * Achim D. Brucker and Michael Herzberg. [On the Static Analysis of
