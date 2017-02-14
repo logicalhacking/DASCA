@@ -27,12 +27,14 @@ import com.ibm.wala.dalvik.ipa.callgraph.impl.DexEntryPoint
 import com.ibm.wala.dalvik.util.AndroidEntryPointLocator
 import com.ibm.wala.dalvik.util.AndroidEntryPointLocator.LocatorFlags
 import com.ibm.wala.ipa.callgraph.AnalysisCache
+import com.ibm.wala.ipa.callgraph.AnalysisCacheImpl
 import com.ibm.wala.ipa.callgraph.AnalysisOptions
 import com.ibm.wala.ipa.callgraph.AnalysisOptions.ReflectionOptions
 import com.ibm.wala.ipa.callgraph.AnalysisScope
 import com.ibm.wala.ipa.callgraph.CallGraph
 import com.ibm.wala.ipa.callgraph.Entrypoint
 import eu.aniketos.dasca.crosslanguage.util.Util
+import com.ibm.wala.ipa.cha.ClassHierarchyFactory
 import com.ibm.wala.ipa.cha.ClassHierarchy
 import brut.androlib.ApkDecoder
 import spray.json._
@@ -45,6 +47,9 @@ import com.ibm.wala.cast.js.loader.JavaScriptLoader
 import com.ibm.wala.cast.js.html.WebUtil
 import com.ibm.wala.classLoader.SourceURLModule
 import com.ibm.wala.classLoader.SourceModule
+import com.ibm.wala.classLoader.SourceFileModule
+import com.ibm.wala.classLoader.ModuleEntry
+import com.ibm.wala.classLoader.Module
 import scala.concurrent._
 import ExecutionContext.Implicits.global
 import scala.concurrent.duration._
@@ -164,8 +169,8 @@ class CordovaCGBuilder(val apk: File, val apkUnzipDir: File) {
     }
     val scope = AndroidAnalysisScope.setUpAndroidAnalysisScope(apk.toURI(), getClass.getClassLoader.getResource("javaexclusions.txt").getFile, CordovaCGBuilder.getClass.getClassLoader())
     scope.addToScope(ClassLoaderReference.Primordial, new JarFileModule(new JarFile(tmpAndroidJar)))
-    val cha = ClassHierarchy.make(scope)
-    val cache = new AnalysisCache(new DexIRFactory())
+    val cha = ClassHierarchyFactory.make(scope)
+    val cache = new AnalysisCacheImpl(new DexIRFactory())
     val eps = new AndroidEntryPointLocator(Set(
       LocatorFlags.INCLUDE_CALLBACKS, LocatorFlags.EP_HEURISTIC, LocatorFlags.CB_HEURISTIC).asJava)
     val pluginEntryPoints = getPluginEntryPoints(cha)
@@ -196,9 +201,9 @@ class CordovaCGBuilder(val apk: File, val apkUnzipDir: File) {
     val loaders = new WebPageLoaderFactory(new CAstRhinoTranslatorFactory())
     val scripts = makeHtmlScope(entrypoint.toURI().toURL(), loaders, pluginInfos);
     preprocessApkDir(scripts, pluginInfos)
-    val cache = new AnalysisCache(AstIRFactory.makeDefaultFactory())
-    val scope = new CAstAnalysisScope(scripts.toArray, loaders, Collections.singleton(JavaScriptLoader.JS))
-    val cha = ClassHierarchy.make(scope, loaders, JavaScriptLoader.JS)
+    val cache = new AnalysisCacheImpl(AstIRFactory.makeDefaultFactory())
+    val scope = new CAstAnalysisScope((scripts:List[Module]).toArray, loaders, Collections.singleton(JavaScriptLoader.JS))
+    val cha = ClassHierarchyFactory.make(scope, loaders, JavaScriptLoader.JS)
     val roots = JSCallGraphUtil.makeScriptRoots(cha)
     val options = JSCallGraphUtil.makeOptions(scope, cha, roots)
     try {
