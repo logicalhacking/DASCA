@@ -28,7 +28,7 @@ import eu.aniketos.dasca.dataflow.util.PlugInUtil;
 
 import com.ibm.wala.cast.java.client.JavaSourceAnalysisEngine;
 import com.ibm.wala.dataflow.IFDS.ICFGSupergraph;
-import com.ibm.wala.ipa.callgraph.AnalysisCache;
+import com.ibm.wala.ipa.callgraph.AnalysisCacheImpl;
 import com.ibm.wala.ipa.callgraph.CallGraph;
 import com.ibm.wala.properties.WalaProperties;
 import com.ibm.wala.util.CancelException;
@@ -133,7 +133,7 @@ public class TestSuite {
         JavaSourceAnalysisEngine engine = PlugInUtil.createECJJavaEngine(sources, libs,
                                           entryPoints.stream().toArray(String[]::new));
         CallGraph cg = engine.buildDefaultCallGraph();
-        AnalysisCache ac = new AnalysisCache();
+        AnalysisCacheImpl ac = new AnalysisCacheImpl();
         superGraph = ICFGSupergraph.make(cg, ac);
         log.info("CG size: "+cg.getNumberOfNodes());
         log.info("SG size: "+superGraph.getNumberOfNodes());
