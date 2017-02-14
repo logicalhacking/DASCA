@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.jdt.junit.launchconfig">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/eu.aniketos.dasca.dataflow/src/main/java/eu/aniketos/dasca/dataflow/test/TestSuite.java"/>
+<listEntry value="/eu.aniketos.dasca.dataflow/src/test/java/eu/aniketos/dasca/dataflow/test/TestSuite.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
