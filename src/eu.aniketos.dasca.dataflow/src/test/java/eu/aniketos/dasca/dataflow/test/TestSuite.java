@@ -133,8 +133,7 @@ public class TestSuite {
         JavaSourceAnalysisEngine engine = PlugInUtil.createECJJavaEngine(sources, libs,
                                           entryPoints.stream().toArray(String[]::new));
         CallGraph cg = engine.buildDefaultCallGraph();
-        AnalysisCacheImpl ac = new AnalysisCacheImpl();
-        superGraph = ICFGSupergraph.make(cg, ac);
+        superGraph = ICFGSupergraph.make(cg);
         log.info("CG size: "+cg.getNumberOfNodes());
         log.info("SG size: "+superGraph.getNumberOfNodes());
         logConfiguration();
