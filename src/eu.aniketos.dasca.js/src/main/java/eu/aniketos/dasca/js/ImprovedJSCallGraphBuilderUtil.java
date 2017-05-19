@@ -34,6 +34,7 @@ import com.ibm.wala.cast.js.loader.JavaScriptLoader;
 import com.ibm.wala.cast.js.loader.JavaScriptLoaderFactory;
 import com.ibm.wala.cast.loader.CAstAbstractLoader;
 import com.ibm.wala.cast.tree.rewrite.CAstRewriterFactory;
+import com.ibm.wala.cfg.Util;
 import com.ibm.wala.classLoader.IMethod;
 import com.ibm.wala.classLoader.SourceModule;
 import com.ibm.wala.classLoader.SourceURLModule;
@@ -232,9 +233,9 @@ public class ImprovedJSCallGraphBuilderUtil
 
     public static CallGraph makeHTMLCG(URL url) throws IOException,
         IllegalArgumentException, CancelException, WalaException {
-        PropagationCallGraphBuilder b = makeHTMLCGBuilder(url);
+    	JSCFABuilder b = makeHTMLCGBuilder(url);
         CallGraph CG = b.makeCallGraph(b.getOptions());
-        dumpCG(b.getPointerAnalysis(), CG);
+        dumpCG(b.getCFAContextInterpreter(), b.getPointerAnalysis(), CG);
         return CG;
     }
 
@@ -266,6 +267,7 @@ public class ImprovedJSCallGraphBuilderUtil
             JSCFABuilder builder = new JSZeroOrOneXCFABuilder(cha, options,
                     cache, null, null, ZeroXInstanceKeys.ALLOCATIONS,
                     builderType.useOneCFA());
+            
             if (builderType.extractCorrelatedPairs())
                 builder.setContextSelector(new PropertyNameContextSelector(
                                                builder.getAnalysisCache(), 2, builder
