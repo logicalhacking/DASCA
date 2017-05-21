@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="scala.scalatest">
+<stringAttribute key="SCALATEST_LAUNCH_INCLUDE_NESTED" value="false"/>
+<setAttribute key="SCALATEST_LAUNCH_TESTS_NAME"/>
+<stringAttribute key="SCALATEST_LAUNCH_TYPE" value="PACKAGE"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/com.logicalhacking.dasca.crosslanguage.test"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.logicalhacking.dasca.crosslanguage.test"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="com.logicalhacking.dasca.crosslanguage.test"/>
+</launchConfiguration>

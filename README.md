@@ -55,7 +55,7 @@ the `<PATH-TO-JDK>` should point to the directory containing the file
 ### How to Compile
 First resolve the dependencies using maven:
 ```
-cd src/eu.aniketos.dasca.parent/
+cd src/com.logicalhacking.dasca.parent/
 mvn -P wala clean install -DskipTests=true -q
 ```
 After this, all projects can be imported into a fresh Eclipse
@@ -64,7 +64,7 @@ workspace using `File -> Import -> Maven -> Existing Maven Projects`:
  2. Import all offered projects (WALA and DASCA)
 
 While some WALA projects may contain compilation errors, all DASCA 
-projects (i.e., `eu.aniketos.dasca.*`) should compile without errors.
+projects (i.e., `com.logicalhacking.dasca.*`) should compile without errors.
 
 ## Team 
 Main contact: [Achim D. Brucker](http://www.brucker.ch/)

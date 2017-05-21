@@ -3,6 +3,6 @@ src/*/.settings
 src/*/.project
 src/*/target
 src/*/bin
-src/eu.aniketos.dasca.dataflow/config/main.config
-src/eu.aniketos.dasca.dataflow/main.log*
-src/eu.aniketos.dasca.crosslanguage/BuildCordovaCallgraph.launch
+src/com.logicalhacking.dasca.dataflow/config/main.config
+src/com.logicalhacking.dasca.dataflow/main.log*
+src/com.logicalhacking.dasca.crosslanguage/BuildCordovaCallgraph.launch
