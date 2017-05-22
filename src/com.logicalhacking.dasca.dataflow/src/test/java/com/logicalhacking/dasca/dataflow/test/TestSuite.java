@@ -59,31 +59,31 @@ import com.ibm.wala.util.CancelException;
 public class TestSuite {
     private static Logger log = AnalysisUtil.getLogger(TestSuite.class);
     protected static ICFGSupergraph superGraph = null;
-    protected static String testDir = "../com.logicalhacking.dasca.dataflow.test.data/src/main/java/com.logicalhacking/dasca/dataflow/test/data/";
+    protected static String testDir = "../com.logicalhacking.dasca.dataflow.test.data/src/main/java/com/logicalhacking/dasca/dataflow/test/data/";
 
     protected static List<String> sources = null;
     protected static List<String> libs = null;
 
     protected static String [] customEntryPoints = {
-        "Lcom.logicalhacking/dasca/dataflow/test/data/Test01"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test02"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test03"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test04"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test05"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test06"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test07"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test08"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test09"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test10"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test11"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test12"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test13"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test14"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test15"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test16"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test17"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test18"
-        ,"Lcom.logicalhacking/dasca/dataflow/test/data/Test19"
+         "Lcom/logicalhacking/dasca/dataflow/test/data/Test01"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test02"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test03"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test04"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test05"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test06"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test07"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test08"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test09"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test10"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test11"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test12"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test13"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test14"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test15"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test16"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test17"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test18"
+        ,"Lcom/logicalhacking/dasca/dataflow/test/data/Test19"
     };
 
 
@@ -121,7 +121,7 @@ public class TestSuite {
         List<String> entryPoints = new ArrayList<String>();
         if (null != test) {
             log.info("Generating Global SG:");
-            entryPoints.add("Lcom.logicalhacking/dasca/dataflow/test/data/"+test);
+            entryPoints.add("Lcom/logicalhacking/dasca/dataflow/test/data/"+test);
         } else {
             log.info("Generating Test Specific SG ("+ test +"):");
             entryPoints.addAll(Arrays.asList(customEntryPoints));
