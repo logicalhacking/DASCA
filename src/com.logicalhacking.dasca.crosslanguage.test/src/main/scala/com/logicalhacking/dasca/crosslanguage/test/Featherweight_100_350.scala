@@ -80,7 +80,7 @@ class Featherweight_100_350 extends FlatSpec with Matchers with BeforeAndAfterAl
    }
    
    "JavaScriptCallGraph" should "contain 0.8k nodes" in {
-     app.getJSCallGraphSize() should be (858 +- 10)
+     app.getJSCallGraphSize() should be (878 +- 10)
    }
 
    "JavaCallGraph" should "be contain 6.1k nodes" in {
