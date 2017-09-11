@@ -3,8 +3,8 @@
 ### Prerequisites
 * Java 8
 * Android SDK (to obtain dx.jar)
-* Eclipse Neon, including
-  * [Scala IDE and Scalatest Runner (optional)](http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site)
+* Eclipse Oxygen, including
+  * [Scala IDE and Scalatest Runner (the latter is optional)](http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site)
   * ["Maven for Scala" - Maven Integration for Eclipse](http://alchim31.free.fr/m2e-scala/update-site)
   * [m2e - Maven Integration for Eclipse](http://download.eclipse.org/releases/neon)
 * [CVC3](http://cs.nyu.edu/acsys/cvc3/) including the Java bindings for CVC3
@@ -34,13 +34,13 @@ mvn install:install-file -Dfile=apktool_2.0.0.jar -DgroupId=apktool -DartifactId
 ```
 
 ### WALA configuration
-DASCA (and the underlying WALA setup) is tested with Java version 8 
-(and version 6). If DASCA is installed using Java 8, there should be 
-no need for updating the WALA configuration. 
+DASCA (and the underlying WALA setup) is tested with Java version 8.
+If DASCA is installed using Java 8, there should be no need for updating 
+the WALA configuration. 
 
 If you experience problems or want to optimize the performance (e.g., 
 by analyzing the programs based on a different Java version), you 
-might need to configure the the location of the Java JDK. The JDK used
+might need to configure the location of the Java JDK. The JDK used
 as part of the static analysis is configured in the `wala.properties` 
 file, e.g.
 
@@ -56,7 +56,7 @@ the `<PATH-TO-JDK>` should point to the directory containing the file
 First resolve the dependencies using maven:
 ```
 cd src/com.logicalhacking.dasca.parent/
-mvn -P wala clean install -DskipTests=true -q
+mvn -P wala clean verify -DskipTests=true -q
 ```
 After this, all projects can be imported into a fresh Eclipse
 workspace using `File -> Import -> Maven -> Existing Maven Projects`:
