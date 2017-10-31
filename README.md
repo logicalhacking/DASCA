@@ -43,7 +43,6 @@ by analyzing the programs based on a different Java version), you
 might need to configure the location of the Java JDK. The JDK used
 as part of the static analysis is configured in the `wala.properties` 
 file, e.g.
-
 ```
 cd DASCA/
 echo "java_runtime_dir = <PATH-TO-JDK>" >> externals/WALA/com.ibm.wala.core/dat/wala.properties
@@ -53,11 +52,17 @@ the `<PATH-TO-JDK>` should point to the directory containing the file
 `rt.lib`.
 
 ### How to Compile
-First resolve the dependencies using maven:
+First check that the variable `JAVA_HOME` is configured correctly, e.g.:
+```
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+```
+
+Second, resolve the dependencies using maven:
 ```
 cd src/com.logicalhacking.dasca.parent/
-mvn -P wala clean verify -DskipTests=true -q
+mvn -P wala clean verify -DskipTests=true 
 ```
+
 After this, all projects can be imported into a fresh Eclipse
 workspace using `File -> Import -> Maven -> Existing Maven Projects`:
  1. Select the DASCA `src` folder as source for the import
