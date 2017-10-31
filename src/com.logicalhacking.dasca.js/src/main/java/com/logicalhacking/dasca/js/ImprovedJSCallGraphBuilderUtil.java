@@ -42,6 +42,7 @@ import com.ibm.wala.ipa.callgraph.AnalysisCache;
 import com.ibm.wala.ipa.callgraph.AnalysisScope;
 import com.ibm.wala.ipa.callgraph.CallGraph;
 import com.ibm.wala.ipa.callgraph.Entrypoint;
+import com.ibm.wala.ipa.callgraph.IAnalysisCacheView;
 import com.ibm.wala.ipa.callgraph.propagation.PropagationCallGraphBuilder;
 import com.ibm.wala.ipa.callgraph.propagation.cfa.ZeroXInstanceKeys;
 import com.ibm.wala.ipa.cha.ClassHierarchyException;
@@ -259,11 +260,11 @@ public class ImprovedJSCallGraphBuilderUtil
                                          IRFactory<IMethod> irFactory) throws IOException, WalaException {
         try {
             IClassHierarchy cha = makeHierarchy(scope, loaders);
-            com.ibm.wala.cast.js.util.Util.checkForFrontEndErrors(cha);
+            com.ibm.wala.cast.util.Util.checkForFrontEndErrors(cha);
             Iterable<Entrypoint> roots = makeScriptRoots(cha);
             JSAnalysisOptions options = makeOptions(scope, cha, roots);
             options.setHandleCallApply(builderType.handleCallApply());
-            AnalysisCache cache = makeCache(irFactory);
+            IAnalysisCacheView cache = makeCache(irFactory);
             JSCFABuilder builder = new JSZeroOrOneXCFABuilder(cha, options,
                     cache, null, null, ZeroXInstanceKeys.ALLOCATIONS,
                     builderType.useOneCFA());

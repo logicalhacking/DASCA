@@ -207,7 +207,7 @@ class CordovaCGBuilder(val apk: File, val apkUnzipDir: File) {
     val roots = JSCallGraphUtil.makeScriptRoots(cha)
     val options = JSCallGraphUtil.makeOptions(scope, cha, roots)
     try {
-      com.ibm.wala.cast.js.util.Util.checkForFrontEndErrors(cha);
+      com.ibm.wala.cast.util.Util.checkForFrontEndErrors(cha);
     } catch {
       case e: WalaException => logger.warn("JavaScript front end error:", e)
     }
