@@ -25,12 +25,12 @@ cloning the repository.
 * Ensure that the environment variable `ANDROID_HOME` is set correctly and that
   the Android SDK has API 19 installed, i.e.,
   `${ANDROID_HOME}/platforms/android-19/android.jar` should be a valid path.
-* Install ``apktool_2.0.0.jar`` into your local maven repository:
+* Install ``apktool_2.3.0.jar`` into your local maven repository:
 
 ```
 cd $(mktemp -d)
-wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.0.0.jar
-mvn install:install-file -Dfile=apktool_2.0.0.jar -DgroupId=apktool -DartifactId=apktool -Dpackaging=jar -Dversion=2.0.0
+wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.3.0.jar
+mvn install:install-file -Dfile=apktool_2.3.0.jar -DgroupId=apktool -DartifactId=apktool -Dpackaging=jar -Dversion=2.3.0
 ```
 
 ### WALA configuration

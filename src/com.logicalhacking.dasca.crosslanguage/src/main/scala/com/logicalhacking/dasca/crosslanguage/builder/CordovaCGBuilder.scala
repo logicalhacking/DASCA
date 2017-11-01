@@ -251,7 +251,7 @@ class CordovaCGBuilder(val apk: File, val apkUnzipDir: File) {
 
   private def decodeApk(apk: File) = {
     val decoder = new ApkDecoder();
-    decoder.setFrameworkDir(new File(System.getProperty("java.io.tmpdir"), s"apktoolframework${Random.alphanumeric.take(16).mkString}").getCanonicalPath)
+    //decoder.setFrameworkDir(new File(System.getProperty("java.io.tmpdir"), s"apktoolframework${Random.alphanumeric.take(16).mkString}").getCanonicalPath)
     decoder.setApkFile(apk);
     if (apkUnzipDir.exists()) FileUtils.deleteDirectory(apkUnzipDir);
     decoder.setOutDir(apkUnzipDir);
