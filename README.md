@@ -6,7 +6,7 @@
 * Eclipse Oxygen, including
   * [Scala IDE and Scalatest Runner (the latter is optional)](http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site)
   * ["Maven for Scala" - Maven Integration for Eclipse](http://alchim31.free.fr/m2e-scala/update-site)
-  * [m2e - Maven Integration for Eclipse](http://download.eclipse.org/releases/neon)
+  * m2e - Maven Integration for Eclipse
 * [CVC3](http://cs.nyu.edu/acsys/cvc3/) including the Java bindings for CVC3
 * [apktool](https://ibotpeaches.github.io/Apktool/)
 
