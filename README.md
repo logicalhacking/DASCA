@@ -1,7 +1,7 @@
 # DASCA
 ## Installation
 ### Prerequisites
-* Java 8
+* Java 8 (Java 9 or later is currently *not* supported)
 * Android SDK (to obtain dx.jar)
 * Eclipse Oxygen, including
   * [Scala IDE and Scalatest Runner (the latter is optional)](http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site)
