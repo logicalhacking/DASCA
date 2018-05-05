@@ -4,6 +4,8 @@
 * Java 8 (Java 9 or later is currently *not* supported)
 * Android SDK (to obtain dx.jar)
 * Eclipse Oxygen, including
+  * The Plug-in Development Environment (PDE)
+  * JavaScript Development Tools (JSDT)
   * [Scala IDE and Scalatest Runner (the latter is optional)](http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site)
   * ["Maven for Scala" - Maven Integration for Eclipse](http://alchim31.free.fr/m2e-scala/update-site)
   * m2e - Maven Integration for Eclipse
