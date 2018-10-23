@@ -19,6 +19,6 @@ logging_properties_file = config/log4j.properties
 
 dot_path = /tmp/graphs
 dot_remove_empty_nodes = no
-
+ 
+# Usually not required
 # java_runtime_dir = /usr/lib/jvm/java-6-openjdk-amd64/jre/lib
-java_runtime_dir = ../../jre/lib
