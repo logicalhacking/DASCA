@@ -4,6 +4,8 @@ src/*/.project
 src/*/target
 src/*/bin
 src/.gradle
+src/.settings
+src/.project
 src/build
 src/*/build
 src/com.logicalhacking.dasca.dataflow/config/main.config
