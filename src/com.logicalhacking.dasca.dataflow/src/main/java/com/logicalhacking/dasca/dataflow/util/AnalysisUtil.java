@@ -33,6 +33,7 @@ import com.ibm.wala.cast.java.loader.JavaSourceLoaderImpl.ConcreteJavaMethod;
 import com.ibm.wala.cast.java.ssa.AstJavaInvokeInstruction;
 import com.ibm.wala.classLoader.IClass;
 import com.ibm.wala.classLoader.IMethod;
+import com.ibm.wala.classLoader.Language;
 import com.ibm.wala.ipa.callgraph.AnalysisCache;
 import com.ibm.wala.ipa.callgraph.AnalysisCacheImpl;
 import com.ibm.wala.ipa.callgraph.AnalysisOptions;
@@ -148,7 +149,7 @@ public class AnalysisUtil {
             entryPoints = HashSetFactory.make();
             for(IClass class1 : cha) {
                 if(class1.getClassLoader().getReference().equals(clr)) {
-                    Collection<IMethod> allMethods = class1.getDeclaredMethods();
+                    Collection<? extends IMethod> allMethods = class1.getDeclaredMethods();
                     for(IMethod m : allMethods) {
                         if(m.isPrivate()) {
                             continue;
@@ -170,8 +171,8 @@ public class AnalysisUtil {
             }
             AnalysisOptions options = new AnalysisOptions(scope, entryPoints);
 
-            //		CallGraphBuilder builder = com.ibm.wala.ipa.callgraph.impl.Util.makeRTABuilder(options, new AnalysisCacheImpl(), cha, scope); // Rapid Type Analysis
-            SSAPropagationCallGraphBuilder builder = com.ibm.wala.ipa.callgraph.impl.Util.makeZeroCFABuilder(options, new AnalysisCacheImpl(), cha, scope); // 0-CFA = context-insensitive, class-based heap
+			//		CallGraphBuilder builder = com.ibm.wala.ipa.callgraph.impl.Util.makeRTABuilder(options, new AnalysisCacheImpl(), cha, scope); // Rapid Type Analysis
+            SSAPropagationCallGraphBuilder builder = com.ibm.wala.ipa.callgraph.impl.Util.makeZeroCFABuilder(Language.JAVA, options, new AnalysisCacheImpl(), cha, scope); // 0-CFA = context-insensitive, class-based heap
             //		CallGraphBuilder builder = com.ibm.wala.ipa.callgraph.impl.Util.makeZeroOneCFABuilder(options, new AnalysisCacheImpl(), cha, scope); // 0-1-CFA = context-insensitive, allocation-site-based heap
             //		CallGraphBuilder builder = com.ibm.wala.ipa.callgraph.impl.Util.makeZeroOneContainerCFABuilder(options, new AnalysisCacheImpl(), cha, scope); // 0-1-Container-CFA = object-sensitive container
 

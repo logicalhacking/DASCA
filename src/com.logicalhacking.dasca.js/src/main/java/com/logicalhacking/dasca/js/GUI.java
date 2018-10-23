@@ -2110,9 +2110,9 @@ public class GUI {
                     JavaScriptInvoke invoki;
                     invoki = (JavaScriptInvoke) ssaInstr;
                     System.out.println("Parametetrs="
-                                       + invoki.getNumberOfParameters());
+                                       + invoki.getNumberOfPositionalParameters());
                     System.out.println("GetFunction=" + invoki.getFunction());
-                    for (int i = 0; i < invoki.getNumberOfParameters(); i++) {
+                    for (int i = 0; i < invoki.getNumberOfPositionalParameters(); i++) {
 
                         System.out.println("Get Use=" + invoki.getUse(i));
                         name = getLocalNames(nodi1, name, ssaInstr, i);

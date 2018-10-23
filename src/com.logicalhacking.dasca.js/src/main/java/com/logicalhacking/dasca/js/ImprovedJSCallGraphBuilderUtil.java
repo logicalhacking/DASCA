@@ -52,7 +52,6 @@ import com.ibm.wala.util.CancelException;
 import com.ibm.wala.util.WalaException;
 import com.ibm.wala.util.collections.HashSetFactory;
 import com.ibm.wala.util.io.FileProvider;
-import com.ibm.wala.util.functions.Function;
 
 /**
  * TODO this class is a mess. rewrite.
