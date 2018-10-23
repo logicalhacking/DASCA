@@ -3,6 +3,9 @@ src/*/.settings
 src/*/.project
 src/*/target
 src/*/bin
+src/.gradle
+src/build
+src/*/build
 src/com.logicalhacking.dasca.dataflow/config/main.config
 src/com.logicalhacking.dasca.dataflow/main.log*
 src/com.logicalhacking.dasca.crosslanguage/BuildCordovaCallgraph.launch

@@ -1,0 +1,10 @@
+
+description = 'com.logicalhacking.dasca.js'
+dependencies {
+    compile group: 'com.ibm.wala', name: 'com.ibm.wala.core', version:'1.5.1-SNAPSHOT-DASCA' 
+    compile group: 'com.ibm.wala', name: 'com.ibm.wala.cast', version:'1.5.1-SNAPSHOT-DASCA'
+    compile group: 'com.ibm.wala', name: 'com.ibm.wala.cast.js', version:'1.5.1-SNAPSHOT-DASCA'
+    compile group: 'com.ibm.wala', name: 'com.ibm.wala.cast.js.rhino', version:'1.5.1-SNAPSHOT-DASCA'
+    compile group: 'com.ibm.wala', name: 'com.ibm.wala.util', version:'1.5.1-SNAPSHOT-DASCA'
+    compile group: 'com.ibm.wala', name: 'com.ibm.wala.shrike', version:'1.5.1-SNAPSHOT-DASCA'
+}

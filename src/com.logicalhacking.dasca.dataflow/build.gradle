@@ -1,0 +1,15 @@
+
+description = 'com.logicalhacking.dasca.dataflow'
+
+dependencies {
+    compile group: 'com.ibm.wala', name: 'com.ibm.wala.core', version: '1.5.1-SNAPSHOT-DASCA'
+    compile group: 'com.ibm.wala', name: 'com.ibm.wala.shrike', version: '1.5.1-SNAPSHOT-DASCA'
+    compile group: 'com.ibm.wala', name: 'com.ibm.wala.util', version: '1.5.1-SNAPSHOT-DASCA'
+    compile group: 'com.ibm.wala', name: 'com.ibm.wala.cast', version: '1.5.1-SNAPSHOT-DASCA'
+    compile group: 'com.ibm.wala', name: 'com.ibm.wala.cast.java', version: '1.5.1-SNAPSHOT-DASCA'
+    compile group: 'com.ibm.wala', name: 'com.ibm.wala.cast.java.ecj', version: '1.5.1-SNAPSHOT-DASCA'
+    compile group: 'junit', name: 'junit', version:'4.12'
+    compile group: 'log4j', name: 'log4j', version:'1.2.17'
+    compile name: 'libcvc3-5.0.0'
+}
+

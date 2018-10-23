@@ -1,0 +1,11 @@
+rootProject.name = 'com.logicalhacking.dasca'
+
+include (
+         'com.logicalhacking.dasca.crosslanguage',
+         'com.logicalhacking.dasca.crosslanguage.test',
+         'com.logicalhacking.dasca.dataflow',
+         'com.logicalhacking.dasca.dataflow.test.data',
+         'com.logicalhacking.dasca.js',
+)
+
+
