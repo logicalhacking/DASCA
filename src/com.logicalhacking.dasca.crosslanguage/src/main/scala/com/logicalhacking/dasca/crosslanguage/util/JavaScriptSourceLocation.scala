@@ -16,6 +16,7 @@ import com.ibm.wala.ipa.callgraph.CGNode
 import com.ibm.wala.ssa.SSAInstruction
 import com.ibm.wala.cast.js.html.IncludedPosition
 import com.ibm.wala.classLoader.IMethod
+import com.ibm.wala.cast.ir.ssa.AstIRFactory.AstIR
 
 class JavaScriptSourceLocation(val line: Int, val column: Int, val filePath: String) extends SourceLocation with Equals {
 
@@ -39,12 +40,12 @@ class JavaScriptSourceLocation(val line: Int, val column: Int, val filePath: Str
 object JavaScriptSourceLocation {
   val JavaScriptPathRegex = """.+/assets/(.+)""".r
 
-  def apply(ir: AstIRFactory[IMethod]#AstIR, inst: SSAInstruction): JavaScriptSourceLocation = {
+  def apply(ir: AstIR, inst: SSAInstruction): JavaScriptSourceLocation = {
     val (line:Int, col:Int, _, _, relPath:String) = Util.getJavaScriptSourceInfo(ir, inst)
     new JavaScriptSourceLocation(line, col, relPath)
   }
 
-  def apply(ir: AstIRFactory[IMethod]#AstIR, csr: CallSiteReference): JavaScriptSourceLocation = apply(ir, ir.getCalls(csr)(0))
+  def apply(ir: AstIR, csr: CallSiteReference): JavaScriptSourceLocation = apply(ir, ir.getCalls(csr)(0))
 
-  def apply(ir: AstIRFactory[IMethod]#AstIR): JavaScriptSourceLocation = apply(ir, ir.getInstructions.find({ i => i != null }).get)
+  def apply(ir: AstIR): JavaScriptSourceLocation = apply(ir, ir.getInstructions.find({ i => i != null }).get)
 }

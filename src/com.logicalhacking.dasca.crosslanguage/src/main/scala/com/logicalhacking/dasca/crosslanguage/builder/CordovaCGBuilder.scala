@@ -178,7 +178,7 @@ class CordovaCGBuilder(val apk: File, val apkUnzipDir: File) {
     val entryPoints = eps.getEntryPoints(cha).asScala ++ pluginEntryPoints
     val options = new AnalysisOptions(scope, entryPoints.asJava);
     options.setReflectionOptions(ReflectionOptions.FULL);
-    val cgb = WalaUtil.makeZeroCFABuilder(options, cache, cha, scope);
+    val cgb = WalaUtil.makeZeroCFABuilder(com.ibm.wala.classLoader.Language.JAVA, options, cache, cha, scope);
     cgb.makeCallGraph(options, null);
   }
 

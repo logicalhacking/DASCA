@@ -30,6 +30,7 @@ import com.logicalhacking.dasca.crosslanguage.builder.FilterJSFrameworks
 import com.logicalhacking.dasca.crosslanguage.builder.PreciseJS
 import com.logicalhacking.dasca.crosslanguage.builder.RunBuildersInParallel
 import com.ibm.wala.classLoader.IMethod
+import com.ibm.wala.cast.ir.ssa.AstIRFactory.AstIR
 
 object Util {
   val cachedDalvikLines = Map[(CGNode, SSAInstruction), Int]()
@@ -51,7 +52,7 @@ object Util {
   }
 
   val JavaScriptPathRegex = """.+/assets/(.+)""".r
-  def getJavaScriptSourceInfo(ir: AstIRFactory[IMethod]#AstIR, inst: SSAInstruction) = {
+  def getJavaScriptSourceInfo(ir:AstIR, inst: SSAInstruction) = {
     val sourcePos = ir.getMethod.getSourcePosition(inst.iindex) match {
       case iPos: IncludedPosition => iPos.getIncludePosition
       case sp => sp
@@ -73,7 +74,7 @@ object Util {
       s"$className:$line, Method: $method, Path: $path"
     } else {
       node.getIR match {
-        case ir:AstIRFactory[IMethod]#AstIR => {
+        case ir:AstIR => {
           val (line, col, start, end, relPath:String) = getJavaScriptSourceInfo(ir, inst)
           val fileName = relPath.substring(relPath.lastIndexOf('/') + 1)
           s"$fileName:$line:$col ($start -> $end), Path: $relPath"

@@ -56,7 +56,7 @@ object Main {
         if (n.getMethod().getName.equals(execSQL)) { sinks = sinks.+:(n) } 
       }else{
         try{
-            if((n.getMethod().asInstanceOf[JavaScriptLoader#JavaScriptMethodObject]).getDeclaringClass()
+            if((n.getMethod().asInstanceOf[JavaScriptLoader#DynamicMethodObject]).getDeclaringClass()
                       .getSourceFileName().endsWith("index.js"))
          {roots = roots.+:(n) }
         }catch{

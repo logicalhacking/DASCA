@@ -50,6 +50,8 @@ import scala.collection.mutable.ListBuffer
 import com.ibm.wala.cast.ir.ssa.AstIRFactory
 import scala.collection.mutable.LinkedHashSet
 import com.ibm.wala.classLoader.IMethod
+import com.ibm.wala.cast.ir.ssa.AstIRFactory.AstIR
+import com.ibm.wala.cast.ir.ssa.AstIRFactory.AstIR
 
 class MergedCallGraph(val javaCG: CallGraph, val jsCG: CallGraph, val configXml: Elem) extends Iterable[CGNode] {
   val logger = Logger(LoggerFactory.getLogger(getClass.toString))
@@ -240,7 +242,7 @@ class MergedCallGraph(val javaCG: CallGraph, val jsCG: CallGraph, val configXml:
   def findJsExecuteNode(node: CGNode, csr: CallSiteReference) = getPossibleTargets(node, csr).collectFirst({
     n =>
       n.getMethod match {
-        case m: JavaScriptLoader#JavaScriptMethodObject if (m.getEntity.getName.endsWith(CordovaCGBuilder.ExecuteSuffix)) => n
+        case m: JavaScriptLoader#DynamicMethodObject if (m.getEntity.getName.endsWith(CordovaCGBuilder.ExecuteSuffix)) => n
       }
   })
 
@@ -258,11 +260,11 @@ class MergedCallGraph(val javaCG: CallGraph, val jsCG: CallGraph, val configXml:
   private def skipCrossCall(from: CGNode, csr: CallSiteReference, to: CGNode): Boolean = {
     if (Util.isJavaNode(from)) {
       to.getMethod match {
-        case m: JavaScriptLoader#JavaScriptMethodObject if (m.getEntity.getName.startsWith("make_")) => return true
+        case m: JavaScriptLoader#DynamicMethodObject if (m.getEntity.getName.startsWith("make_")) => return true
         case _ =>
       }
       to.getIR match {
-        case ir: AstIRFactory[IMethod]#AstIR => {
+        case ir: AstIR => {
           val (_, _, _, _, relPath:String) = Util.getJavaScriptSourceInfo(ir, ir.getInstructions.find(_ != null).get)
           val lc = relPath.toLowerCase()
           val filename = lc.substring(lc.lastIndexOf('/'))
@@ -277,7 +279,7 @@ class MergedCallGraph(val javaCG: CallGraph, val jsCG: CallGraph, val configXml:
       }
     } else {
       from.getIR match {
-        case ir: AstIRFactory[IMethod]#AstIR => {
+        case ir: AstIR => {
           val (_, _, _, _, relPath:String) = Util.getJavaScriptSourceInfo(ir, ir.getInstructions.find(_ != null).get)
           val lc = relPath.toLowerCase()
           val filename = lc.substring(lc.lastIndexOf('/'))
