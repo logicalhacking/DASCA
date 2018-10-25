@@ -23,6 +23,7 @@ import com.logicalhacking.dasca.crosslanguage.builder.CrossBuilderOption
 import com.logicalhacking.dasca.crosslanguage.builder.MergedCallGraph
 import com.logicalhacking.dasca.crosslanguage.builder._
 import com.ibm.wala.cast.ir.ssa.AstIRFactory
+import com.ibm.wala.cast.ir.ssa.AstIRFactory.AstIR
 import com.ibm.wala.classLoader.IMethod
 
 class AppTest {
@@ -127,12 +128,12 @@ class AppTest {
     ) yield {
       if (Util.isJavaNode(origin._1)) {
         target.getIR match {
-          case ir: AstIRFactory[IMethod]#AstIR => (JavaSourceLocation(origin._1, origin._2), JavaScriptSourceLocation(ir))
+          case ir: AstIR => (JavaSourceLocation(origin._1, origin._2), JavaScriptSourceLocation(ir))
           case _ => (JavaSourceLocation(origin._1, origin._2), new JavaScriptSourceLocation(-1, -1, "unknown"))
         }
       } else {
         origin._1.getIR match {
-          case ir: AstIRFactory[IMethod]#AstIR => (JavaScriptSourceLocation(ir, origin._2), JavaSourceLocation(target))
+          case ir: AstIR => (JavaScriptSourceLocation(ir, origin._2), JavaSourceLocation(target))
           case _ => (new JavaScriptSourceLocation(-1, -1, "unknown"), JavaSourceLocation(target))
         }
       }

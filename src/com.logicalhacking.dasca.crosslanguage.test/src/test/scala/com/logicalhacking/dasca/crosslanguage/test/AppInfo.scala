@@ -13,7 +13,6 @@ package com.logicalhacking.dasca.crosslanguage.test
 
 import java.io.File
 import com.logicalhacking.dasca.crosslanguage.util.SourceLocation
-import com.logicalhacking.dasca.crosslanguage.test.AppTest
 import com.logicalhacking.dasca.crosslanguage.builder.CrossBuilderOption
 
 trait AppInfo {

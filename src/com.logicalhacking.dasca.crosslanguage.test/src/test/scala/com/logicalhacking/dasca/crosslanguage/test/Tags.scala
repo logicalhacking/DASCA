@@ -8,7 +8,7 @@
  *
  */
 
-package com.logicalhacking.dasca.crosslanguage.test.Tag
+package com.logicalhacking.dasca.crosslanguage.test
 
 import org.scalatest.Tag
 
