@@ -1,4 +1,0 @@
-[submodule "externals/WALA"]
-	path = externals/WALA
-	url = https://git.logicalhacking.com/DASCA/WALA.git
-	branch = master
