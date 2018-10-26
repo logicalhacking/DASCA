@@ -1,6 +1,9 @@
 # DASCA
+
 ## Installation
+
 ### Prerequisites
+
 * Java 8 (Java 9 or later is currently *not* supported)
 * Android SDK (to obtain dx.jar)
 * Eclipse Oxygen, including
@@ -14,16 +17,15 @@
 
 
 ### Checkout
-Note that this repository imports [WALA](http://wala.sf.net) as a submodule. Thus,
-you either need to recursively clone this repository, e.g.,
-```
-git clone --recursive https://git.logicalhacking.com/DASCA/DASCA.git
-```
-or execute ``git submodule update --init --recursive`` after 
-cloning the repository.
 
+The repository can be cloned as usual:
+
+```
+git clone https://git.logicalhacking.com/DASCA/DASCA.git
+```
 
 ### Resolving external dependencies
+
 * Ensure that the environment variable `ANDROID_HOME` is set correctly and that
   the Android SDK has API 19 installed, i.e.,
   `${ANDROID_HOME}/platforms/android-19/android.jar` should be a valid path.
@@ -36,6 +38,7 @@ mvn install:install-file -Dfile=apktool_2.3.0.jar -DgroupId=apktool -DartifactId
 ```
 
 ### WALA configuration
+
 DASCA (and the underlying WALA setup) is tested with Java version 8.
 If DASCA is installed using Java 8, there should be no need for updating 
 the WALA configuration. 
@@ -54,6 +57,7 @@ the `<PATH-TO-JDK>` should point to the directory containing the file
 `rt.lib`.
 
 ### How to Compile
+
 First check that the variable `JAVA_HOME` is configured correctly, e.g.:
 ```
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
@@ -74,17 +78,21 @@ While some WALA projects may contain compilation errors, all DASCA
 projects (i.e., `com.logicalhacking.dasca.*`) should compile without errors.
 
 ## Team 
+
 Main contact: [Achim D. Brucker](http://www.brucker.ch/)
 
 ### Contributors
+
 * Thomas Deuster
 * [Michael Herzberg](http://www.dcs.shef.ac.uk/cgi-bin/makeperson?M.Herzberg)
 * Tim Herres
 
 ## License
+
 This project is licensed under the Eclipse Public License 1.0. 
 
 ## Publications
+
 * Achim D. Brucker and Michael Herzberg. [On the Static Analysis of
   Hybrid Mobile Apps: A Report on the State of Apache Cordova
   Nation.](https://www.brucker.ch/bibliography/download/2016/brucker.ea-cordova-security-2016.pdf)
