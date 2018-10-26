@@ -1,6 +1,7 @@
 src/*/.classpath
 src/*/.settings
 src/*/.project
+src/*/.cache*
 src/*/target
 src/*/bin
 src/.gradle
