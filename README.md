@@ -9,75 +9,64 @@
 * Eclipse Oxygen, including
   * The Plug-in Development Environment (PDE)
   * JavaScript Development Tools (JSDT)
+  * Gradle Integration (Buildship)
   * [Scala IDE and Scalatest Runner (the latter is optional)](http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site)
-  * ["Maven for Scala" - Maven Integration for Eclipse](http://alchim31.free.fr/m2e-scala/update-site)
-  * m2e - Maven Integration for Eclipse
 * [CVC3](http://cs.nyu.edu/acsys/cvc3/) including the Java bindings for CVC3
-* [apktool](https://ibotpeaches.github.io/Apktool/)
-
 
 ### Checkout
 
 The repository can be cloned as usual:
 
-```
+``` sh
 git clone https://git.logicalhacking.com/DASCA/DASCA.git
-```
-
-### Resolving external dependencies
-
-* Ensure that the environment variable `ANDROID_HOME` is set correctly and that
-  the Android SDK has API 19 installed, i.e.,
-  `${ANDROID_HOME}/platforms/android-19/android.jar` should be a valid path.
-* Install ``apktool_2.3.0.jar`` into your local maven repository:
-
-```
-cd $(mktemp -d)
-wget https://bitbucket.org/iBotPeaches/apktool/downloads/apktool_2.3.0.jar
-mvn install:install-file -Dfile=apktool_2.3.0.jar -DgroupId=apktool -DartifactId=apktool -Dpackaging=jar -Dversion=2.3.0
 ```
 
 ### WALA configuration
 
 DASCA (and the underlying WALA setup) is tested with Java version 8.
-If DASCA is installed using Java 8, there should be no need for updating 
-the WALA configuration. 
+If DASCA is installed using Java 8, there should be no need for updating
+the WALA configuration.
 
-If you experience problems or want to optimize the performance (e.g., 
-by analyzing the programs based on a different Java version), you 
+If you experience problems or want to optimize the performance (e.g.,
+by analyzing the programs based on a different Java version), you
 might need to configure the location of the Java JDK. The JDK used
-as part of the static analysis is configured in the `wala.properties` 
+as part of the static analysis is configured in the `wala.properties`
 file, e.g.
-```
+
+``` sh
 cd DASCA/
 echo "java_runtime_dir = <PATH-TO-JDK>" >> externals/WALA/com.ibm.wala.core/dat/wala.properties
 ```
+
 Don't forget to adjust the path to the Java JDK accordingly, i.e.,
 the `<PATH-TO-JDK>` should point to the directory containing the file
 `rt.lib`.
 
 ### How to Compile
 
-First check that the variable `JAVA_HOME` is configured correctly, e.g.:
-```
+First check that the variable `JAVA_HOME` is configured correctly, to ensure 
+that Java 8 is used, e.g.:
+
+``` sh
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
 ```
 
-Second, resolve the dependencies using maven:
+The project can be compiled using gradle
+
+``` sh
+./gradlew clean assemble test
 ```
-cd src/com.logicalhacking.dasca.parent/
-mvn -P wala clean verify -DskipTests=true 
-```
 
-After this, all projects can be imported into a fresh Eclipse
-workspace using `File -> Import -> Maven -> Existing Maven Projects`:
- 1. Select the DASCA `src` folder as source for the import
- 2. Import all offered projects (WALA and DASCA)
+### Import into Eclipse
 
-While some WALA projects may contain compilation errors, all DASCA 
-projects (i.e., `com.logicalhacking.dasca.*`) should compile without errors.
+All projects can be imported into a (fresh) Eclipse workspace
+using `File -> Import -> Gradle -> Existing Maven Projects`:
 
-## Team 
+ 1. Select the DASCA folder as source for the import
+ 2. Import all offered projects
+
+## Team
 
 Main contact: [Achim D. Brucker](http://www.brucker.ch/)
 
@@ -89,7 +78,7 @@ Main contact: [Achim D. Brucker](http://www.brucker.ch/)
 
 ## License
 
-This project is licensed under the Eclipse Public License 1.0. 
+This project is licensed under the Eclipse Public License 1.0.
 
 ## Publications
 
