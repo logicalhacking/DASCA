@@ -68,10 +68,11 @@ The project can be compiled using gradle
 ### Import into Eclipse
 
 All projects can be imported into a (fresh) Eclipse workspace
-using `File -> Import -> Gradle -> Existing Maven Projects`:
+using `File -> Import -> Gradle -> Existing Gradle Projects`:
 
- 1. Select the DASCA folder as source for the import
+ 1. Select the `DASCA` folder as source for the import
  2. Import all offered projects
+
 
 ## Team
 
