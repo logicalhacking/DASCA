@@ -10,7 +10,7 @@ dependencies {
     compile group: 'com.ibm.wala', name: 'com.ibm.wala.cast.java.ecj', version: walaVersion
     compile group: 'junit', name: 'junit', version:'4.12'
     compile group: 'log4j', name: 'log4j', version:'1.2.17'
-    compile name: 'libcvc3-5.0.0'
+    compile group: 'cvc3', name: 'libcvc3', version: '5.0.0'
     compile 'org.eclipse.platform:org.eclipse.equinox.common:3.10.100'
     compile 'org.eclipse.platform:org.eclipse.core.resources:3.13.100'
     compile 'org.eclipse.platform:org.eclipse.core.runtime:3.15.0'
