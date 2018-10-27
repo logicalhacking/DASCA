@@ -8,4 +8,8 @@ include (
          'com.logicalhacking.dasca.js',
 )
 
+if (new File('com.logicalhacking.dasca.crosslanguage.test.confidential', 'build.gradle').exists()) {
+    include 'com.logicalhacking.dasca.crosslanguage.test.confidential'
+}
+
 enableFeaturePreview('STABLE_PUBLISHING')
