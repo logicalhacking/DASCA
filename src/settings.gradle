@@ -8,4 +8,4 @@ include (
          'com.logicalhacking.dasca.js',
 )
 
-
+enableFeaturePreview('STABLE_PUBLISHING')
