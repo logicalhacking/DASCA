@@ -5,13 +5,13 @@ dependencies {
     implementation group: 'org.scala-lang', name: 'scala-library', version:'2.12.3'
     implementation group: 'junit', name: 'junit', version: '4.12'
     implementation group: 'org.scalatest', name: 'scalatest_2.12', version: '3.0.5'
-    implementation group: 'com.ibm.wala', name: 'com.ibm.wala.core' , version:'1.5.1-SNAPSHOT-DASCA'
-    implementation group: 'com.ibm.wala', name: 'com.ibm.wala.shrike' , version:'1.5.1-SNAPSHOT-DASCA'
-    implementation group: 'com.ibm.wala', name: 'com.ibm.wala.util' , version:'1.5.1-SNAPSHOT-DASCA'
-    implementation group: 'com.ibm.wala', name: 'com.ibm.wala.cast' , version:'1.5.1-SNAPSHOT-DASCA'
-    implementation group: 'com.ibm.wala', name: 'com.ibm.wala.cast.js' , version:'1.5.1-SNAPSHOT-DASCA'
-    implementation group: 'com.ibm.wala', name: 'com.ibm.wala.cast.js.rhino' , version:'1.5.1-SNAPSHOT-DASCA'
-    implementation group: 'com.ibm.wala', name: 'com.ibm.wala.dalvik' , version:'1.5.1-SNAPSHOT-DASCA'
+    implementation group: 'com.ibm.wala', name: 'com.ibm.wala.core' , version:walaVersion
+    implementation group: 'com.ibm.wala', name: 'com.ibm.wala.shrike' , version:walaVersion
+    implementation group: 'com.ibm.wala', name: 'com.ibm.wala.util' , version:walaVersion
+    implementation group: 'com.ibm.wala', name: 'com.ibm.wala.cast' , version:walaVersion
+    implementation group: 'com.ibm.wala', name: 'com.ibm.wala.cast.js' , version:walaVersion
+    implementation group: 'com.ibm.wala', name: 'com.ibm.wala.cast.js.rhino' , version:walaVersion
+    implementation group: 'com.ibm.wala', name: 'com.ibm.wala.dalvik' , version:walaVersion
     implementation project(':com.logicalhacking.dasca.crosslanguage')
     testRuntime group: 'org.slf4j', name: 'slf4j-api', version: '1.7.2'
     testRuntime group: 'org.smali', name: 'dexlib2', version: '2.2.5'
