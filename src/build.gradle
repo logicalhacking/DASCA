@@ -17,7 +17,7 @@ subprojects {
 
   
   repositories {
-    maven { url "https://artifacts.logicalhacking.com/maven2" }
+    maven { url "https://artifacts.logicalhacking.com/maven3" }
     maven { url "https://repo.maven.apache.org/maven2" }
   }
 
