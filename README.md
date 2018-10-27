@@ -21,6 +21,13 @@ The repository can be cloned as usual:
 git clone https://git.logicalhacking.com/DASCA/DASCA.git
 ```
 
+Note, if you authorized to access the confidential test cases of 
+DASCA, you can obtain them by executing
+
+``` sh
+git submodule update --init --recursive
+```
+
 ### WALA configuration
 
 DASCA (and the underlying WALA setup) is tested with Java version 8.

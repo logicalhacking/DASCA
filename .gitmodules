@@ -1,0 +1,3 @@
+[submodule "com.logicalhacking.dasca.crosslanguage.test.confidential"]
+	path = com.logicalhacking.dasca.crosslanguage.test.confidential
+	url = git@git.logicalhacking.com:DASCA/DASCA-confidential.git
