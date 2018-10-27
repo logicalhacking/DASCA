@@ -159,13 +159,14 @@ class CordovaCGBuilder(val apk: File, val apkUnzipDir: File) {
   }
 
   private def createJavaCallGraph = {
-    val tmpAndroidJar = File.createTempFile("android", "jar")
+    val tmpAndroidJar = File.createTempFile("android-dasca", ".jar")
     tmpAndroidJar.deleteOnExit()
-    if (null != getClass.getClassLoader.getResource("android19.jar")){
-      TemporaryFile.urlToFile(tmpAndroidJar, getClass.getClassLoader.getResource("android19.jar"))
+    if (null != getClass.getClassLoader.getResource("android-dasca.jar")){
+      TemporaryFile.urlToFile(tmpAndroidJar, getClass.getClassLoader.getResource("android-dasca.jar"))
     }else{
-       logger.error("Please install android19.jar.");
-       throw new FileNotFoundException("Please install android19.jar.");
+       val msg = "Please install android-dasca.jar in resources directory."
+       logger.error(msg);
+       throw new FileNotFoundException(msg);
     }
     val scope = AndroidAnalysisScope.setUpAndroidAnalysisScope(apk.toURI(), getClass.getClassLoader.getResource("javaexclusions.txt").getFile, CordovaCGBuilder.getClass.getClassLoader())
     scope.addToScope(ClassLoaderReference.Primordial, new JarFileModule(new JarFile(tmpAndroidJar)))
