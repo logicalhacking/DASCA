@@ -90,6 +90,12 @@ Main contact: [Achim D. Brucker](http://www.brucker.ch/)
 
 This project is licensed under the Eclipse Public License 1.0.
 
+## Master Repository
+
+The master git repository for this project is hosted by the [Software
+Assurance & Security Research Team](https://logicalhacking.com) at
+<https://git.logicalhacking.com/DASCA/DASCA>.
+
 ## Publications
 
 * Achim D. Brucker and Michael Herzberg. [On the Static Analysis of
