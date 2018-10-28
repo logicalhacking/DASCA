@@ -5,13 +5,15 @@
 ### Prerequisites
 
 * Java 8 (Java 9 or later is currently *not* supported)
-* Android SDK (to obtain dx.jar)
-* Eclipse Oxygen, including
-  * The Plug-in Development Environment (PDE)
-  * JavaScript Development Tools (JSDT)
-  * Gradle Integration (Buildship)
-  * [Scala IDE and Scalatest Runner (the latter is optional)](http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site)
-* [CVC3](http://cs.nyu.edu/acsys/cvc3/) including the Java bindings for CVC3
+* Eclipse Oxygen, including the following additional packages:
+  * From the Eclipse Marketplace:
+    * The Plug-in Development Environment (PDE)
+    * JavaScript Development Tools (JSDT)
+    * Gradle Integration (Buildship)
+  * From the [Scala IDE Update Site](http://scala-ide.org/download/current.html)
+    * [Scala IDE and Scalatest Runner (the latter is optional)](http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site)
+* The native libraries and the JNI packages for [CVC3](http://cs.nyu.edu/acsys/cvc3/). 
+  On a Debian-based Linux system, you need to install the package `libcvc3-5-jni`.
 
 ### Checkout
 
