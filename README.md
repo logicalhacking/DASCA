@@ -11,7 +11,10 @@
     * JavaScript Development Tools (JSDT)
     * Gradle Integration (Buildship)
   * From the [Scala IDE Update Site](http://scala-ide.org/download/current.html)
-    * [Scala IDE and Scalatest Runner (the latter is optional)](http://download.scala-ide.org/sdk/lithium/e44/scala211/stable/site)
+    * [Scala IDE and Scalatest Runner (the latter is optional)](http://download.scala-ide.org/sdk/lithium/e47/scala212/stable/site)
+  If you install the [Eclipse for Java EE Developers](http://www.eclipse.org/downloads/packages/release/2018-09/r/eclipse-ide-java-ee-developers),
+  you should get a version that includes already PDE, JSDT, and Buildship. Thus, you only need 
+  to add the Scala IDE.
 * The native libraries and the JNI packages for [CVC3](http://cs.nyu.edu/acsys/cvc3/). 
   On a Debian-based Linux system, you need to install the package `libcvc3-5-jni`.
 
@@ -72,6 +75,7 @@ using `File -> Import -> Gradle -> Existing Gradle Projects`:
 
  1. Select the `DASCA` folder as source for the import
  2. Import all offered projects
+
 
 
 ## Team
