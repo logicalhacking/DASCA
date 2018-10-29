@@ -39,12 +39,12 @@ the WALA configuration.
 If you experience problems or want to optimize the performance (e.g.,
 by analyzing the programs based on a different Java version), you
 might need to configure the location of the Java JDK. The JDK used
-as part of the static analysis is configured in the `wala.properties`
-file, e.g.
+as part of the static analysis is configured in the file 
+`com.logicalhacking.dasca.dataflow/config/main.config`, e.g.
 
 ``` sh
 cd DASCA/
-echo "java_runtime_dir = <PATH-TO-JDK>" >> externals/WALA/com.ibm.wala.core/dat/wala.properties
+echo "java_runtime_dir = <PATH-TO-JDK>" >> ./com.logicalhacking.dasca.dataflow/config/main.config
 ```
 
 Don't forget to adjust the path to the Java JDK accordingly, i.e.,
