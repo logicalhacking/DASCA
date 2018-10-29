@@ -30,16 +30,14 @@ DASCA, you can obtain them by executing
 git submodule update --init --recursive
 ```
 
-### WALA configuration (optional)
+### Configuration (optional)
 
-DASCA (and the underlying WALA setup) is tested with Java version 8.
-If DASCA is installed using Java 8, there should be no need for updating
-the WALA configuration.
-
-If you experience problems or want to optimize the performance (e.g.,
-by analyzing the programs based on a different Java version), you
-might need to configure the location of the Java JDK. The JDK used
-as part of the static analysis is configured in the file 
+The dataflow analysis can be configured in various ways in the 
+`com.logicalhacking.dasca.dataflow/config/main.config` file. Most importantly, 
+if you experience problems or want to optimize the performance (e.g., by 
+analyzing the programs based on a different Java version), you might need to 
+configure the location of the Java JDK. The JDK used as part of the static 
+analysis is configured in the file 
 `com.logicalhacking.dasca.dataflow/config/main.config`, e.g.
 
 ``` sh
