@@ -12,11 +12,14 @@
     * Gradle Integration (Buildship)
   * From the [Scala IDE Update Site](http://scala-ide.org/download/current.html)
     * [Scala IDE and Scalatest Runner (the latter is optional)](http://download.scala-ide.org/sdk/lithium/e47/scala212/stable/site)
-  If you install the [Eclipse for Java EE Developers](http://www.eclipse.org/downloads/packages/release/2018-09/r/eclipse-ide-java-ee-developers),
-  you should get a version that includes already PDE, JSDT, and Buildship. Thus, you only need 
-  to add the Scala IDE.
 * The native libraries and the JNI packages for [CVC3](http://cs.nyu.edu/acsys/cvc3/). 
-  On a Debian-based Linux system, you need to install the package `libcvc3-5-jni`.
+  On a Debian-based Linux system, you need to install the package `libcvc3-5-jni`. CVC3 is 
+  only required for the sub-project `com.logicalhacking.dasca.dataflow` and the 
+  corresponding tests.
+  
+Note, if you install the [Eclipse for Java EE Developers](http://www.eclipse.org/downloads/packages/release/2018-09/r/eclipse-ide-java-ee-developers),
+you should get a version that includes already PDE, JSDT, and Buildship. Thus, you only need 
+to add the Scala IDE.
 
 ### Checkout
 
