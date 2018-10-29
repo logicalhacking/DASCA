@@ -26,3 +26,21 @@ test {
    exclude '**/Test0*.class'  
    exclude '**/Test1*.class'  
 }
+
+task copyConfigIfNotExists {
+  if (!file('config/main.config').exists())
+    copy {
+        from("config")
+        into("config")
+        include("main.config.in")
+        rename("main.config.in", "main.config")
+    }
+    copy {
+        from("config")
+        into("bin/config")
+        include("main.config.in")
+        rename("main.config.in", "main.config")
+    }
+}
+
+build.dependsOn(copyConfigIfNotExists)
