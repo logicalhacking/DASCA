@@ -30,7 +30,7 @@ DASCA, you can obtain them by executing
 git submodule update --init --recursive
 ```
 
-### WALA configuration
+### WALA configuration (optional)
 
 DASCA (and the underlying WALA setup) is tested with Java version 8.
 If DASCA is installed using Java 8, there should be no need for updating
