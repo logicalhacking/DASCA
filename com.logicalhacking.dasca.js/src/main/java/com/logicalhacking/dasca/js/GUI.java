@@ -1,11 +1,13 @@
 /*
- * (C) Copyright 2010-2015 SAP SE.
- *
+ * Copyright (c) 2010-2015 SAP SE.
+ *               2016-2018 The University of Sheffield.
+ * 
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License 2.0
+ * which is available at https://www.eclipse.org/legal/epl-2.0/
  *
+ * SPDX-License-Identifier: EPL-2.0
  */
 
 package com.logicalhacking.dasca.js;
@@ -177,7 +179,7 @@ public class GUI {
         frmSapJsAnalyser.setIconImage(Toolkit.getDefaultToolkit().getImage(
                                           GUI.class.getResource(iconDir+"logo.png")));
         frmSapJsAnalyser.getContentPane().setBackground(new Color(255, 215, 0));
-        frmSapJsAnalyser.setTitle("SAP JS Analyser @ V 1.0");
+        frmSapJsAnalyser.setTitle("JS Analyser @ V 1.0");
         frmSapJsAnalyser.setBounds(100, 100, 1189, 793); 
         frmSapJsAnalyser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frmSapJsAnalyser.getContentPane().setLayout(null);

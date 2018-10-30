@@ -93,7 +93,9 @@ Main contact: [Achim D. Brucker](http://www.brucker.ch/)
 
 ## License
 
-This project is licensed under the Eclipse Public License 1.0.
+This project is licensed under the Eclipse Public License 2.0.
+
+SPDX-License-Identifier: EPL-2.0
 
 ## Master Repository
 
