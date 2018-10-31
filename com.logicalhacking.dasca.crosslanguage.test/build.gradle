@@ -2,77 +2,9 @@ apply plugin: 'scala'
 
 description = 'com.logicalhacking.dasca.crosslanguage.test'
 
-def osName = System.getProperty('os.name')
-ext.isWindows = osName.startsWith('Windows ')
-
-task downloadAndroidSdk(type: VerifiedDownload) {
-	def sdkOs
-	switch (osName) {
-		case ~/Linux/:
-			sdkOs = 'linux'
-			checksum '444e22ce8ca0f67353bda4b85175ed3731cae3ffa695ca18119cbacef1c1bea0'
-			break
-		case ~/Mac OS X/:
-			sdkOs = 'darwin'
-			checksum '4a81754a760fce88cba74d69c364b05b31c53d57b26f9f82355c61d5fe4b9df9'
-			break
-		case ~/Windows.*/:
-			sdkOs = 'windows'
-			checksum '7f6037d3a7d6789b4fdc06ee7af041e071e9860c51f66f7a4eb5913df9871fd2'
-			break
-	}
-	def archive = "sdk-tools-$sdkOs-3859397.zip"
-	src "https://dl.google.com/android/repository/$archive"
-	dest "$temporaryDir/$archive"
-	algorithm 'SHA-256'
-}
-
-task installAndroidSdk(type: Sync, dependsOn: downloadAndroidSdk) {
-	from zipTree(downloadAndroidSdk.dest)
-	into temporaryDir
-
-	def buildToolsVersion = '26.0.2'
-	ext {
-		components = [
-			'build-tools': buildToolsVersion,
-			'platforms': "android-${buildToolsVersion.tokenize('.')[0]}"
-		]
-	}
-
-	doLast {
-		exec {
-			def shell, shellFlags, yes, semicolon, discard
-			if (project.isWindows) {
-				shell = 'PowerShell'
-				shellFlags = '-Command'
-				yes = 'echo y'
-				semicolon = '`;'
-				discard = '$null'
-			} else {
-				shell = 'sh'
-				shellFlags = '-ceu'
-				yes = 'yes 2>/dev/null'
-				semicolon = /\;/
-				discard = '/dev/null'
-			}
-
-			def componentArgs = components.collect { "$it.key$semicolon$it.value" }.join ' '
-			commandLine shell, shellFlags, "$yes | $temporaryDir/tools/bin/sdkmanager $componentArgs >$discard"
-		}
-	}
-	outputs.cacheIf { true }
-}
-
-task copyAndroidJar(type: Sync, dependsOn: installAndroidSdk) {
-	from "${installAndroidSdk.destinationDir}/platforms/${installAndroidSdk.components['platforms']}/android.jar"
-        into temporaryDir
-}
-
 processResources {
-    with copySpec {
-        from copyAndroidJar
-        rename { "android-dasca.jar" }
-    }
+    from '../com.logicalhacking.dasca.crosslanguage/build/resources/main'
+    into 'build/resources/main'
 }
 
 dependencies {
