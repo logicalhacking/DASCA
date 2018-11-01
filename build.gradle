@@ -2,6 +2,7 @@ plugins {
 	id 'de.undercouch.download'
 }
 
+apply plugin: 'eclipse'
 
 
 allprojects  {
