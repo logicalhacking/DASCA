@@ -12,3 +12,4 @@ build
 com.logicalhacking.dasca.dataflow/config/main.config
 com.logicalhacking.dasca.dataflow/main.log*
 com.logicalhacking.dasca.crosslanguage/BuildCordovaCallgraph.launch
+com.logicalhacking.dasca.crosslanguage/src/main/resources/android-26.jar

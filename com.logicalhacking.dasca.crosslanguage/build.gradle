@@ -63,15 +63,15 @@ task installAndroidSdk(type: Sync, dependsOn: downloadAndroidSdk) {
 	outputs.cacheIf { true }
 }
 
-task copyAndroidJar(type: Sync, dependsOn: installAndroidSdk) {
+task copyAndroidJar(type: Copy, dependsOn: installAndroidSdk) {
 	from "${installAndroidSdk.destinationDir}/platforms/${installAndroidSdk.components['platforms']}/android.jar"
-        into temporaryDir
+        rename { "android-26.jar" }
+        into 'src/main/resources'
 }
 
 processResources {
     with copySpec {
         from copyAndroidJar
-        rename { "android-dasca.jar" }
     }
 }
 

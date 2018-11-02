@@ -161,12 +161,25 @@ class CordovaCGBuilder(val apk: File, val apkUnzipDir: File) {
   }
 
   private def createJavaCallGraph = {
-    val tmpAndroidJar = File.createTempFile("android-dasca", ".jar")
+    val tmpAndroidJar = File.createTempFile("android-26", ".jar")
     tmpAndroidJar.deleteOnExit()
-    if (null != getClass.getClassLoader.getResource("android-dasca.jar")){
-      TemporaryFile.urlToFile(tmpAndroidJar, getClass.getClassLoader.getResource("android-dasca.jar"))
+    
+    val rscDirs = List("android-26.jar")
+    var androidResource = null:java.net.URL
+    for (rsc <- rscDirs) {
+        if (null == androidResource) {
+            logger.info("Searching android framework: " + rsc)
+            androidResource = getClass.getClassLoader.getResource(rsc)
+            if (null != androidResource) {
+                logger.info("  Found android framework: " + rsc)
+            }
+        }
+    }
+    
+    if (null != androidResource){
+      TemporaryFile.urlToFile(tmpAndroidJar, androidResource)
     }else{
-       val msg = "Please install android-dasca.jar in resources directory."
+       val msg = "Please install a suiteable android framework in the resources directory."
        logger.error(msg);
        throw new FileNotFoundException(msg);
     }
