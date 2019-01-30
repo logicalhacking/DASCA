@@ -9,10 +9,32 @@ allprojects  {
   apply plugin: 'maven'
 
   group = 'com.logicalhacking.dasca'
-  version = '0.1'
+  version = '0.1-dev-2019-01-30'
+  
 }
 
 
+configure(allprojects - project('com.logicalhacking.dasca.crosslanguage.test.confidential')) { 
+  apply plugin: 'maven-publish'
+  apply plugin: 'java'
+  publishing.publications {
+    mavenJava(MavenPublication) {
+      from components.java
+    }
+  }
+
+  publishing {
+    repositories {
+      maven {
+        url = "sftp://artifacts.logicalhacking.com:22/home/brucker/www/artifacts.logicalhacking.com/htdocs/maven3/"
+        credentials {
+          username comLogicalhackingArtifactsUser
+          password comLogicalhackingArtifactsPassword
+        }
+      }
+    }
+  }
+}
 
 subprojects {
   apply plugin: 'java'
@@ -22,11 +44,9 @@ subprojects {
   	options.encoding = 'UTF-8'
   }
 
-  
   repositories {
     maven { url "https://artifacts.logicalhacking.com/maven3" }
     maven { url "https://repo.maven.apache.org/maven2" }
   }
-
   
 }
