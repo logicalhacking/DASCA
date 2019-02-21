@@ -9,7 +9,7 @@ allprojects  {
   apply plugin: 'maven'
 
   group = 'com.logicalhacking.dasca'
-  version = '0.1-dev-2019-01-30'
+  version = '0.1-dev-2019-02-21'
   
 }
 
